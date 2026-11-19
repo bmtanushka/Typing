@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Typing engine, on-screen keyboard and hands overlay
+   Loaded only on pages that type (demo, lessons, tests).
+   ========================================================================== */
+
+/* ---- Typing surface ---- */
+.typing {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-5) var(--space-6);
+  transition: border-color var(--dur), box-shadow var(--dur);
+}
+.typing.is-focused { border-color: var(--primary-light); box-shadow: var(--shadow-md), 0 0 0 4px var(--primary-soft); }
+.typing.is-complete { opacity: 0.75; }
+
+.typing__viewport {
+  position: relative;
+  height: calc(var(--fs-typing) * 1.7 * 3);   /* exactly three lines */
+  overflow: hidden;
+  cursor: text;
+}
+.typing--large { --fs-typing: clamp(2rem, 1.4rem + 2.6vw, 3.25rem); }
+.typing--large .typing__viewport { height: calc(var(--fs-typing) * 1.7 * 2); }
+
+.typing__text {
+  position: relative;
+  margin: 0;
+  transition: transform var(--dur-slow) var(--ease);
+  user-select: none;
+}
+.typing .word { display: inline-block; white-space: pre; }
+.typing__break { display: block; height: 0; }
+.typing .ch { position: relative; display: inline-block; min-width: 0.6em; text-align: center; }
+.typing .ch--space { min-width: 0.62em; }
+.typing .ch--enter { color: var(--border-strong); font-size: 0.8em; }
+.typing .ch--current { animation: none; box-shadow: none; }
+.typing .ch--fixed { text-decoration: underline dotted var(--warning); text-underline-offset: 0.25em; }
+.typing .ch--space.ch--error { background: var(--typing-error-bg); }
+.typing .ch--error-flash { background: var(--typing-error-bg); color: var(--typing-error); border-radius: 4px; }
+
+/* Smooth caret */
+.typing__caret {
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--primary);
+  pointer-events: none;
+  transition: transform 90ms var(--ease);
+}
+.typing__caret.no-anim { transition: none; }
+.typing.is-focused .typing__caret { animation: caret-pulse 1.1s ease-in-out infinite; }
+.typing:not(.is-focused) .typing__caret { opacity: 0.35; }
+.typing.is-complete .typing__caret { display: none; }
+@keyframes caret-pulse { 50% { opacity: 0.35; } }
+
+/* Hidden but focusable input (receives keys, IME and dead keys) */
+.typing__input {
+  position: absolute;
+  left: 0; top: 0;
+  width: 1px; height: 1px;
+  padding: 0; border: 0;
+  opacity: 0;
+  resize: none;
+  overflow: hidden;
+  caret-color: transparent;
+}
+
+/* Click-to-start / paused overlay */
+.typing__overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  color: var(--text);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
+  cursor: pointer;
+}
+.typing__overlay[hidden] { display: none; }
+.typing__overlay-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 2px solid var(--primary-light);
+  box-shadow: var(--shadow-md);
+}
+.typing__overlay:hover .typing__overlay-inner { border-color: var(--primary); }
+.typing__overlay-icon { font-size: 1.3em; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .typing.is-shake .typing__viewport { animation: typing-shake 0.28s var(--ease); }
+}
+@keyframes typing-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+/* ---- On-screen keyboard ---- */
+.kb {
+  --kb-gap: clamp(3px, 0.5vw, 6px);
+  --kb-key-h: clamp(2.1rem, 3.6vw, 3rem);
+  display: grid;
+  gap: var(--kb-gap);
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  user-select: none;
+}
+.kb__row { display: flex; gap: var(--kb-gap); }
+.kb__key {
+  flex-basis: 0;
+  min-width: 0;
+  height: var(--kb-key-h);
+  padding: 0 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.05;
+  font-size: clamp(0.65rem, 1.15vw, 0.95rem);
+  border-bottom-width: 3px;
+}
+.kb__key { overflow: hidden; }
+.kb__key--special { font-family: var(--font-ui); font-size: clamp(0.55rem, 0.9vw, 0.78rem); font-weight: var(--fw-bold); }
+.kb__shift { font-size: 0.78em; opacity: 0.7; }
+.kb__base { font-size: 1em; }
+/* UK ISO Enter is drawn as two joined parts */
+.kb__key--enter-top { border-bottom-left-radius: var(--radius-xs); border-bottom-right-radius: 0; border-bottom-width: 0; height: calc(var(--kb-key-h) + var(--kb-gap)); margin-bottom: calc(-1 * var(--kb-gap)); z-index: 1; }
+.kb__key--enter-bottom { border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
+.kb .keycap.is-next { z-index: 2; }
+.kb__key[data-heat="1"] { box-shadow: inset 0 0 0 99px color-mix(in srgb, var(--warning) 22%, transparent); }
+.kb__key[data-heat="2"] { box-shadow: inset 0 0 0 99px color-mix(in srgb, var(--danger) 28%, transparent); }
+.kb__key[data-heat="3"] { box-shadow: inset 0 0 0 99px color-mix(in srgb, var(--danger) 50%, transparent); }
+
+/* Fade keyboard hints (used in later lesson steps) */
+.kb.is-faded .keycap:not(.is-next) { --k-fill: var(--surface); --k-edge: var(--border); color: var(--text-muted); }
+.kb.is-hidden-hints .keycap.is-next { transform: none; box-shadow: none; animation: none; }
+
+/* ---- Hands ---- */
+.hands { width: 100%; max-width: 30rem; margin-inline: auto; }
+.hands__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hands__palm { fill: var(--surface); stroke: var(--border-strong); stroke-width: 2; }
+.hands__digit { fill: var(--surface); stroke: var(--border-strong); stroke-width: 2; transition: fill var(--dur), stroke var(--dur); }
+.hands__nail { fill: var(--surface-2); }
+.hands__label { font: 700 13px var(--font-mono); fill: var(--text-muted); text-anchor: middle; }
+.hands__finger { transition: transform var(--dur) var(--ease-bounce); transform-box: fill-box; }
+.hands__finger.is-active { transform: translateY(-8px); }
+.hands__finger.is-active .hands__label { fill: var(--f-text); }
+.hands__finger--lp.is-active .hands__digit { fill: var(--f-lp); stroke: var(--f-lp-edge); }
+.hands__finger--lr.is-active .hands__digit { fill: var(--f-lr); stroke: var(--f-lr-edge); }
+.hands__finger--lm.is-active .hands__digit { fill: var(--f-lm); stroke: var(--f-lm-edge); }
+.hands__finger--li.is-active .hands__digit { fill: var(--f-li); stroke: var(--f-li-edge); }
+.hands__finger--ri.is-active .hands__digit { fill: var(--f-ri); stroke: var(--f-ri-edge); }
+.hands__finger--rm.is-active .hands__digit { fill: var(--f-rm); stroke: var(--f-rm-edge); }
+.hands__finger--rr.is-active .hands__digit { fill: var(--f-rr); stroke: var(--f-rr-edge); }
+.hands__finger--rp.is-active .hands__digit { fill: var(--f-rp); stroke: var(--f-rp-edge); }
+.hands__finger--th.is-active .hands__digit { fill: var(--f-th); stroke: var(--f-th-edge); }
+.hands__finger.is-active .hands__digit { stroke-width: 3; }
+
+/* ==========================================================================
+   Page: typing playground (/demo)
+   ========================================================================== */
+.demo { padding-block: var(--space-6); }
+.demo__intro { display: flex; justify-content: space-between; align-items: center; gap: var(--space-5); margin-bottom: var(--space-5); }
+.demo__intro h1 { margin-bottom: var(--space-2); }
+.demo__intro .lead { margin: 0; max-width: 40rem; }
+.demo__controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+}
+.demo__toggles { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); }
+.demo__custom { grid-column: 1 / -1; justify-items: start; }
+.demo__custom[hidden] { display: none; }
+.demo__stage { display: grid; gap: var(--space-4); }
+.demo__stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; padding-inline: var(--space-2); }
+.demo__stat { display: grid; min-width: 4.5rem; }
+.demo__stat-value { font-size: var(--fs-xl); font-weight: var(--fw-black); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.demo__stat-label { font-size: var(--fs-sm); font-weight: var(--fw-bold); color: var(--text-muted); }
+.demo__restart { margin-left: auto; }
+.demo__notices { display: grid; gap: var(--space-3); justify-items: center; }
+.demo__notices [hidden] { display: none; }
+.speech--hint { max-width: 34rem; text-align: center; }
+.speech--hint::after { bottom: auto; top: -11px; transform: translateX(-50%) rotate(225deg); }
+.demo__results-head { display: flex; gap: var(--space-4); align-items: center; margin-bottom: var(--space-4); }
+.demo__results-head h2 { margin-bottom: var(--space-1); }
+.demo__results-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); margin-bottom: var(--space-5); }
+.demo__problem-title { font-size: var(--fs-md); }
+.demo__results .pill .keycap { min-width: 1.8rem; height: 1.8rem; }
+.demo__guides { display: grid; gap: var(--space-4); margin-top: var(--space-2); }
+.demo__guides [hidden] { display: none; }
+.demo__help { margin-top: var(--space-5); text-align: center; }
+@media (max-width: 50rem) {
+  .demo__controls { grid-template-columns: 1fr; }
+  .demo__results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .demo__intro .mascot { display: none; }
+}
+.demo__results .stat__value [data-r] { font-size: inherit; color: inherit; }
+@media (max-width: 50rem) { .demo__stats { gap: var(--space-4); } }
