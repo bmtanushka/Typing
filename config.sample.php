@@ -46,5 +46,7 @@ return [
     'security' => [
         // Set true in production once HTTPS works (secure cookies + redirect).
         'force_https' => false,
+        // true only behind a reverse proxy you trust (e.g. Railway) – uses X-Forwarded-For/Proto.
+        'trust_proxy' => false,
     ],
 ];

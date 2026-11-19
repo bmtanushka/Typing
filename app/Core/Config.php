@@ -20,7 +20,7 @@ final class Config
             'base_url'  => '',
             'timezone'  => 'Europe/London',
         ],
-        'security' => ['force_https' => false],
+        'security' => ['force_https' => false, 'trust_proxy' => false],
     ];
 
     /**
@@ -43,7 +43,11 @@ final class Config
         'mail.smtp.port'       => ['SMTP_PORT'],
         'mail.smtp.username'   => ['SMTP_USERNAME'],
         'mail.smtp.password'   => ['SMTP_PASSWORD'],
+        'mail.from_name'       => ['MAIL_FROM_NAME'],
+        'mail.smtp.encryption' => ['SMTP_ENCRYPTION'],
         'security.force_https' => ['FORCE_HTTPS'],
+        'security.trust_proxy' => ['TRUST_PROXY'],
+        'app.asset_version'    => ['ASSET_VERSION'],
     ];
 
     public static function load(string $file): void
@@ -63,7 +67,7 @@ final class Config
                 }
                 $bool = filter_var($value, FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE);
                 $value = match (true) {
-                    in_array($key, ['app.debug', 'security.force_https'], true) => (bool) $bool,
+                    in_array($key, ['app.debug', 'security.force_https', 'security.trust_proxy'], true) => (bool) $bool,
                     str_ends_with($key, '.port') && ctype_digit($value) => (int) $value,
                     default => $value,
                 };
