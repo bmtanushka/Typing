@@ -1,0 +1,15 @@
+# Local configuration (contains secrets)
+/config.php
+# Logs and runtime data
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/cache/
+# Install lock
+/install/installed.lock
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+node_modules/
