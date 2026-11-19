@@ -7,6 +7,7 @@ use App\Core\Config;
 use App\Core\Request;
 use App\Core\Response;
 use App\Core\View;
+use App\Services\Auth;
 use App\Services\LessonRepository;
 
 final class PageController
@@ -16,9 +17,6 @@ final class PageController
         '/practice' => ['Practice', 5, 'Problem-key drills and free practice with your own text.'],
         '/test'     => ['Typing test', 5, 'One, three and five minute tests with a history chart.'],
         '/games'    => ['Games', 6, 'Key Drops, Balloon Pop and more – using only the keys you know.'],
-        '/progress' => ['Your progress', 4, 'Charts, problem-key heatmap, streaks and badges.'],
-        '/login'    => ['Log in', 4, 'Save your progress on any device with a free account.'],
-        '/register' => ['Create an account', 4, 'A free account keeps your progress safe on any device.'],
         '/help'     => ['Help and technique', 7, 'Posture, home position and tips for touch typing.'],
         '/privacy'  => ['Privacy', 7, 'What we store, why, and how to delete it.'],
     ];
@@ -114,6 +112,71 @@ final class PageController
             'pageScript' => 'js/pages/settings.js',
             'pageStyles' => ['css/progress.css'],
         ]));
+    }
+
+    public function progress(Request $request): Response
+    {
+        return Response::html(View::page('pages/progress', [
+            'title' => 'Your progress',
+            'description' => 'Your typing speed and accuracy over time, problem keys, badges and streaks.',
+            'bodyClass' => 'page-progress',
+            'pageScript' => 'js/pages/progress.js',
+            'pageStyles' => ['css/typing.css', 'css/progress.css'],
+            'course' => (new LessonRepository())->index(),
+        ]));
+    }
+
+    private function authPage(string $view, string $title, array $extra = []): Response
+    {
+        return Response::html(View::page("pages/auth/{$view}", $extra + [
+            'title' => $title,
+            'bodyClass' => 'page-auth',
+            'pageScript' => 'js/pages/auth.js',
+            'pageStyles' => ['css/account.css'],
+            'noindex' => true,
+        ]));
+    }
+
+    private function safeNext(Request $request): string
+    {
+        $next = (string) ($request->query['next'] ?? '');
+        return preg_match('#^/[A-Za-z0-9/_-]{0,100}$#', $next) && !str_starts_with($next, '//') ? $next : '/progress';
+    }
+
+    public function login(Request $request): Response
+    {
+        if (Auth::user()) {
+            return Response::redirect(url('/account'));
+        }
+        return $this->authPage('login', 'Log in', ['next' => $this->safeNext($request)]);
+    }
+
+    public function register(Request $request): Response
+    {
+        if (Auth::user()) {
+            return Response::redirect(url('/account'));
+        }
+        return $this->authPage('register', 'Create your free account', ['next' => $this->safeNext($request)]);
+    }
+
+    public function forgot(Request $request): Response
+    {
+        return $this->authPage('forgot', 'Forgotten your password?');
+    }
+
+    public function reset(Request $request): Response
+    {
+        $token = (string) ($request->query['token'] ?? '');
+        return $this->authPage('reset', 'Choose a new password', ['token' => preg_match('/^[a-f0-9]{64}$/', $token) ? $token : '']);
+    }
+
+    public function account(Request $request): Response
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return Response::redirect(url('/login') . '?next=/account');
+        }
+        return $this->authPage('account', 'Your account', ['user' => $user]);
     }
 
     public function placeholder(Request $request): Response
