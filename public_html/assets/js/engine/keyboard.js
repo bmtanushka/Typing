@@ -77,6 +77,26 @@ export class Keyboard {
     return info;
   }
 
+  /** Highlight several keys at once (intro screens). Returns the infos found. */
+  highlightKeys(chars = []) {
+    this.nextChar = undefined;
+    this.el.querySelectorAll('.is-next').forEach((k) => k.classList.remove('is-next'));
+    return chars.map((c) => this.info(c)).filter(Boolean).map((info) => {
+      this.#els(info.code).forEach((k) => k.classList.add('is-next'));
+      return info;
+    });
+  }
+
+  /** Mark a key as done (ticked off) during "press each key" steps. */
+  markDone(char, done = true) {
+    const info = this.info(char);
+    if (info) this.#els(info.code).forEach((k) => k.classList.toggle('is-done', done));
+  }
+
+  clearMarks() {
+    this.el.querySelectorAll('.is-done').forEach((k) => k.classList.remove('is-done'));
+  }
+
   /** Brief feedback on the key that should have been pressed. */
   flash(char, ok) {
     const info = this.info(char);

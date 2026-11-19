@@ -6,7 +6,7 @@
             <p class="hero__lead">Short, friendly lessons take you from the home row to full speed.
                 Practise with games, track your progress and celebrate every win.</p>
             <div class="hero__actions">
-                <a class="btn btn--primary btn--lg" href="<?= e(url('/lessons')) ?>">
+                <a class="btn btn--primary btn--lg" href="<?= e(url('/lessons/gs-welcome')) ?>" data-start-link>
                     Start typing
                     <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                 </a>

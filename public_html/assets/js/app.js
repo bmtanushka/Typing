@@ -46,3 +46,22 @@ requestAnimationFrame(() => {
     bar.style.width = `${pct}%`;
   });
 });
+
+/* ---- "Start typing" goes to the learner's next lesson ---- */
+const startLink = document.querySelector('[data-start-link]');
+if (startLink) {
+  import('./core/store.js').then(async ({ load }) => {
+    const progress = load().progress || {};
+    if (!Object.keys(progress).length) return; // first visit: keep the first lesson
+    const [{ nextLessonId }, res] = await Promise.all([
+      import('./core/lesson-logic.js'),
+      fetch(`${document.documentElement.dataset.base || ''}/api/lessons`),
+    ]);
+    if (!res.ok) return;
+    const id = nextLessonId(await res.json(), progress);
+    if (id) {
+      startLink.href = `${document.documentElement.dataset.base || ''}/lessons/${id}`;
+      startLink.firstChild.textContent = 'Continue typing ';
+    }
+  }).catch(() => {});
+}

@@ -7,12 +7,12 @@ use App\Core\Config;
 use App\Core\Request;
 use App\Core\Response;
 use App\Core\View;
+use App\Services\LessonRepository;
 
 final class PageController
 {
     /** Sections not built yet: path => [title, phase, blurb]. */
     public const PLACEHOLDERS = [
-        '/lessons'  => ['Lessons', 2, 'Step-by-step lessons from the home row to symbols.'],
         '/practice' => ['Practice', 5, 'Problem-key drills and free practice with your own text.'],
         '/test'     => ['Typing test', 5, 'One, three and five minute tests with a history chart.'],
         '/games'    => ['Games', 6, 'Key Drops, Balloon Pop and more – using only the keys you know.'],
@@ -55,6 +55,42 @@ final class PageController
             'bodyClass' => 'page-demo',
             'pageScript' => 'js/pages/demo.js',
             'pageStyles' => ['css/typing.css'],
+        ]));
+    }
+
+    public function lessons(Request $request): Response
+    {
+        return Response::html(View::page('pages/lessons', [
+            'title' => 'Lessons',
+            'description' => 'Step-by-step touch-typing lessons, from the home row upwards.',
+            'bodyClass' => 'page-lessons',
+            'pageScript' => 'js/pages/lessons.js',
+            'pageStyles' => ['css/lessons.css'],
+            'course' => (new LessonRepository())->index(),
+        ]));
+    }
+
+    public function lesson(Request $request, array $params): Response
+    {
+        $repo = new LessonRepository();
+        $lesson = $repo->lesson($params['id']);
+        if ($lesson === null) {
+            return $this->notFound($request);
+        }
+        $unitTitle = '';
+        foreach ($repo->index()['units'] as $u) {
+            if ($u['id'] === $lesson['unit']) {
+                $unitTitle = $u['title'];
+            }
+        }
+        return Response::html(View::page('pages/lesson', [
+            'title' => $lesson['title'],
+            'description' => $lesson['intro']['text'] ?? '',
+            'bodyClass' => 'page-lesson',
+            'pageScript' => 'js/pages/lesson.js',
+            'pageStyles' => ['css/typing.css', 'css/lessons.css'],
+            'lesson' => $lesson,
+            'unitTitle' => $unitTitle,
         ]));
     }
 

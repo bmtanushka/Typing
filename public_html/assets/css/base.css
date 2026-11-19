@@ -78,6 +78,8 @@ ul[class], ol[class] { list-style: none; margin: 0; padding: 0; }
 /* ---- Focus ---- */
 :focus { outline: none; }
 :focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-xs); }
+/* Headings receive focus programmatically (for screen readers) – no ring needed. */
+h1[tabindex="-1"]:focus-visible, h2[tabindex="-1"]:focus-visible, h3[tabindex="-1"]:focus-visible { box-shadow: none; }
 
 /* ---- A11y helpers ---- */
 .visually-hidden {
