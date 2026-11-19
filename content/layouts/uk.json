@@ -1,0 +1,419 @@
+{
+ "id": "uk",
+ "name": "UK QWERTY",
+ "locale": "en-GB",
+ "rows": [
+  [
+   {
+    "code": "Backquote",
+    "base": "`",
+    "shift": "¬",
+    "finger": "lp"
+   },
+   {
+    "code": "Digit1",
+    "base": "1",
+    "shift": "!",
+    "finger": "lp"
+   },
+   {
+    "code": "Digit2",
+    "base": "2",
+    "shift": "\"",
+    "finger": "lr"
+   },
+   {
+    "code": "Digit3",
+    "base": "3",
+    "shift": "£",
+    "finger": "lm"
+   },
+   {
+    "code": "Digit4",
+    "base": "4",
+    "shift": "$",
+    "finger": "li"
+   },
+   {
+    "code": "Digit5",
+    "base": "5",
+    "shift": "%",
+    "finger": "li"
+   },
+   {
+    "code": "Digit6",
+    "base": "6",
+    "shift": "^",
+    "finger": "ri"
+   },
+   {
+    "code": "Digit7",
+    "base": "7",
+    "shift": "&",
+    "finger": "ri"
+   },
+   {
+    "code": "Digit8",
+    "base": "8",
+    "shift": "*",
+    "finger": "rm"
+   },
+   {
+    "code": "Digit9",
+    "base": "9",
+    "shift": "(",
+    "finger": "rr"
+   },
+   {
+    "code": "Digit0",
+    "base": "0",
+    "shift": ")",
+    "finger": "rp"
+   },
+   {
+    "code": "Minus",
+    "base": "-",
+    "shift": "_",
+    "finger": "rp"
+   },
+   {
+    "code": "Equal",
+    "base": "=",
+    "shift": "+",
+    "finger": "rp"
+   },
+   {
+    "code": "Backspace",
+    "label": "⌫",
+    "special": true,
+    "width": 2,
+    "finger": "rp"
+   }
+  ],
+  [
+   {
+    "code": "Tab",
+    "label": "Tab",
+    "special": true,
+    "width": 1.5,
+    "finger": "lp"
+   },
+   {
+    "code": "KeyQ",
+    "base": "q",
+    "shift": "Q",
+    "finger": "lp"
+   },
+   {
+    "code": "KeyW",
+    "base": "w",
+    "shift": "W",
+    "finger": "lr"
+   },
+   {
+    "code": "KeyE",
+    "base": "e",
+    "shift": "E",
+    "finger": "lm"
+   },
+   {
+    "code": "KeyR",
+    "base": "r",
+    "shift": "R",
+    "finger": "li"
+   },
+   {
+    "code": "KeyT",
+    "base": "t",
+    "shift": "T",
+    "finger": "li"
+   },
+   {
+    "code": "KeyY",
+    "base": "y",
+    "shift": "Y",
+    "finger": "ri"
+   },
+   {
+    "code": "KeyU",
+    "base": "u",
+    "shift": "U",
+    "finger": "ri"
+   },
+   {
+    "code": "KeyI",
+    "base": "i",
+    "shift": "I",
+    "finger": "rm"
+   },
+   {
+    "code": "KeyO",
+    "base": "o",
+    "shift": "O",
+    "finger": "rr"
+   },
+   {
+    "code": "KeyP",
+    "base": "p",
+    "shift": "P",
+    "finger": "rp"
+   },
+   {
+    "code": "BracketLeft",
+    "base": "[",
+    "shift": "{",
+    "finger": "rp"
+   },
+   {
+    "code": "BracketRight",
+    "base": "]",
+    "shift": "}",
+    "finger": "rp"
+   },
+   {
+    "code": "Enter",
+    "label": "Enter",
+    "special": true,
+    "width": 1.5,
+    "finger": "rp",
+    "part": "top"
+   }
+  ],
+  [
+   {
+    "code": "CapsLock",
+    "label": "Caps",
+    "special": true,
+    "width": 1.75,
+    "finger": "lp"
+   },
+   {
+    "code": "KeyA",
+    "base": "a",
+    "shift": "A",
+    "finger": "lp"
+   },
+   {
+    "code": "KeyS",
+    "base": "s",
+    "shift": "S",
+    "finger": "lr"
+   },
+   {
+    "code": "KeyD",
+    "base": "d",
+    "shift": "D",
+    "finger": "lm"
+   },
+   {
+    "code": "KeyF",
+    "base": "f",
+    "shift": "F",
+    "finger": "li"
+   },
+   {
+    "code": "KeyG",
+    "base": "g",
+    "shift": "G",
+    "finger": "li"
+   },
+   {
+    "code": "KeyH",
+    "base": "h",
+    "shift": "H",
+    "finger": "ri"
+   },
+   {
+    "code": "KeyJ",
+    "base": "j",
+    "shift": "J",
+    "finger": "ri"
+   },
+   {
+    "code": "KeyK",
+    "base": "k",
+    "shift": "K",
+    "finger": "rm"
+   },
+   {
+    "code": "KeyL",
+    "base": "l",
+    "shift": "L",
+    "finger": "rr"
+   },
+   {
+    "code": "Semicolon",
+    "base": ";",
+    "shift": ":",
+    "finger": "rp"
+   },
+   {
+    "code": "Quote",
+    "base": "'",
+    "shift": "@",
+    "finger": "rp"
+   },
+   {
+    "code": "Backslash",
+    "base": "#",
+    "shift": "~",
+    "finger": "rp"
+   },
+   {
+    "code": "Enter",
+    "label": "",
+    "special": true,
+    "width": 1.25,
+    "finger": "rp",
+    "part": "bottom"
+   }
+  ],
+  [
+   {
+    "code": "ShiftLeft",
+    "label": "Shift",
+    "special": true,
+    "width": 1.25,
+    "finger": "lp"
+   },
+   {
+    "code": "IntlBackslash",
+    "base": "\\",
+    "shift": "|",
+    "finger": "lp"
+   },
+   {
+    "code": "KeyZ",
+    "base": "z",
+    "shift": "Z",
+    "finger": "lp"
+   },
+   {
+    "code": "KeyX",
+    "base": "x",
+    "shift": "X",
+    "finger": "lr"
+   },
+   {
+    "code": "KeyC",
+    "base": "c",
+    "shift": "C",
+    "finger": "lm"
+   },
+   {
+    "code": "KeyV",
+    "base": "v",
+    "shift": "V",
+    "finger": "li"
+   },
+   {
+    "code": "KeyB",
+    "base": "b",
+    "shift": "B",
+    "finger": "li"
+   },
+   {
+    "code": "KeyN",
+    "base": "n",
+    "shift": "N",
+    "finger": "ri"
+   },
+   {
+    "code": "KeyM",
+    "base": "m",
+    "shift": "M",
+    "finger": "ri"
+   },
+   {
+    "code": "Comma",
+    "base": ",",
+    "shift": "<",
+    "finger": "rm"
+   },
+   {
+    "code": "Period",
+    "base": ".",
+    "shift": ">",
+    "finger": "rr"
+   },
+   {
+    "code": "Slash",
+    "base": "/",
+    "shift": "?",
+    "finger": "rp"
+   },
+   {
+    "code": "ShiftRight",
+    "label": "Shift",
+    "special": true,
+    "width": 2.75,
+    "finger": "rp"
+   }
+  ],
+  [
+   {
+    "code": "ControlLeft",
+    "label": "Ctrl",
+    "special": true,
+    "width": 1.25,
+    "finger": "lp"
+   },
+   {
+    "code": "MetaLeft",
+    "label": "",
+    "special": true,
+    "width": 1.25,
+    "finger": "th"
+   },
+   {
+    "code": "AltLeft",
+    "label": "Alt",
+    "special": true,
+    "width": 1.25,
+    "finger": "th"
+   },
+   {
+    "code": "Space",
+    "label": "",
+    "special": true,
+    "width": 6.25,
+    "finger": "th"
+   },
+   {
+    "code": "AltRight",
+    "label": "Alt Gr",
+    "special": true,
+    "width": 1.25,
+    "finger": "th"
+   },
+   {
+    "code": "MetaRight",
+    "label": "",
+    "special": true,
+    "width": 1.25,
+    "finger": "th"
+   },
+   {
+    "code": "ContextMenu",
+    "label": "",
+    "special": true,
+    "width": 1.25,
+    "finger": "rp"
+   },
+   {
+    "code": "ControlRight",
+    "label": "Ctrl",
+    "special": true,
+    "width": 1.25,
+    "finger": "rp"
+   }
+  ]
+ ],
+ "altGr": {
+  "Digit4": "€"
+ },
+ "homeRow": {
+  "KeyF": true,
+  "KeyJ": true
+ }
+}
