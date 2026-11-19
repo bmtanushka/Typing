@@ -2,7 +2,8 @@
 # Mirrors Hostinger: PHP 8.3 + Apache with .htaccess (mod_rewrite/headers).
 FROM php:8.3-apache
 
-RUN a2enmod rewrite headers deflate expires \
+RUN a2dismod -f mpm_event mpm_worker || true \
+ && a2enmod mpm_prefork rewrite headers deflate expires \
  && docker-php-ext-install pdo_mysql \
  && cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
@@ -19,4 +20,4 @@ RUN chown -R www-data:www-data storage
 # Railway injects PORT; default for local `docker run`.
 ENV PORT=8080
 EXPOSE 8080
-CMD ["apache2-foreground"]
+CMD ["/var/www/keyquest/docker/start.sh"]
