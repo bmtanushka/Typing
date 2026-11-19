@@ -92,10 +92,10 @@ export function applyLessonResult(state, lessonId, result, stars, now = new Date
   return state;
 }
 
-/** First lesson in course order that has not been passed yet (or the last one). */
-export function nextLessonId(index, progress = {}) {
+/** First lesson in course order that has not been passed or skipped yet (or the last one). */
+export function nextLessonId(index, progress = {}, skipped = {}) {
   const order = courseOrder(index);
-  const next = order.find((l) => !(progress[l.id]?.stars > 0));
+  const next = order.find((l) => !(progress[l.id]?.stars > 0) && !skipped[l.id]);
   return (next || order[order.length - 1])?.id ?? null;
 }
 
@@ -104,4 +104,51 @@ export function lessonAfter(index, lessonId) {
   const order = courseOrder(index);
   const i = order.findIndex((l) => l.id === lessonId);
   return i >= 0 && i < order.length - 1 ? order[i + 1] : null;
+}
+
+/* ---------------------------------------------------------------- unlocking */
+
+const isPassed = (state, id) => state.progress?.[id]?.stars > 0 || !!state.skipped?.[id];
+
+/**
+ * A lesson is open when: it is the first lesson; the previous lesson is passed or skipped;
+ * it has been played before; its unit's checkpoint is passed; or it is a checkpoint in a
+ * unit the learner has reached ("test out" to skip ahead).
+ */
+export function isUnlocked(index, state, lessonId) {
+  const order = courseOrder(index);
+  const i = order.findIndex((l) => l.id === lessonId);
+  if (i < 0) return false;
+  if (i === 0) return true;
+  if (isPassed(state, lessonId) || state.progress?.[lessonId]?.attempts > 0) return true;
+  if (isPassed(state, order[i - 1].id)) return true;
+  const lesson = order[i];
+  const unit = index.units.find((u) => u.id === lesson.unit);
+  if (unit.lessons.some((l) => l.type === 'checkpoint' && isPassed(state, l.id))) return true;
+  if (lesson.type === 'checkpoint' && unit.lessons[0].id !== lessonId) return isUnlocked(index, state, unit.lessons[0].id);
+  return false;
+}
+
+/** 'done' | 'open' | 'locked' */
+export function lessonState(index, state, lessonId) {
+  if (isPassed(state, lessonId)) return 'done';
+  return isUnlocked(index, state, lessonId) ? 'open' : 'locked';
+}
+
+/** The lesson a learner must finish to open `lessonId` (the first open, unpassed one before it). */
+export function blockingLesson(index, state, lessonId) {
+  const order = courseOrder(index);
+  const i = order.findIndex((l) => l.id === lessonId);
+  for (let j = i - 1; j >= 0; j--) {
+    if (isUnlocked(index, state, order[j].id) && !isPassed(state, order[j].id)) return order[j];
+  }
+  return null;
+}
+
+/** Mark every unfinished lesson in a unit as skipped (skip ahead / passed checkpoint). */
+export function skipUnit(state, index, unitId) {
+  const unit = index.units.find((u) => u.id === unitId);
+  state.skipped = state.skipped || {};
+  for (const l of unit?.lessons || []) if (!(state.progress?.[l.id]?.stars > 0)) state.skipped[l.id] = true;
+  return state;
 }

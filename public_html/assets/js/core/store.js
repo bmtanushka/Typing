@@ -26,6 +26,8 @@ export function defaultState() {
     results: [],              // recent results (capped)
     keyStats: {},             // char -> { attempts, errors, totalLatencyMs }
     badges: {},               // badgeId -> earnedAt
+    skipped: {},              // lessonId -> true (skipped ahead / tested out)
+    ui: { bannerDismissedAt: null, seenBadges: {} },
     gameScores: {},           // gameId -> bestScore
     xp: 0,
     streak: { current: 0, best: 0, lastDay: null },
@@ -54,6 +56,7 @@ export function migrate(raw) {
     ...base,
     ...state,
     settings: { ...base.settings, ...(state.settings || {}) },
+    ui: { ...base.ui, ...(state.ui || {}) },
     schemaVersion: SCHEMA_VERSION,
   };
 }

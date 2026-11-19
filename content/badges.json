@@ -1,0 +1,21 @@
+{
+  "badges": [
+    { "id": "first-steps", "title": "First steps", "description": "Complete your first lesson.", "icon": "footsteps", "colour": "primary", "criteria": { "type": "lessonsCompleted", "count": 1 } },
+    { "id": "on-your-way", "title": "On your way", "description": "Complete five lessons.", "icon": "rocket", "colour": "primary", "criteria": { "type": "lessonsCompleted", "count": 5 } },
+    { "id": "ten-out-of-ten", "title": "Ten out of ten", "description": "Complete ten lessons.", "icon": "trophy", "colour": "star", "criteria": { "type": "lessonsCompleted", "count": 10 } },
+    { "id": "home-sweet-home", "title": "Home sweet home", "description": "Finish the home row unit.", "icon": "home", "colour": "success", "criteria": { "type": "unitComplete", "unit": "home-row" } },
+    { "id": "hat-trick", "title": "Hat-trick", "description": "Earn three stars in a lesson.", "icon": "stars", "colour": "star", "criteria": { "type": "threeStars", "count": 1 } },
+    { "id": "star-collector", "title": "Star collector", "description": "Earn three stars in five lessons.", "icon": "stars", "colour": "star", "criteria": { "type": "threeStars", "count": 5 } },
+    { "id": "sharp-shooter", "title": "Sharp shooter", "description": "Finish a lesson with 98% accuracy or better.", "icon": "target", "colour": "danger", "criteria": { "type": "accuracy", "min": 98 } },
+    { "id": "flawless", "title": "Flawless", "description": "Finish a lesson without a single mistake.", "icon": "gem", "colour": "info", "criteria": { "type": "perfect", "count": 1 } },
+    { "id": "picking-up-pace", "title": "Picking up pace", "description": "Reach 10 words per minute in a lesson.", "icon": "bolt", "colour": "accent", "criteria": { "type": "wpm", "min": 10 } },
+    { "id": "quick-fingers", "title": "Quick fingers", "description": "Reach 20 words per minute in a lesson.", "icon": "bolt", "colour": "accent", "criteria": { "type": "wpm", "min": 20 } },
+    { "id": "speedy", "title": "Speedy", "description": "Reach 30 words per minute in a lesson.", "icon": "bolt", "colour": "accent", "criteria": { "type": "wpm", "min": 30 } },
+    { "id": "on-a-roll", "title": "On a roll", "description": "Practise three days in a row.", "icon": "flame", "colour": "accent", "criteria": { "type": "streak", "days": 3 } },
+    { "id": "seven-day-streak", "title": "Seven-day streak", "description": "Practise seven days in a row.", "icon": "flame", "colour": "danger", "criteria": { "type": "streak", "days": 7 } },
+    { "id": "practice-pays", "title": "Practice pays", "description": "Complete three problem-key practice sessions.", "icon": "keyboard", "colour": "primary", "criteria": { "type": "practice", "count": 3 } },
+    { "id": "rising-star", "title": "Rising star", "description": "Earn 500 XP.", "icon": "medal", "colour": "star", "criteria": { "type": "xp", "min": 500 } },
+    { "id": "game-on", "title": "Game on", "description": "Play your first typing game.", "icon": "gamepad", "colour": "success", "criteria": { "type": "gamesPlayed", "count": 1 } },
+    { "id": "high-scorer", "title": "High scorer", "description": "Score 100 points in any game.", "icon": "trophy", "colour": "success", "criteria": { "type": "gameScore", "min": 100 } }
+  ]
+}
