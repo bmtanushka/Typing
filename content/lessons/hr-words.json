@@ -1,0 +1,64 @@
+{
+  "id": "hr-words",
+  "unit": "home-row",
+  "title": "Home row words",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "You know the whole home row now – that’s nine letters and a semicolon! Let’s put them together into real words.",
+    "tip": "Find a steady rhythm, like a ticking clock. Even and smooth beats fast and bumpy."
+  },
+  "steps": [
+    {
+      "type": "words",
+      "title": "Warm-up words",
+      "count": 12,
+      "focus": [
+        "a",
+        "s",
+        "d",
+        "f"
+      ],
+      "instructions": "Start gently with words from the left side of the home row."
+    },
+    {
+      "type": "words",
+      "title": "Stretch to G and H",
+      "count": 12,
+      "focus": [
+        "g",
+        "h"
+      ],
+      "instructions": "These words reach into the middle of the row."
+    },
+    {
+      "type": "words",
+      "title": "All together",
+      "count": 15,
+      "instructions": "Any home row word can turn up now."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "hints": "fade",
+      "text": [
+        "a lass has a glad dash; dad shall ask all lads; half a salad falls; a flag has a flash;",
+        "all lads had a glass; dad has a flask; a sad lass asks a lad; glad dads shall dash;"
+      ],
+      "instructions": "Keyboard hints fade out – you’ve got this."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 10
+    }
+  }
+}

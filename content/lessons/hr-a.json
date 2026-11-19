@@ -1,0 +1,67 @@
+{
+  "id": "hr-a",
+  "unit": "home-row",
+  "title": "A and ;",
+  "type": "lesson",
+  "newKeys": [
+    "a",
+    ";"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Your little fingers complete the home row: A on the left and the semicolon (;) on the right. With A, you can type real words!",
+    "tip": "Little fingers are small but mighty – keep your wrists level so they can reach comfortably."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet A and ;",
+      "keys": [
+        "a",
+        ";"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. Take your time – the cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "aaa ;;; a;a ;a; sas l;l asdf jkl; a;sl ;ald",
+      "instructions": "Keep your fingers on the home row and move only the finger you need."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 48,
+      "instructions": "The new keys are mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 12,
+      "instructions": "Every word uses only the keys you’ve learnt so far."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "a lad; a dad; a sad lass; all lads ask; dad adds a salad; a flask falls;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out now – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 10
+    }
+  }
+}

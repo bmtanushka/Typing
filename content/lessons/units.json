@@ -1,0 +1,29 @@
+{
+  "units": [
+    {
+      "id": "getting-started",
+      "title": "Getting started",
+      "description": "Sit comfortably, find the home row and learn how lessons work.",
+      "colour": "accent",
+      "lessons": [
+        "gs-welcome",
+        "gs-home"
+      ]
+    },
+    {
+      "id": "home-row",
+      "title": "The home row",
+      "description": "Your fingers’ home base: A S D F G H J K L ;",
+      "colour": "primary",
+      "lessons": [
+        "hr-fj",
+        "hr-dk",
+        "hr-sl",
+        "hr-a",
+        "hr-gh",
+        "hr-words",
+        "hr-check"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "hr-check",
+  "unit": "home-row",
+  "title": "Home row checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Time to show what you’ve learnt! This checkpoint uses only home row keys. There are no keyboard hints, so keep your eyes on the screen.",
+    "tip": "Reach 90% accuracy to pass. Breathe, relax your shoulders and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": [
+        "dad has a glass; a lad has a flag; all lads ask dad; a lass shall dash; half a salad falls;"
+      ],
+      "instructions": "No hints this time – trust your fingers."
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": [
+        "glad lads add a dash; dad had a flask; a flash falls; all lads shall ask; a sad lad has half a glass;"
+      ],
+      "instructions": "Nearly there. Keep the same steady rhythm."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 90,
+    "minWpm": 5
+  },
+  "stars": {
+    "two": {
+      "accuracy": 94,
+      "wpm": 8
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 14
+    }
+  }
+}

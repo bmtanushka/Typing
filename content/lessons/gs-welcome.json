@@ -1,0 +1,62 @@
+{
+  "id": "gs-welcome",
+  "unit": "getting-started",
+  "title": "Welcome aboard",
+  "type": "tutorial",
+  "newKeys": [],
+  "estimatedMinutes": 2,
+  "intro": {
+    "text": "Before we type a single letter, let’s get comfy. Good habits now make you faster later – and they’re kinder to your back and wrists.",
+    "tip": "You’ll move through each screen by pressing the space bar with your thumb."
+  },
+  "steps": [
+    {
+      "type": "info",
+      "title": "Sit tall and relaxed",
+      "art": "posture",
+      "body": [
+        "Feet flat on the floor, back against the chair and shoulders loose.",
+        "Keep your elbows by your sides and your wrists floating just above the keyboard – not resting on the desk.",
+        "Your screen should be roughly at eye level, about an arm’s length away."
+      ]
+    },
+    {
+      "type": "info",
+      "title": "Eyes on the screen",
+      "art": "eyes",
+      "body": [
+        "Touch typists don’t look down at their hands. Your fingers learn where the keys are, just like learning to ride a bike.",
+        "Whenever you’re unsure, glance at the keyboard on the screen instead – it lights up the next key and shows which finger to use."
+      ]
+    },
+    {
+      "type": "info",
+      "title": "How lessons work",
+      "art": "stars",
+      "body": [
+        "Each lesson introduces one or two new keys, then you practise them in short steps of about half a minute.",
+        "Aim for accuracy first: speed follows naturally. Finish with good accuracy to earn up to three stars."
+      ]
+    },
+    {
+      "type": "keys",
+      "title": "Your first keys: the space bar",
+      "text": "     ",
+      "keys": [
+        " "
+      ],
+      "instructions": "Tap the space bar five times with either thumb. Watch the stars appear!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 0
+  },
+  "stars": {
+    "two": {
+      "accuracy": 0
+    },
+    "three": {
+      "accuracy": 0
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "hr-fj",
+  "unit": "home-row",
+  "title": "F and J",
+  "type": "lesson",
+  "newKeys": [
+    "f",
+    "j"
+  ],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "F and J are your anchor keys. Your index fingers live here, and every other finger lines up beside them.",
+    "tip": "Feel the bumps on F and J – they let you find home without looking."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet F and J",
+      "keys": [
+        "f",
+        "j"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. Take your time – the cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "fff jjj fjf jfj ffj jjf fj jf fjfj jfjf",
+      "instructions": "Keep your fingers on the home row and move only the finger you need."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 48,
+      "instructions": "The new keys are mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "fj jf ffj jjf fjf jfj fj ff jj fjj jff jf"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out now – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 10
+    }
+  }
+}

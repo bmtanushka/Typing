@@ -1,0 +1,83 @@
+{
+  "id": "gs-home",
+  "unit": "getting-started",
+  "title": "Home position",
+  "type": "tutorial",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Every key you’ll ever type is reached from one place: the home row. Let’s find it with your eyes closed (well, almost).",
+    "tip": "If your fingers ever get lost, feel for the bumps on F and J and you’re home again."
+  },
+  "steps": [
+    {
+      "type": "info",
+      "title": "Find the bumps",
+      "art": "bumps",
+      "highlight": [
+        "f",
+        "j"
+      ],
+      "body": [
+        "Look closely at the F and J keys on your keyboard – each has a tiny raised bump.",
+        "Rest your left index finger on F and your right index finger on J. Now press them both."
+      ],
+      "waitFor": [
+        "f",
+        "j"
+      ]
+    },
+    {
+      "type": "info",
+      "title": "Settle the rest of your fingers",
+      "art": "hands",
+      "highlight": [
+        "a",
+        "s",
+        "d",
+        "f",
+        "j",
+        "k",
+        "l",
+        ";"
+      ],
+      "body": [
+        "Let your other fingers fall naturally onto the keys beside them: A S D F on the left, J K L ; on the right.",
+        "Your thumbs rest lightly on the space bar. Press each home key once to check every finger is in place."
+      ],
+      "waitFor": [
+        "a",
+        "s",
+        "d",
+        "f",
+        "j",
+        "k",
+        "l",
+        ";"
+      ]
+    },
+    {
+      "type": "keys",
+      "title": "Walk along the home row",
+      "text": "asdf jkl; asdf jkl;",
+      "instructions": "Type each letter in turn. You can’t go wrong – the next key waits for you."
+    },
+    {
+      "type": "drill",
+      "title": "One finger at a time",
+      "text": "a s d f j k l ; f j d k s l a ;",
+      "instructions": "Say each letter in your head as you press it, and keep your eyes up here."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 0
+  },
+  "stars": {
+    "two": {
+      "accuracy": 80
+    },
+    "three": {
+      "accuracy": 92
+    }
+  }
+}

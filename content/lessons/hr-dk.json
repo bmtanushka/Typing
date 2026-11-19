@@ -1,0 +1,61 @@
+{
+  "id": "hr-dk",
+  "unit": "home-row",
+  "title": "D and K",
+  "type": "lesson",
+  "newKeys": [
+    "d",
+    "k"
+  ],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Your middle fingers sit on D and K, right next to your index fingers. They’re strong fingers – let them do the work.",
+    "tip": "Only the finger you need should move; the others stay resting on the home row."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet D and K",
+      "keys": [
+        "d",
+        "k"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. Take your time – the cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "ddd kkk dkd kdk fdf jkj dfd kjk fdk jkd",
+      "instructions": "Keep your fingers on the home row and move only the finger you need."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 48,
+      "instructions": "The new keys are mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "dk kd fdk jkd dfj kjf fkd jdk ddk kkd dfk kjd"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out now – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 10
+    }
+  }
+}

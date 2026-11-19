@@ -1,0 +1,67 @@
+{
+  "id": "hr-gh",
+  "unit": "home-row",
+  "title": "G and H",
+  "type": "lesson",
+  "newKeys": [
+    "g",
+    "h"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "G and H sit in the middle of the row. Your index fingers stretch across to reach them, then hop straight back to F and J.",
+    "tip": "Stretch, press, return. Always come back to the bumps after reaching for G or H."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet G and H",
+      "keys": [
+        "g",
+        "h"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. Take your time – the cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "fgf jhj fgf jhj ggg hhh ghg hgh fgh jhg",
+      "instructions": "Keep your fingers on the home row and move only the finger you need."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 48,
+      "instructions": "The new keys are mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 12,
+      "instructions": "Every word uses only the keys you’ve learnt so far."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "a glad lad has a flask; dad had half a salad; all lads shall dash; a flag flash;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out now – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 10
+    }
+  }
+}

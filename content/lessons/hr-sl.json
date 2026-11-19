@@ -1,0 +1,61 @@
+{
+  "id": "hr-sl",
+  "unit": "home-row",
+  "title": "S and L",
+  "type": "lesson",
+  "newKeys": [
+    "s",
+    "l"
+  ],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Ring fingers next! S is under your left ring finger and L is under your right. They’re a bit shy, so they need extra practice.",
+    "tip": "If a ring finger feels wobbly, slow down. Accuracy builds the muscle memory."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet S and L",
+      "keys": [
+        "s",
+        "l"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. Take your time – the cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "sss lll sls lsl dsd klk sdf lkj fsl jls",
+      "instructions": "Keep your fingers on the home row and move only the finger you need."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 48,
+      "instructions": "The new keys are mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "sl ls sld lsk fsl jls dsl kls sdf lkj slk lsd"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out now – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 10
+    }
+  }
+}
