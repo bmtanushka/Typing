@@ -47,6 +47,17 @@ final class PageController
         ]));
     }
 
+    public function demo(Request $request): Response
+    {
+        return Response::html(View::page('pages/demo', [
+            'title' => 'Typing playground',
+            'description' => 'Try the typing engine with the on-screen keyboard and hands guide.',
+            'bodyClass' => 'page-demo',
+            'pageScript' => 'js/pages/demo.js',
+            'pageStyles' => ['css/typing.css'],
+        ]));
+    }
+
     public function placeholder(Request $request): Response
     {
         [$title, $phase, $blurb] = self::PLACEHOLDERS[$request->path];

@@ -212,7 +212,7 @@ $fingers = [
     <!-- Keyboard -->
     <section id="sg-keyboard" class="sg-section">
         <h2>Keyboard keys</h2>
-        <p class="text-muted">Preview of keycap states. The full data-driven UK/US keyboard arrives in phase 1.</p>
+        <p class="text-muted">Keycap states. The full data-driven UK/US keyboard with the hands guide is live in the <a href="<?= e(url('/demo')) ?>">typing playground</a>.</p>
         <div class="kb-preview" aria-hidden="true">
             <div class="kb-row">
                 <?php foreach (['A' => 'lp', 'S' => 'lr', 'D' => 'lm', 'F' => 'li', 'G' => 'li', 'H' => 'ri', 'J' => 'ri', 'K' => 'rm', 'L' => 'rr', ';' => 'rp'] as $k => $f): ?>

@@ -7,6 +7,7 @@
  * @var ?string $bodyClass
  * @var ?string $pageScript Path under assets/ of a page ES module
  * @var ?bool   $noindex
+ * @var ?array  $pageStyles Extra stylesheets under assets/
  */
 $appName = (string) config('app.name', 'KeyQuest');
 ?><!doctype html>
@@ -24,6 +25,9 @@ $appName = (string) config('app.name', 'KeyQuest');
     <link rel="stylesheet" href="<?= e(asset('css/tokens.css')) ?>">
     <link rel="stylesheet" href="<?= e(asset('css/base.css')) ?>">
     <link rel="stylesheet" href="<?= e(asset('css/components.css')) ?>">
+    <?php foreach ($pageStyles ?? [] as $sheet): ?>
+    <link rel="stylesheet" href="<?= e(asset($sheet)) ?>">
+    <?php endforeach; ?>
     <script type="module" src="<?= e(asset('js/app.js')) ?>"></script>
     <?php if (!empty($pageScript)): ?>
     <script type="module" src="<?= e(asset($pageScript)) ?>"></script>

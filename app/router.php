@@ -5,6 +5,7 @@
 declare(strict_types=1);
 
 use App\Controllers\ApiController;
+use App\Controllers\ContentController;
 use App\Controllers\PageController;
 use App\Core\Router;
 
@@ -12,6 +13,7 @@ return static function (Router $r): void {
     // Pages
     $r->get('/', [PageController::class, 'home']);
     $r->get('/styleguide', [PageController::class, 'styleguide']); // dev only
+    $r->get('/demo', [PageController::class, 'demo']);
 
     // Sections still to be built – friendly "coming soon" placeholder for now.
     foreach (array_keys(PageController::PLACEHOLDERS) as $path) {
@@ -20,6 +22,7 @@ return static function (Router $r): void {
 
     // JSON API
     $r->get('/api/health', [ApiController::class, 'health']);
+    $r->get('/api/layouts/{id}', [ContentController::class, 'layout']);
 
     $r->setNotFound([PageController::class, 'notFound']);
 };
