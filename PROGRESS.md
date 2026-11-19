@@ -4,9 +4,9 @@
 |---|---|
 | 0 – Foundations | ✅ Done |
 | 1 – Typing engine + keyboard | ✅ Done |
-| 2 – Lesson framework + Units 1–2 | ✅ Built – awaiting review |
-| 3 – Guest progress + motivation | ⏳ Next |
-| 4 – Accounts + sync | – |
+| 2 – Lesson framework + Units 1–2 | ✅ Done |
+| 3 – Guest progress + motivation | ✅ Built – awaiting review |
+| 4 – Accounts + sync | ⏳ Next |
 | 5 – Remaining curriculum + practice modes | – |
 | 6 – Games | – |
 | 7 – Polish | – |
@@ -50,6 +50,51 @@
 4. Click the theme button in the header (System → Light → Dark), reload: it persists.
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
+
+## Phase 3 – Guest progress + motivation
+
+**Built**
+- Unlocking (`core/lesson-logic.js`): lessons open in order; failed attempts stay open; skip a
+  unit without a checkpoint ("Skip – I know this already"); **test out** of a unit by passing
+  its checkpoint (available once the unit is reached) – this skips the unit's remaining
+  lessons and opens the next unit. Skipped lessons stay playable. Locked lessons on the map open
+  a friendly dialog (what to finish first + test-out option); a direct URL shows a locked screen.
+- `core/rewards.js` (pure): XP (finishing 10, +5/star, first pass +20, checkpoint +50, new
+  stars +10 each, practice 8), levels (100, 150, 200… XP), daily streak on the learner's local
+  calendar, badge evaluation from `content/badges.json` (17 badges, 11 criteria types),
+  `recordLesson` / `recordPractice` returning a summary for the results screen.
+- `core/mascot.js`: Pip's varied, never-negative messages – specific improvements first
+  ("Nice! Your accuracy improved by 6%.", "You’re 4 WPM faster than your best!"), unit
+  completion, level ups, streaks, then encouragement by stars.
+- Results screen: Pip speech bubble, +XP, level bar (level up!), streak, new badge cards;
+  confetti + fanfare on unit completion (smaller burst on level up); reduced motion → no confetti.
+- `core/sound.js`: soft Web Audio sounds (key click, gentle error, step, success, badge,
+  level up) – no audio files, **off by default**, also in the playground.
+- Header chip: streak flame + level (links to badges). Guest banner "Create a free account to
+  save your progress on any device." on the map, badges page and lesson results – dismissible
+  for a week.
+- `/badges`: level, streak (current + best), earned count, all badges with earned dates, "New"
+  sparkle once. Original SVG icon set (`core/icons.js`).
+- `/settings`: theme, text size (applied before paint), keyboard layout (auto/UK/US), keyboard,
+  hands, backspace, sound (+ sample), download my progress (JSON), reset progress (confirm dialog,
+  keeps settings).
+
+**Verified**
+- `node tests/js/run.mjs` → 57 passed (XP, levels, streak dates across month ends, badges,
+  checkpoint test-out, unlocking, mascot messages never negative); `php tests/run.php` → 15.
+- Browser suites run against **Apache** (same `.htaccess` as production): Phase 3 suite (locking,
+  dialog, locked URL, skip ahead, rewards, 7 badges, test out + confetti + unit badge, banner
+  dismiss, badges page, settings persist, export, reset) plus the Phase 1–2 suites – no console
+  errors.
+
+**How to test**
+1. Fresh browser (or Settings → Reset): on Lessons only *Welcome aboard* is open; tap a locked
+   lesson to see the dialog.
+2. Click **Skip – I know this already** on Getting started → F and J opens and **Test out with
+   the checkpoint** appears on The home row.
+3. Finish F and J: see +XP, level bar, 1-day streak, new badges, Pip's message, header chip.
+4. Pass the Home row checkpoint → confetti, "Home sweet home", the rest of the unit is skipped.
+5. Open **Badges** and **Settings** (try sound on, Large text, dark theme, export, reset).
 
 ## Phase 2 – Lesson framework + Units 1–2
 
@@ -162,6 +207,6 @@ celebrations arrive in Phase 3.
 - [x] Fonts approved and self-hosted.
 - [x] Name: KeyQuest, mascot: Pip (confirmed).
 - [x] Hostinger allows folders beside `public_html` – use that layout.
-- [ ] Badge icons currently use emoji in the style guide; replace with SVG in Phase 3.
+- [x] Badge icons are now original SVGs (`core/icons.js`).
 - [ ] Approve Playwright as a dev-only dependency for committed browser tests (optional).
 - [ ] Railway deploy-on-push: add the Railway GitHub App to the repo (deploys triggered manually until then).

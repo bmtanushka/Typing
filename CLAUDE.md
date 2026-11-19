@@ -54,6 +54,15 @@ brief is summarised there; work phase by phase and stop for review at the end of
 - Texts may only use keys learnt so far – `tests/php/LessonContentTest.php` enforces this.
 - Copy is original, British English, encouraging and never negative.
 
+## Motivation
+- XP, levels, streaks and badges live in `assets/js/core/rewards.js` (pure, tested). Record
+  lessons with `recordLesson` and other practice with `recordPractice` – never write progress
+  fields by hand.
+- Badges are data in `content/badges.json` (`id, title, description, icon, colour, criteria`);
+  criteria types are listed in `KNOWN_CRITERIA`. Icons come from `core/icons.js`.
+- Pip's copy lives in `core/mascot.js` – specific, varied and never negative (a test checks).
+- Sounds (`core/sound.js`) are synthesised and off by default; confetti respects reduced motion.
+
 ## CSS
 - Design tokens in `assets/css/tokens.css` – use variables, never hard-code colours.
   Dark theme overrides live under `:root[data-theme="dark"]`.
