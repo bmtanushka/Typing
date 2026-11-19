@@ -1,0 +1,13 @@
+{
+  "name": "keyquest",
+  "private": true,
+  "description": "Development tooling only – nothing here is deployed. The app itself needs no build step.",
+  "scripts": {
+    "test": "php tests/run.php && node tests/js/run.mjs",
+    "test:api": "php tests/integration/api.php ${BASE:-http://localhost:8000}",
+    "test:e2e": "node tests/e2e/run.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

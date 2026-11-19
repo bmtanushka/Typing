@@ -8,3 +8,5 @@ node_modules
 tests
 *.md
 .dockerignore
+package.json
+package-lock.json

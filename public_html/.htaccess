@@ -17,7 +17,7 @@ ServerSignature Off
 
     # Block internal folders/files if they were uploaded inside the web root
     RewriteRule ^(app|content|install|storage|tests|vendor)(/|$) - [F,L]
-    RewriteRule ^(config(\.sample)?\.php|composer\.(json|lock)|[A-Z]+\.md)$ - [F,L]
+    RewriteRule ^(config(\.sample)?\.php|composer\.(json|lock)|package(-lock)?\.json|[A-Z]+\.md)$ - [F,L]
 
     # Versioned assets: /assets/_v<hash>/js/app.js -> /assets/js/app.js
     # (the version lives in the path so relative ES-module imports inherit it)
