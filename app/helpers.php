@@ -42,13 +42,44 @@ function url(string $path = '/'): string
     return base_path() . ($path === '/' ? '/' : $path);
 }
 
-/** Versioned URL for a file in public_html/assets (cache-busting by mtime). */
+/**
+ * Versioned URL for a file in public_html/assets.
+ *
+ * Under Apache/LiteSpeed the version goes in the PATH (/assets/_v<hash>/js/app.js, rewritten
+ * by .htaccess) so that ES modules imported relatively by a versioned file inherit the same
+ * version – a query string would not propagate to imports. PHP's built-in dev server cannot
+ * rewrite, so it gets ?v=<hash> instead (no long-lived caching there).
+ */
 function asset(string $path): string
 {
     $path = ltrim($path, '/');
-    $file = KQ_PUBLIC . '/assets/' . $path;
-    $v = is_file($file) ? (string) filemtime($file) : '0';
-    return base_path() . '/assets/' . $path . '?v=' . $v;
+    if (PHP_SAPI === 'cli-server') {
+        return base_path() . '/assets/' . $path . '?v=' . asset_version();
+    }
+    return base_path() . '/assets/_v' . asset_version() . '/' . $path;
+}
+
+/** Short hash that changes whenever any file under public_html/assets changes. */
+function asset_version(): string
+{
+    static $version = null;
+    if ($version !== null) {
+        return $version;
+    }
+    $configured = Config::get('app.asset_version');
+    if (is_string($configured) && preg_match('/^[a-f0-9]{4,32}$/', $configured)) {
+        return $version = $configured;
+    }
+    $parts = [];
+    $dir = KQ_PUBLIC . '/assets';
+    if (is_dir($dir)) {
+        $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS));
+        foreach ($it as $file) {
+            $parts[] = $file->getPathname() . ':' . $file->getMTime() . ':' . $file->getSize();
+        }
+    }
+    sort($parts);
+    return $version = substr(md5(implode('|', $parts)), 0, 10);
 }
 
 /** Current request path relative to the base path. */

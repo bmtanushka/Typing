@@ -18,7 +18,9 @@ brief is summarised there; work phase by phase and stop for review at the end of
   array (sent as JSON).
 - JSON API lives under `/api/*` and always returns `{ ok: bool, ... }`.
 - Views are plain PHP in `app/Views`; **escape every output with `e()`**. Build links
-  with `url()` and asset links with `asset()` (adds base path + cache-busting).
+  with `url()` and asset links with `asset()`. In production `asset()` puts the version in the
+  PATH (`/assets/_v<hash>/…`, rewritten by .htaccess) so relative ES-module imports inherit it;
+  assets are cached as immutable, so never link an asset without `asset()`.
 - DB access: PDO prepared statements only (from Phase 4). Validate every input.
 - Never show errors to users in production; `ErrorHandler` logs to `storage/logs`.
 - Config via `config('a.b')`; secrets only in `config.php` (git-ignored).

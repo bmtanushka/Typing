@@ -19,6 +19,10 @@ ServerSignature Off
     RewriteRule ^(app|content|install|storage|tests|vendor)(/|$) - [F,L]
     RewriteRule ^(config(\.sample)?\.php|composer\.(json|lock)|[A-Z]+\.md)$ - [F,L]
 
+    # Versioned assets: /assets/_v<hash>/js/app.js -> /assets/js/app.js
+    # (the version lives in the path so relative ES-module imports inherit it)
+    RewriteRule ^assets/_v[0-9a-f]+/(.+)$ assets/$1 [L]
+
     # Front controller: everything that is not a real file goes to index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
