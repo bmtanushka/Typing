@@ -63,6 +63,17 @@ brief is summarised there; work phase by phase and stop for review at the end of
 - Pip's copy lives in `core/mascot.js` – specific, varied and never negative (a test checks).
 - Sounds (`core/sound.js`) are synthesised and off by default; confetti respects reduced motion.
 
+## Accounts and sync
+- Every state-changing endpoint: `AuthController::guard()` (CSRF via `X-CSRF-Token`, 403 on
+  failure – never use non-standard status codes, Apache turns them into 500). Use the
+  browser helpers in `core/api.js`.
+- Sessions start lazily (`Session::start()` only for auth); read with `Auth::user()`.
+- Every new kind of activity must (1) update the local store via `rewards.js`, and (2) call
+  `track(makeEvent(type, ref, result, {stars, score, xp, badges, skipped}))` from `core/sync.js`.
+  Server-side validation lives in `ProgressService::validateEvent` – extend it, keep the
+  plausibility limits.
+- `/install` paths are blocked by .htaccess; the web installer is `/setup`.
+
 ## CSS
 - Design tokens in `assets/css/tokens.css` – use variables, never hard-code colours.
   Dark theme overrides live under `:root[data-theme="dark"]`.
@@ -74,5 +85,9 @@ brief is summarised there; work phase by phase and stop for review at the end of
 
 ## Testing & workflow
 - `php tests/run.php` (PHP) and `node tests/js/run.mjs` (JS). All tests must pass before commit.
-- Run locally with `php -S localhost:8000 -t public_html`.
+- With a database + Apache: `php tests/integration/api.php <base-url>` and
+  `BASE=<base-url> node tests/e2e/run.cjs` (Playwright, dev-only). Browser robots must type at
+  a human-plausible speed (≥ 60 ms per key) when signed in, or the server rejects the result.
+- Run locally with `php -S localhost:8000 -t public_html` (no `.htaccess` there – test
+  rewrites, headers and caching under Apache before deploying).
 - Small, focused commits with clear messages. Update `PROGRESS.md` at the end of each phase.

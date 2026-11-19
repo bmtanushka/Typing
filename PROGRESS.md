@@ -5,9 +5,9 @@
 | 0 – Foundations | ✅ Done |
 | 1 – Typing engine + keyboard | ✅ Done |
 | 2 – Lesson framework + Units 1–2 | ✅ Done |
-| 3 – Guest progress + motivation | ✅ Built – awaiting review |
-| 4 – Accounts + sync | ⏳ Next |
-| 5 – Remaining curriculum + practice modes | – |
+| 3 – Guest progress + motivation | ✅ Done |
+| 4 – Accounts + sync | ✅ Done (user asked to continue straight to Phase 6) |
+| 5 – Remaining curriculum + practice modes | ⏳ In progress |
 | 6 – Games | – |
 | 7 – Polish | – |
 | 8 – Deployment to Hostinger | – |
@@ -50,6 +50,57 @@
 4. Click the theme button in the header (System → Light → Dark), reload: it persists.
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
+
+## Phase 4 – Accounts + sync
+
+Decisions (approved "go ahead with all"): MySQL on Railway for testing; mail driver `log` on
+Railway (SMTP or `mail()` configurable for Hostinger); Argon2id (bcrypt fallback); Playwright
+as a dev-only dependency (`package.json`, never deployed).
+
+**Built**
+- `install/schema.sql` (users, lesson_progress, results, key_stats, badges, game_scores,
+  password_resets, login_attempts + `action`, guest_merges). Idempotent. Three ways to install:
+  `php install/migrate.php` (SSH), the one-time web installer at **`/setup`** (locks itself via
+  `storage/installed.lock`), or phpMyAdmin import. Docker/Railway runs migrations at start-up.
+- PHP core: `Database` (PDO, prepared statements, no emulation, UTC), `Session` (lazy – guests
+  get no cookie; HttpOnly, Secure on HTTPS, SameSite=Lax, strict mode, regenerated on login),
+  `Csrf` (synchroniser token, `X-CSRF-Token` header, 403 on failure), `RateLimiter`
+  (DB-backed: login 5/email + 20/IP per 15 min, register 5/IP/h, forgot 3/email + 10/IP per h,
+  reset 10/IP/h), `Validator`, pluggable `Mailer` (log / mail() / SMTP with SSL or STARTTLS).
+- Auth API: `GET /api/session`, `POST /api/auth/{register,login,logout,forgot,reset}`.
+  No account enumeration (same reply for unknown emails; dummy hash on unknown login).
+  Password reset tokens are random, stored hashed, expire after an hour, single use.
+- Sync: the browser records activity locally and, when signed in, queues **events** with a
+  client id (`core/sync.js`); `POST /api/progress/sync` applies them idempotently with
+  plausibility checks (≤ 250 WPM, ≤ 300 raw, characters must fit the time, accuracy 0–100,
+  known badges, slug ids, XP ≤ 300 per event) and returns the account state. Offline-tolerant:
+  queue persists, retries with back-off, on `online` and when the tab becomes visible.
+  Settings and skipped lessons sync too.
+- Guest → account merge on register/login (`POST /api/progress/merge`): best per lesson, sum
+  XP, union badges, add key stats, better streak, keep game bests; idempotent per merge id;
+  the guest store is then replaced by the account mirror. Logging out removes account data
+  from the device (settings kept).
+- Pages: `/register`, `/login`, `/forgot-password`, `/reset-password`, `/account` (change
+  name/email/password, download my data, delete account with password confirmation),
+  `/progress` dashboard (summary, WPM + accuracy trend charts with hover tooltip and table
+  view, single-hue problem-key heatmap, course progress, recent activity, badges) – works for
+  guests too. Header shows the signed-in learner.
+
+**Verified**
+- `php tests/integration/api.php http://localhost:8090` → 18 passed (CSRF, validation, cookie
+  flags + session regeneration, idempotent sync, best-result rules, implausible results
+  rejected, settings/skipped sync, logout, login, merge once, profile/password, export without
+  hash, forgot = same reply, bad reset token, login rate limit, delete).
+- `BASE=http://localhost:8090 node tests/e2e/run.cjs` → all suites (accounts: guest → register
+  merge → dashboard → synced lesson → logout clears → login restores → second device →
+  profile → reset via mail log → delete). Unit tests: 60 JS, 15 PHP.
+
+**How to test (Railway)**: register at `/register` after finishing a lesson as a guest, open
+`/progress`, log in from another browser, try `/account`. Reset emails are written to the log
+on Railway (not sent).
+
+Notes: sessions are files in `storage/sessions`; on Railway they reset on each deploy (you'll
+need to log in again) – fine for testing, persistent on Hostinger.
 
 ## Phase 3 – Guest progress + motivation
 
