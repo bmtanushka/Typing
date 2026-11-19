@@ -55,13 +55,14 @@
 - PHP renders a page shell for each route, and each page loads its own ES module (not a SPA).
   Page transitions use cross-document View Transitions (progressive enhancement).
 - Theme resolved by a tiny blocking script in `<head>`; no-JS users get the light theme.
-- Fonts: system font stacks for now, with "Nunito" / "JetBrains Mono" named first.
-  Self-hosting the font files needs approval (see open items).
+- Fonts: self-hosted variable **Nunito** (UI) and **JetBrains Mono** (typing), Latin +
+  Latin Extended subsets only (~130 KB total, loaded per unicode-range), `font-display: swap`.
+  Source: @fontsource-variable packages, SIL OFL 1.1 (licences in `assets/fonts/`).
 - Namespace `App\` (not tied to the working product name).
 - Mascot named "Pip" (working name).
 
 ## Open items / questions
-- [ ] Approve self-hosting **Nunito** and **JetBrains Mono** (both SIL OFL) as `.woff2`.
-- [ ] Final product name and mascot name.
-- [ ] Confirm Hostinger plan allows files outside `public_html` (fallback is in place).
+- [x] Fonts approved and self-hosted.
+- [x] Name: KeyQuest, mascot: Pip (confirmed).
+- [x] Hostinger allows folders beside `public_html` – use that layout.
 - [ ] Badge icons currently use emoji in the style guide; replace with SVG in Phase 3.
