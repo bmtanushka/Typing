@@ -23,10 +23,59 @@ final class Config
         'security' => ['force_https' => false],
     ];
 
+    /**
+     * Environment variables that override config.php (used on Railway/Docker).
+     * First variable found wins; MYSQL* are the names Railway's MySQL add-on provides.
+     */
+    private const ENV_MAP = [
+        'app.env'              => ['APP_ENV'],
+        'app.debug'            => ['APP_DEBUG'],
+        'app.base_path'        => ['APP_BASE_PATH'],
+        'app.base_url'         => ['APP_BASE_URL'],
+        'db.host'              => ['DB_HOST', 'MYSQLHOST'],
+        'db.port'              => ['DB_PORT', 'MYSQLPORT'],
+        'db.name'              => ['DB_NAME', 'MYSQLDATABASE'],
+        'db.user'              => ['DB_USER', 'MYSQLUSER'],
+        'db.pass'              => ['DB_PASS', 'MYSQLPASSWORD'],
+        'mail.driver'          => ['MAIL_DRIVER'],
+        'mail.from_email'      => ['MAIL_FROM_EMAIL'],
+        'mail.smtp.host'       => ['SMTP_HOST'],
+        'mail.smtp.port'       => ['SMTP_PORT'],
+        'mail.smtp.username'   => ['SMTP_USERNAME'],
+        'mail.smtp.password'   => ['SMTP_PASSWORD'],
+        'security.force_https' => ['FORCE_HTTPS'],
+    ];
+
     public static function load(string $file): void
     {
         $user = is_file($file) ? require $file : [];
         self::$items = array_replace_recursive(self::DEFAULTS, is_array($user) ? $user : []);
+        self::applyEnv();
+    }
+
+    private static function applyEnv(): void
+    {
+        foreach (self::ENV_MAP as $key => $names) {
+            foreach ($names as $name) {
+                $value = getenv($name);
+                if ($value === false || $value === '') {
+                    continue;
+                }
+                $bool = filter_var($value, FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE);
+                $value = match (true) {
+                    in_array($key, ['app.debug', 'security.force_https'], true) => (bool) $bool,
+                    str_ends_with($key, '.port') && ctype_digit($value) => (int) $value,
+                    default => $value,
+                };
+                $ref = &self::$items;
+                foreach (explode('.', $key) as $part) {
+                    $ref = &$ref[$part];
+                }
+                $ref = $value;
+                unset($ref);
+                break;
+            }
+        }
     }
 
     /** For tests. */
