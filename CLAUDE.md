@@ -39,6 +39,19 @@ brief is summarised there; work phase by phase and stop for review at the end of
 - Keyboard layouts are JSON in `content/layouts/` (served by `/api/layouts/{id}`); each key has
   `code` (KeyboardEvent.code), `base`, `shift`, `finger`, optional `width`/`special`.
 
+## Lesson content (content/lessons)
+- `units.json` lists units in course order (`id`, `title`, `description`, `colour`, `lessons[]`).
+- One file per lesson, `<id>.json` (id = lowercase slug, matches file name):
+  `id, unit, title, type (tutorial|lesson|checkpoint), newKeys[], estimatedMinutes,
+  intro {text, tip}, steps[], passCriteria {minAccuracy, minWpm}, stars {two, three}`.
+- Step types: `info` (body[], art, highlight[], waitFor[]), `keys` (keys[], rounds, groupSize –
+  always stopOnError, large text, not counted for WPM), `drill` (text or generated: length,
+  focus[]), `words` (count, focus[] – real words from content/wordlists filtered to learnt keys),
+  `challenge` (text or [alternatives], hints: show|fade|none). Every step has `title` and
+  optional `instructions`. `text` may be a string or an array (one is picked at random).
+- Texts may only use keys learnt so far – `tests/php/LessonContentTest.php` enforces this.
+- Copy is original, British English, encouraging and never negative.
+
 ## CSS
 - Design tokens in `assets/css/tokens.css` – use variables, never hard-code colours.
   Dark theme overrides live under `:root[data-theme="dark"]`.

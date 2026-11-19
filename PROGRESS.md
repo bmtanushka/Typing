@@ -3,9 +3,9 @@
 | Phase | Status |
 |---|---|
 | 0 – Foundations | ✅ Done |
-| 1 – Typing engine + keyboard | ✅ Built – awaiting review |
-| 2 – Lesson framework + Units 1–2 | ⏳ Next |
-| 3 – Guest progress + motivation | – |
+| 1 – Typing engine + keyboard | ✅ Done |
+| 2 – Lesson framework + Units 1–2 | ✅ Built – awaiting review |
+| 3 – Guest progress + motivation | ⏳ Next |
 | 4 – Accounts + sync | – |
 | 5 – Remaining curriculum + practice modes | – |
 | 6 – Games | – |
@@ -50,6 +50,52 @@
 4. Click the theme button in the header (System → Light → Dark), reload: it persists.
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
+
+## Phase 2 – Lesson framework + Units 1–2
+
+**Built**
+- Lesson format (see CLAUDE.md): `content/lessons/units.json` + one JSON per lesson;
+  `LessonRepository` (PHP) reads and indexes it. APIs: `GET /api/lessons` (course index,
+  ETag), `GET /api/lessons/{id}`, `GET /api/wordlists/{id}`.
+- Original word list `content/wordlists/en-common.json` (≈690 common words, British spelling,
+  child-friendly) – words are filtered to the keys a learner has unlocked.
+- `engine/generators.js` (pure, seeded RNG): key repeats, pattern drills mixing new + learnt
+  keys, real-word drills (with pattern fallback), weighted problem-key drills.
+- `core/lesson-logic.js` (pure): allowed keys per lesson, combine step results (accuracy over
+  all steps, WPM over scored steps), stars (pass mark + 2/3-star thresholds), save best result
+  into the guest store, next lesson.
+- Lesson player `/lessons/{id}`: intro (big finger-coloured keycaps, finger names, animated
+  hands tapping + keyboard demo, tip, Enter to start) → steps with progress indicator →
+  `info` screens with illustrations and "press these keys" checklists → `keys` (large text,
+  stop on error) → `drill` → `words` → `challenge` (keyboard hints fade) → quick praise between
+  steps (Enter to continue) → results with animated stars, WPM, accuracy, time, errors, problem
+  keys + keyboard heatmap, kind message (names the pass mark if not passed), Next lesson /
+  Try again / Practise problem keys / Back to lessons.
+- Lesson map `/lessons`: units as "islands" with a winding path of nodes (done ✓ green with
+  stars, current pulsing, to do), unit progress, "Continue/Start" card, units 3–10 shown as
+  coming soon. Home "Start typing" opens the first lesson (or the next one for returning users).
+- Content: **Getting started** – Welcome aboard (posture, eyes on screen, how lessons work,
+  first space-bar taps), Home position (find the bumps, press each home key, walk the home row).
+  **Home row** – F J, D K, S L, A ;, G H, Home row words, Home row checkpoint (no hints,
+  90% accuracy + 5 WPM to pass).
+
+**Verified**
+- `node tests/js/run.mjs` → 38 passed; `php tests/run.php` → 13 passed (incl. content
+  validation: every lesson exists, valid step types, texts only use learnt keys).
+- Browser walk-through (Playwright, local): home → Welcome aboard → Home position (key
+  checklists) → F and J with a mistake → 3 stars → Retry → failed checkpoint (0 stars, kind
+  message, no Next) → map shows 3 done + D and K next → home button continues. No console errors.
+
+**How to test**
+1. Home → **Start typing** → you land in *Welcome aboard*; press Enter, Space through the tips.
+2. *Home position*: press F and J, then every home key – they tick off.
+3. *F and J*: watch the intro demo, then type each step; press Enter between steps.
+4. On results try **Practise problem keys** and **Try again**.
+5. Open **Lessons**: stars on finished lessons, the next one pulsing, *Continue* card.
+6. Try the *Home row checkpoint* – no keyboard on screen; under 90% accuracy you can retry.
+
+Notes: lessons are not locked yet – unlocking, skip-ahead/placement, XP, streaks, badges and
+celebrations arrive in Phase 3.
 
 ## Phase 1 – Typing engine + keyboard
 
