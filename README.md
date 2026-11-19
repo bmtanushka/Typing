@@ -62,6 +62,23 @@ config.sample.php       Copy to config.php (git-ignored)
 `index.php` detects that automatically and `.htaccess` blocks web access to those
 folders.
 
+## Test site (Railway)
+
+Every push to the development branch is built and deployed automatically to
+**https://web-production-c9fae285.up.railway.app** (Railway project `keyquest`,
+service `web`). It uses the `Dockerfile` (PHP 8.3 + Apache, same `.htaccess` as
+Hostinger) and `railway.json` (health check on `/api/health`).
+
+Configuration on Railway comes from service variables instead of `config.php`:
+`APP_ENV`, `APP_DEBUG`, `APP_BASE_URL`, `PORT` (8080), and later `DB_*` / Railway's
+`MYSQL*` variables. See `ENV_MAP` in `app/Core/Config.php` for the full list.
+
+To run the same container locally:
+
+```bash
+docker build -t keyquest . && docker run --rm -p 8080:8080 -e APP_ENV=development keyquest
+```
+
 ## Subfolder installs
 
 The base path is auto-detected, so the app works at `https://example.com/` or

@@ -51,6 +51,14 @@
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
 
+## Test deployment (Railway)
+- Live test site: https://web-production-c9fae285.up.railway.app – auto-deploys on every push
+  to `claude/determined-albattani-7m20sy`.
+- Railway project `keyquest` → service `web`, Dockerfile build, health check `/api/health`.
+- Variables: `APP_ENV=development` (so `/styleguide` is visible), `APP_DEBUG=false`,
+  `APP_BASE_URL`, `PORT=8080`.
+- Hostinger remains the production target (Phase 8).
+
 ## Decisions
 - PHP renders a page shell for each route, and each page loads its own ES module (not a SPA).
   Page transitions use cross-document View Transitions (progressive enhancement).
