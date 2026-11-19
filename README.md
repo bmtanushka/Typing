@@ -64,7 +64,7 @@ folders.
 
 ## Test site (Railway)
 
-Every push to the development branch is built and deployed automatically to
+The development branch is deployed to
 **https://web-production-c9fae285.up.railway.app** (Railway project `keyquest`,
 service `web`). It uses the `Dockerfile` (PHP 8.3 + Apache, same `.htaccess` as
 Hostinger) and `railway.json` (health check on `/api/health`).

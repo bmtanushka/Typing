@@ -52,8 +52,9 @@
 6. `php tests/run.php`
 
 ## Test deployment (Railway)
-- Live test site: https://web-production-c9fae285.up.railway.app – auto-deploys on every push
-  to `claude/determined-albattani-7m20sy`.
+- Live test site: https://web-production-c9fae285.up.railway.app – deploys the branch
+  `claude/determined-albattani-7m20sy` (deploy-on-push needs the Railway GitHub App on the repo;
+  until then Claude triggers each deploy).
 - Railway project `keyquest` → service `web`, Dockerfile build, health check `/api/health`.
 - Variables: `APP_ENV=development` (so `/styleguide` is visible), `APP_DEBUG=false`,
   `APP_BASE_URL`, `PORT=8080`.
