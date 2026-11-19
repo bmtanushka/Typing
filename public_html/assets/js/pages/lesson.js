@@ -9,7 +9,12 @@ import { connectVisuals } from '../engine/visuals.js';
 import { loadLayout, detectLayout, fingersFor, FINGER_NAMES } from '../engine/layouts.js';
 import { createRng, pick, keyRepeats, patternDrill, wordDrill, weightedDrill } from '../engine/generators.js';
 import { formatTime, mergeKeyStats } from '../engine/stats.js';
-import { allowedKeys, combineResults, computeStars, applyLessonResult, lessonAfter, DEFAULT_PASS } from '../core/lesson-logic.js';
+import { allowedKeys, combineResults, computeStars, lessonAfter, lessonState, blockingLesson, DEFAULT_PASS } from '../core/lesson-logic.js';
+import { recordLesson, recordPractice, levelInfo } from '../core/rewards.js';
+import { resultMessages } from '../core/mascot.js';
+import { play, connectSound } from '../core/sound.js';
+import { confetti } from '../core/confetti.js';
+import { icon } from '../core/icons.js';
 import { load, update } from '../core/store.js';
 import { ART } from '../core/art.js';
 
@@ -43,12 +48,13 @@ async function fetchJson(url) {
 
 /* ---- Load everything ---- */
 const settings = load().settings;
-let index, layout, wordlist;
+let index, layout, wordlist, badgeDefs;
 try {
-  [index, layout, wordlist] = await Promise.all([
+  [index, layout, wordlist, badgeDefs] = await Promise.all([
     fetchJson(`${base}/api/lessons`),
     loadLayout(settings.layout || detectLayout()),
     fetchJson(`${base}/api/wordlists/en-common`),
+    fetchJson(`${base}/api/badges`).then((d) => d.badges),
   ]);
 } catch (e) {
   stage.replaceChildren(h('div', { class: 'alert alert--danger', role: 'alert' },
@@ -65,6 +71,7 @@ const pass = { ...DEFAULT_PASS, ...(lesson.passCriteria || {}) };
 
 let engine = null;
 let visuals = null;
+let unsound = null;
 let stepResults = [];
 let screenKeyHandler = null;
 let demoTimer = null;
@@ -84,7 +91,10 @@ function markStep(i) {
 
 /* ---- Screen plumbing ---- */
 function cleanup() {
+  document.querySelector('[data-player]').classList.remove('is-results');
   visuals?.disconnect();
+  unsound?.();
+  unsound = null;
   engine?.destroy();
   engine = null;
   visuals = null;
@@ -299,6 +309,7 @@ function typingStep(i, step, { text, onDone, title = null }) {
       hintEl.hidden = false;
     });
   }
+  unsound = connectSound(engine);
   engine.addEventListener('capslock', (e) => (capsEl.hidden = !e.detail.on));
   engine.addEventListener('complete', (e) => onDone({ ...e.detail.results, scored: !isKeys }));
 }
@@ -314,6 +325,7 @@ const praiseFor = (acc) => pick(PRAISE.find(([min]) => acc >= min)[1], rng);
 function afterStep(i, res) {
   stepResults.push(res);
   if (i + 1 >= steps.length) return finish();
+  play('step');
   const next = () => runStep(i + 1);
   const btn = h('button', { class: 'btn btn--primary', type: 'button', onclick: next }, 'Continue');
   stage.querySelector('.screen').append(
@@ -345,15 +357,18 @@ function finish() {
     : { wpm: 0, rawWpm: 0, accuracy: 100, errors: 0, keystrokes: 0, elapsedMs: 0, keyStats: {}, problemKeys: [] };
   const stars = computeStars(result, lesson);
   const previous = load().progress[lesson.id]?.stars || 0;
-  update((s) => applyLessonResult(s, lesson.id, result, stars));
-  lastResults = { result, stars, previous };
+  let summary;
+  update((s) => { summary = recordLesson(s, { lesson, index, result, stars, badges: badgeDefs }); });
+  document.dispatchEvent(new CustomEvent('kq:progress'));
+  lastResults = { result, stars, previous, summary, fresh: true };
   renderResults();
 }
 
 function renderResults() {
   cleanup();
   markStep(steps.length);
-  const { result, stars, previous } = lastResults;
+  const { result, stars, previous, summary, fresh } = lastResults;
+  lastResults.fresh = false;
   const next = lessonAfter(index, lesson.id);
   const isTutorial = lesson.type === 'tutorial';
 
@@ -391,7 +406,13 @@ function renderResults() {
         h('div', {},
           h('h2', { class: 'results__title', tabindex: '-1' }, pick(TITLES[stars], rng)),
           isTutorial ? null : starRow,
-          h('p', { class: 'lead results__message' }, message(stars, result)),
+          stars === 0 && !isTutorial ? h('p', { class: 'lead results__message' }, message(stars, result)) : null,
+          h('div', { class: 'speech speech--left results__pip' },
+            resultMessages({
+              stars, accuracy: result.accuracy, wpm: result.wpm, previous: summary.previous,
+              streak: summary.streak, streakGrew: summary.streakGrew, levelUp: summary.levelUp,
+              level: summary.level.level, unitCompleted: summary.unitCompleted, tutorial: isTutorial,
+            }, rng).map((m) => h('p', {}, m))),
           passed && stars > previous && previous > 0 ? h('p', { class: 'pill pill--success' }, 'New best!') : null)),
       isTutorial && !result.keystrokes ? null : h('div', { class: 'results__stats' },
         stat('Speed', result.wpm, ' WPM'),
@@ -399,6 +420,7 @@ function renderResults() {
         stat('Time', formatTime(result.elapsedMs)),
         stat('Errors', result.errors)),
       problemList,
+      rewardsPanel(summary),
       h('div', { class: 'results__actions' }, nextBtn, retryBtn, practiseBtn,
         h('a', { class: 'btn btn--ghost', href: `${base}/lessons` }, 'Back to lessons'))));
 
@@ -413,12 +435,56 @@ function renderResults() {
     setGuides({ keyboard: false, hands: false });
   }
   focusFirst('.results__title');
+  document.querySelector('[data-player]').classList.add('is-results');
+  if (fresh) celebrate(summary, stars);
   onScreenKeys((e) => {
     if (e.key !== 'Enter') return;
     e.preventDefault();
     if (nextBtn) location.href = nextBtn.href;
     else retry();
   });
+}
+
+/** XP, level, streak and new badges for the results screen. */
+function rewardsPanel(summary) {
+  const { level } = summary;
+  const pct = Math.round((level.into / level.needed) * 100);
+  const bar = h('div', { class: 'progress progress--xp', role: 'progressbar', 'aria-label': `Level ${level.level} progress`, 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': String(pct) },
+    h('span', { class: 'progress__bar' }));
+  requestAnimationFrame(() => requestAnimationFrame(() => (bar.firstChild.style.width = `${pct}%`)));
+  const iconEl = (name, cls = '') => { const span = h('span', { class: `rewards__icon ${cls}`, 'aria-hidden': 'true' }); span.innerHTML = icon(name, { size: 20 }); return span; };
+
+  const badges = summary.newBadges.map((id) => badgeDefs.find((b) => b.id === id)).filter(Boolean);
+  return h('div', { class: 'rewards' },
+    h('div', { class: 'rewards__row' },
+      h('span', { class: 'rewards__xp' }, `+${summary.xpGained} XP`),
+      h('div', { class: 'rewards__level' },
+        h('span', { class: 'rewards__level-label' }, iconEl('star', 'rewards__icon--star'), summary.levelUp ? `Level up! Level ${level.level}` : `Level ${level.level}`),
+        bar,
+        h('span', { class: 'small text-muted' }, `${level.into} / ${level.needed} XP`)),
+      summary.streak > 0 ? h('span', { class: `rewards__streak${summary.streakGrew ? ' is-new' : ''}` }, iconEl('flame', 'rewards__icon--flame'), `${summary.streak}-day streak`) : null),
+    badges.length ? h('div', { class: 'rewards__badges' },
+      h('h3', {}, badges.length === 1 ? 'New badge!' : `${badges.length} new badges!`),
+      h('ul', { class: 'rewards__badge-list' }, badges.map((b) => {
+        const medal = h('span', { class: `badge-card__medal badge-card--${b.colour || 'primary'}`, 'aria-hidden': 'true' });
+        medal.innerHTML = icon(b.icon, { size: 28 });
+        return h('li', { class: `rewards__badge badge-card--${b.colour || 'primary'}` }, medal,
+          h('div', {}, h('p', { class: 'rewards__badge-title' }, b.title), h('p', { class: 'small text-muted' }, b.description)));
+      }))) : null);
+}
+
+function celebrate(summary, stars) {
+  if (summary.unitCompleted) {
+    confetti();
+    play('levelUp');
+  } else if (summary.levelUp) {
+    confetti({ pieces: 70, duration: 1800 });
+    play('levelUp');
+  } else if (summary.newBadges.length) {
+    play('badge');
+  } else if (stars > 0) {
+    play('success');
+  }
 }
 
 function retry() {
@@ -438,10 +504,15 @@ function practise(problem) {
       h('h2', { class: 'step-head__title', tabindex: '-1' }, step.title),
       h('p', { class: 'text-muted step-head__text' }, 'This drill focuses on the keys you found tricky.')),
     onDone: (res) => {
+      let out;
       update((s) => {
         s.keyStats = mergeKeyStats(s.keyStats, res.keyStats);
-        s.results.push({ type: 'practice', ref: lesson.id, wpm: res.wpm, rawWpm: res.rawWpm, accuracy: res.accuracy, durationMs: res.elapsedMs, at: new Date().toISOString() });
+        out = recordPractice(s, { result: res, ref: lesson.id, badges: badgeDefs, index });
       });
+      // Show what the practice earned on the results screen.
+      lastResults.summary = { ...lastResults.summary, xpGained: out.xpGained, newBadges: out.newBadges,
+        level: levelInfo(load().xp), levelUp: false, streak: out.streak, streakGrew: false };
+      lastResults.fresh = out.newBadges.length > 0;
       renderResults();
     },
   });
@@ -468,4 +539,26 @@ function mascot(mood) {
   return wrap.firstChild;
 }
 
-intro();
+/* ---- Locked lessons: explain and point the way ---- */
+function lockedScreen() {
+  const state = load();
+  const blocker = blockingLesson(index, state, lesson.id);
+  const unit = index.units.find((u) => u.id === lesson.unit);
+  const checkpoint = unit?.lessons.find((l) => l.type === 'checkpoint' && l.id !== lesson.id);
+  const canTestOut = checkpoint && lessonState(index, state, checkpoint.id) !== 'locked';
+  setGuides({ keyboard: false, hands: false });
+  const art = h('div', { class: 'locked__mascot', 'aria-hidden': 'true' });
+  art.append(mascot('happy'));
+  showScreen(h('div', { class: 'locked card' }, art,
+    h('div', {},
+      h('h2', { tabindex: '-1', class: 'locked__title' }, 'This lesson is still locked'),
+      h('p', { class: 'lead' }, blocker ? `Finish “${blocker.title}” first – each lesson builds on the one before.` : 'Finish the earlier lessons to open this one.'),
+      h('div', { class: 'cluster' },
+        blocker ? h('a', { class: 'btn btn--primary', href: `${base}/lessons/${blocker.id}` }, `Go to ${blocker.title}`) : null,
+        canTestOut ? h('a', { class: 'btn btn--secondary', href: `${base}/lessons/${checkpoint.id}` }, 'Test out with the checkpoint') : null,
+        h('a', { class: 'btn btn--ghost', href: `${base}/lessons` }, 'See all lessons')))));
+  focusFirst('.locked__title');
+}
+
+if (lessonState(index, load(), lesson.id) === 'locked') lockedScreen();
+else intro();

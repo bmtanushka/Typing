@@ -17,8 +17,6 @@ final class PageController
         '/test'     => ['Typing test', 5, 'One, three and five minute tests with a history chart.'],
         '/games'    => ['Games', 6, 'Key Drops, Balloon Pop and more – using only the keys you know.'],
         '/progress' => ['Your progress', 4, 'Charts, problem-key heatmap, streaks and badges.'],
-        '/badges'   => ['Badges', 3, 'Earn badges for milestones, streaks and accuracy.'],
-        '/settings' => ['Settings', 3, 'Keyboard layout, sound, theme, font size and more.'],
         '/login'    => ['Log in', 4, 'Save your progress on any device with a free account.'],
         '/register' => ['Create an account', 4, 'A free account keeps your progress safe on any device.'],
         '/help'     => ['Help and technique', 7, 'Posture, home position and tips for touch typing.'],
@@ -91,6 +89,30 @@ final class PageController
             'pageStyles' => ['css/typing.css', 'css/lessons.css'],
             'lesson' => $lesson,
             'unitTitle' => $unitTitle,
+        ]));
+    }
+
+    public function badges(Request $request): Response
+    {
+        $defs = json_decode((string) file_get_contents(KQ_ROOT . '/content/badges.json'), true, 16, JSON_THROW_ON_ERROR);
+        return Response::html(View::page('pages/badges', [
+            'title' => 'Badges',
+            'description' => 'Badges you can earn for milestones, streaks, speed and accuracy.',
+            'bodyClass' => 'page-badges',
+            'pageScript' => 'js/pages/badges.js',
+            'pageStyles' => ['css/progress.css'],
+            'badges' => $defs['badges'],
+        ]));
+    }
+
+    public function settings(Request $request): Response
+    {
+        return Response::html(View::page('pages/settings', [
+            'title' => 'Settings',
+            'description' => 'Keyboard layout, sound, theme, text size and more.',
+            'bodyClass' => 'page-settings',
+            'pageScript' => 'js/pages/settings.js',
+            'pageStyles' => ['css/progress.css'],
         ]));
     }
 

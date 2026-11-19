@@ -20,6 +20,8 @@ $json = static fn ($v): string => json_encode($v, JSON_HEX_TAG | JSON_HEX_AMP | 
         <p class="player__loading text-muted" data-loading>Getting your lesson ready…</p>
     </div>
 
+    <div class="container player__banner"><?= \App\Core\View::render('partials/guest-banner') ?></div>
+
     <div class="container player__guides" data-guides hidden>
         <div data-keyboard></div>
         <div data-hands></div>

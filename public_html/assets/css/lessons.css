@@ -276,3 +276,68 @@
   .path__step:nth-child(n) { transform: none; }
   .path__step::after { display: none; }
 }
+
+/* ---- Phase 3: locking, rewards ---- */
+.island__side { margin-left: auto; display: grid; justify-items: end; gap: var(--space-1); }
+.island__side .island__progress { margin: 0; }
+.island__actions:empty { display: none; }
+.map-node__lock { display: none; }
+.map-node--locked { cursor: pointer; }
+.map-node--locked .map-node__disc { background: var(--surface-2); color: var(--text-muted); border: 3px dashed var(--border-strong); box-shadow: none; opacity: 0.8; }
+.map-node--locked .map-node__label { color: var(--text-muted); }
+.map-node--locked .map-node__lock {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: -0.3rem; right: calc(50% - 2.9rem);
+  width: 1.7rem; height: 1.7rem;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
+  color: var(--text-muted);
+}
+.map-node--locked .map-node__lock .icon { width: 14px; height: 14px; }
+.map-node--skipped .map-node__disc { background: var(--surface); color: var(--success); border: 3px solid var(--success); box-shadow: 0 6px 0 var(--border); }
+.map-node--skipped .map-node__stars::before { content: "Skipped"; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--text-muted); letter-spacing: 0; }
+
+.player__banner:has(.guest-banner[hidden]), .player:not(.is-results) .player__banner { display: none; }
+
+.locked { display: flex; gap: var(--space-5); align-items: center; padding: var(--space-6); }
+.locked__title { font-size: var(--fs-xl); }
+
+.results__pip { max-width: 34rem; margin-top: var(--space-3); }
+.results__pip p { margin: 0; }
+.results__pip p + p { margin-top: var(--space-1); }
+
+.rewards { display: grid; gap: var(--space-4); padding: var(--space-4); border-radius: var(--radius-lg); background: var(--surface-2); }
+.rewards__row { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-6); align-items: center; }
+.rewards__xp {
+  padding: 0.25rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--star), var(--accent));
+  color: #1e1b2e;
+  font-weight: var(--fw-black);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rewards__xp { animation: star-pop 0.6s var(--ease-bounce) 0.6s both; }
+}
+.rewards__level { display: grid; gap: 2px; min-width: 12rem; }
+.rewards__level-label { display: inline-flex; align-items: center; gap: var(--space-1); font-weight: var(--fw-black); }
+.rewards__icon { display: inline-grid; place-items: center; }
+.rewards__icon--star { color: var(--star); }
+.rewards__icon--flame { color: #d9480f; }
+:root[data-theme="dark"] .rewards__icon--flame { color: var(--accent); }
+.rewards__streak { display: inline-flex; align-items: center; gap: var(--space-1); font-weight: var(--fw-black); }
+.rewards__badges h3 { font-size: var(--fs-md); margin-bottom: var(--space-3); }
+.rewards__badge-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--space-3); }
+.rewards__badge { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md); background: var(--surface); }
+.rewards__badge .badge-card__medal { width: 3.2rem; height: 3.2rem; }
+.rewards__badge p { margin: 0; }
+.rewards__badge-title { font-weight: var(--fw-black); }
+@media (prefers-reduced-motion: no-preference) {
+  .rewards__badge { animation: star-pop 0.6s var(--ease-bounce) 0.9s both; }
+}
+@media (max-width: 50rem) {
+  .locked { flex-direction: column; text-align: center; }
+  .island__side { margin-left: 0; justify-items: start; }
+}

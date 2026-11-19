@@ -32,6 +32,9 @@ $keyLabel = static fn (array $keys): string => implode(' ', array_map(static fn 
         </div>
     </header>
 
+    <?= View::render('partials/guest-banner') ?>
+    <p class="visually-hidden" role="status" data-map-status></p>
+
     <?php foreach ($course['units'] as $unit): $unitNo++; ?>
         <section class="island island--<?= e($unit['colour'] ?? 'primary') ?>" id="unit-<?= e($unit['id']) ?>"
                  aria-labelledby="unit-title-<?= e($unit['id']) ?>" data-unit="<?= e($unit['id']) ?>">
@@ -43,9 +46,12 @@ $keyLabel = static fn (array $keys): string => implode(' ', array_map(static fn 
                     </h2>
                     <p class="island__desc"><?= e($unit['description'] ?? '') ?></p>
                 </div>
-                <p class="island__progress" data-unit-progress>
-                    <span data-unit-done>0</span> / <?= count($unit['lessons']) ?> done
-                </p>
+                <div class="island__side">
+                    <p class="island__progress" data-unit-progress>
+                        <span data-unit-done>0</span> / <?= count($unit['lessons']) ?> done
+                    </p>
+                    <div class="island__actions" data-unit-actions></div>
+                </div>
             </header>
             <ol class="path">
                 <?php foreach ($unit['lessons'] as $i => $l):
@@ -67,12 +73,28 @@ $keyLabel = static fn (array $keys): string => implode(' ', array_map(static fn 
                             <span class="map-node__label"><?= e($l['title']) ?></span>
                             <span class="map-node__meta small text-muted"><?= (int) $l['estimatedMinutes'] ?> min<span class="visually-hidden" data-sr-state>, not started</span></span>
                             <span class="map-node__stars" aria-hidden="true" data-stars></span>
+                            <span class="map-node__lock" aria-hidden="true" data-icon="lock"></span>
                         </a>
                     </li>
                 <?php endforeach; ?>
             </ol>
         </section>
     <?php endforeach; ?>
+
+    <dialog class="dialog" data-locked-dialog aria-labelledby="locked-title">
+        <form method="dialog" class="stack">
+            <div class="dialog__head">
+                <?= View::render('partials/mascot', ['size' => 64, 'mood' => 'think']) ?>
+                <h2 id="locked-title">This lesson is still locked</h2>
+            </div>
+            <p data-locked-text></p>
+            <div class="cluster">
+                <a class="btn btn--primary" href="#" data-locked-go>Go to lesson</a>
+                <a class="btn btn--secondary" href="#" data-locked-test hidden>Test out with the checkpoint</a>
+                <button class="btn btn--ghost" value="close">Close</button>
+            </div>
+        </form>
+    </dialog>
 
     <h2 class="journey__soon-title">Coming next on your journey</h2>
     <div class="islands-soon">

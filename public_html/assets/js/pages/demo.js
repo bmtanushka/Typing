@@ -8,6 +8,7 @@ import { connectVisuals } from '../engine/visuals.js';
 import { loadLayout, detectLayout } from '../engine/layouts.js';
 import { formatTime } from '../engine/stats.js';
 import { load, update } from '../core/store.js';
+import { connectSound, play } from '../core/sound.js';
 
 const TEXTS = {
   home: 'asdf jkl; fdsa ;lkj fj dk sl a; jf kd ls ;a fjf jfj dkd kdk sls lsl a;a ;a;',
@@ -96,6 +97,7 @@ function start() {
     size: form.large.checked ? 'large' : 'normal',
   });
   visuals = connectVisuals(engine, { keyboard, hands, onHint: showHint });
+  connectSound(engine);
 
   const refresh = () => setStats(engine.stats(), timeDisplay());
   engine.addEventListener('tick', refresh);
@@ -114,6 +116,7 @@ function message(r) {
 }
 
 function showResults(r) {
+  play('success');
   setStats(r, formatTime(r.elapsedMs));
   const set = (k, v) => (els.results.querySelector(`[data-r="${k}"]`).textContent = v);
   set('wpm', r.wpm);

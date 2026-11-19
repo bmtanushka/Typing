@@ -24,6 +24,13 @@ final class ContentController
         return $this->json('wordlists', $params['id'] ?? '', $request);
     }
 
+    /** GET /api/badges */
+    public function badges(Request $request): Response
+    {
+        $file = KQ_ROOT . '/content/badges.json';
+        return $this->cached($request, '"' . md5_file($file) . '"', static fn () => (string) file_get_contents($file));
+    }
+
     /** GET /api/lessons – course index (units + lesson summaries). */
     public function lessons(Request $request): Response
     {
