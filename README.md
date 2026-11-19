@@ -33,7 +33,11 @@ system at <http://localhost:8000/styleguide>.
 php tests/run.php
 ```
 
-(JavaScript unit tests for the typing engine arrive in Phase 1.)
+```bash
+node tests/js/run.mjs
+```
+
+Node is only needed to run the JS tests locally – never on the server.
 
 ## Project structure
 
@@ -43,6 +47,8 @@ public_html/            Web root – the only folder served to browsers
   .htaccess             Routing, security headers, caching
   assets/css            tokens.css (design tokens), base.css, components.css
   assets/js             app.js (shell), theme-init.js, core/, engine/, pages/, games/
+  assets/js/engine      stats.js + session.js (pure, tested), layouts.js, keyboard.js,
+                        hands.js, typing-engine.js, visuals.js
   assets/img|fonts|sounds
 app/                    PHP application (outside the web root)
   bootstrap.php         Autoload, config, error handling, dispatch

@@ -2,9 +2,9 @@
 
 | Phase | Status |
 |---|---|
-| 0 – Foundations | ✅ Built – awaiting review |
-| 1 – Typing engine + keyboard | ⏳ Next |
-| 2 – Lesson framework + Units 1–2 | – |
+| 0 – Foundations | ✅ Done |
+| 1 – Typing engine + keyboard | ✅ Built – awaiting review |
+| 2 – Lesson framework + Units 1–2 | ⏳ Next |
 | 3 – Guest progress + motivation | – |
 | 4 – Accounts + sync | – |
 | 5 – Remaining curriculum + practice modes | – |
@@ -51,6 +51,48 @@
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
 
+## Phase 1 – Typing engine + keyboard
+
+**Built** (`public_html/assets/js/engine/`)
+- `stats.js` (pure): WPM `(correct/5)/min`, raw WPM, accuracy, `m:ss`, per-key stats
+  (attempts, errors, latency), `mergeKeyStats`, `problemKeys` ranking.
+- `session.js` (pure): `TypingSession` state machine – correct/error/pending per char,
+  `stopOnError`, `allowBackspace`, "corrected" tracking, hint after 3 misses on one key,
+  `appendText` for timed tests. Timestamps are injected, so it is fully testable.
+- `layouts.js`: char → key/finger/Shift map (opposite-hand Shift), Alt Gr (€ on UK),
+  friendly hints ("Use your left middle finger for “d”."), locale-based default layout.
+- `content/layouts/uk.json` + `us.json`: data-driven ISO UK / ANSI US layouts, served by
+  `GET /api/layouts/{id}` (strict slug whitelist, ETag/304, 1 h cache).
+- `keyboard.js`: on-screen keyboard (finger colours, F/J bumps, UK two-part Enter),
+  next-key + Shift highlight, green/red press feedback, heatmap hook for later.
+- `hands.js`: inline-SVG hands; active finger(s) light up in finger colour and lift.
+- `typing-engine.js`: renders text per character, smooth caret, line-by-line auto-scroll,
+  live stats ticks, time limit, Shift/AltGr, dead keys + IME via hidden textarea, Esc/blur
+  pauses with "click to continue" overlay (paused time excluded), Caps Lock warning, never
+  traps Tab. Events: start, keystroke, error, hint, tick, pause, resume, capslock, complete.
+- `visuals.js`: `connectVisuals(engine, {keyboard, hands, onHint})` – shared wiring.
+- `/demo` typing playground: preset texts or your own, timed or untimed, beginner mode,
+  backspace, show/hide keyboard and hands, UK/US, large text, results with problem keys.
+  Settings persist in the guest store.
+- JS test runner `tests/js/run.mjs` (Node, no dependencies).
+
+**Verified**
+- `node tests/js/run.mjs` → 25 passed; `php tests/run.php` → 9 passed.
+- Browser run (Playwright, not committed – needs approval as a dev dependency): UK default
+  for en-GB, autofocus, next key + finger highlight, error/backspace, blur pause + resume,
+  completion results, beginner mode holds position, capital P → P + left Shift, `"` typed
+  on UK, switch to US layout, hint after 3 misses, light/dark/mobile – no console errors.
+- JS + CSS total ≈ 93 KB uncompressed (budget 200 KB).
+
+**How to test** – open `/demo` (locally or on Railway):
+1. Type the text; watch the highlighted key and finger move ahead of you.
+2. Make a mistake: red shake; Backspace fixes it (dotted underline = corrected).
+3. Turn on Beginner mode: wrong keys don't advance; miss a key 3 times for a hint.
+4. Press Esc or click away: "Paused – click to continue"; time stops.
+5. Pick "Capitals and punctuation": Shift on the opposite hand lights up.
+6. Switch UK ↔ US and compare `"` / `@` / `£` / `#`.
+7. Try 30 seconds, Large text and "My own text…". Finish to see results + problem keys.
+
 ## Test deployment (Railway)
 - Live test site: https://web-production-c9fae285.up.railway.app – deploys the branch
   `claude/determined-albattani-7m20sy` (deploy-on-push needs the Railway GitHub App on the repo;
@@ -75,3 +117,5 @@
 - [x] Name: KeyQuest, mascot: Pip (confirmed).
 - [x] Hostinger allows folders beside `public_html` – use that layout.
 - [ ] Badge icons currently use emoji in the style guide; replace with SVG in Phase 3.
+- [ ] Approve Playwright as a dev-only dependency for committed browser tests (optional).
+- [ ] Railway deploy-on-push: add the Railway GitHub App to the repo (deploys triggered manually until then).

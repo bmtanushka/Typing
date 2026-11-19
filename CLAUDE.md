@@ -34,6 +34,10 @@ brief is summarised there; work phase by phase and stop for review at the end of
 - Theme: `theme-init.js` (classic script in `<head>`) sets `data-theme` before paint;
   `core/theme.js` handles changes. Keep the two in sync.
 - Keep logic (stats, generators) pure and DOM-free so it can be unit-tested.
+- Typing: always build exercises on `engine/typing-engine.js` (+ `connectVisuals` for keyboard
+  and hands). Compare `event.key` to the target text; layouts only drive the on-screen keyboard.
+- Keyboard layouts are JSON in `content/layouts/` (served by `/api/layouts/{id}`); each key has
+  `code` (KeyboardEvent.code), `base`, `shift`, `finger`, optional `width`/`special`.
 
 ## CSS
 - Design tokens in `assets/css/tokens.css` – use variables, never hard-code colours.
@@ -45,6 +49,6 @@ brief is summarised there; work phase by phase and stop for review at the end of
   respect `prefers-reduced-motion`.
 
 ## Testing & workflow
-- `php tests/run.php` (PHP); JS tests from Phase 1. All tests must pass before commit.
+- `php tests/run.php` (PHP) and `node tests/js/run.mjs` (JS). All tests must pass before commit.
 - Run locally with `php -S localhost:8000 -t public_html`.
 - Small, focused commits with clear messages. Update `PROGRESS.md` at the end of each phase.
