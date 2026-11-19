@@ -16,6 +16,7 @@ import { play, connectSound } from '../core/sound.js';
 import { confetti } from '../core/confetti.js';
 import { icon } from '../core/icons.js';
 import { load, update } from '../core/store.js';
+import { track, makeEvent } from '../core/sync.js';
 import { ART } from '../core/art.js';
 
 const lesson = JSON.parse(document.getElementById('lesson-data').textContent);
@@ -358,7 +359,10 @@ function finish() {
   const stars = computeStars(result, lesson);
   const previous = load().progress[lesson.id]?.stars || 0;
   let summary;
+  const skippedBefore = new Set(Object.keys(load().skipped || {}));
   update((s) => { summary = recordLesson(s, { lesson, index, result, stars, badges: badgeDefs }); });
+  const newlySkipped = Object.keys(load().skipped || {}).filter((id) => !skippedBefore.has(id));
+  track(makeEvent('lesson', lesson.id, result, { stars, xp: summary.xpGained, badges: summary.newBadges, skipped: newlySkipped }));
   document.dispatchEvent(new CustomEvent('kq:progress'));
   lastResults = { result, stars, previous, summary, fresh: true };
   renderResults();
@@ -509,6 +513,7 @@ function practise(problem) {
         s.keyStats = mergeKeyStats(s.keyStats, res.keyStats);
         out = recordPractice(s, { result: res, ref: lesson.id, badges: badgeDefs, index });
       });
+      track(makeEvent('practice', lesson.id, res, { xp: out.xpGained, badges: out.newBadges }));
       // Show what the practice earned on the results screen.
       lastResults.summary = { ...lastResults.summary, xpGained: out.xpGained, newBadges: out.newBadges,
         level: levelInfo(load().xp), levelUp: false, streak: out.streak, streakGrew: false };

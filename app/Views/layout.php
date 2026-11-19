@@ -11,7 +11,8 @@
  */
 $appName = (string) config('app.name', 'KeyQuest');
 ?><!doctype html>
-<html lang="en-GB" data-base="<?= e(base_path()) ?>">
+<?php $authUser = \App\Services\Auth::user(); ?>
+<html lang="en-GB" data-base="<?= e(base_path()) ?>"<?= $authUser ? ' data-user="' . (int) $authUser['id'] . '"' : '' ?>>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +20,7 @@ $appName = (string) config('app.name', 'KeyQuest');
     <meta name="description" content="<?= e($description ?? 'Learn to touch type with friendly lessons, games and tests.') ?>">
     <?php if (!empty($noindex)): ?><meta name="robots" content="noindex"><?php endif; ?>
     <meta name="color-scheme" content="light dark">
+    <?php if ($authUser): ?><meta name="csrf-token" content="<?= e(\App\Core\Csrf::token()) ?>"><?php endif; ?>
     <meta name="theme-color" content="#4f46e5">
     <link rel="icon" href="<?= e(asset('img/favicon.svg')) ?>" type="image/svg+xml">
     <script src="<?= e(asset('js/theme-init.js')) ?>"></script>

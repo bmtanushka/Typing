@@ -1,0 +1,27 @@
+/* ==========================================================================
+   Auth pages, account settings, installer
+   ========================================================================== */
+.auth { max-width: 30rem; padding-block: var(--space-7); }
+.auth__card { padding: var(--space-6); }
+.auth__head { display: flex; gap: var(--space-4); align-items: center; margin-bottom: var(--space-5); }
+.auth__head h1 { font-size: var(--fs-2xl); margin-bottom: var(--space-1); }
+.auth__head p { margin: 0; }
+.auth__submit { width: 100%; }
+.auth__links { margin: 0; text-align: center; }
+.auth__switch { margin: var(--space-5) 0 0; padding-top: var(--space-4); border-top: 1px solid var(--border); text-align: center; }
+.auth__note { text-align: center; margin-top: var(--space-4); }
+.field__error[hidden], .alert[hidden] { display: none; }
+
+.account { padding-block: var(--space-6); }
+.account__head { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-6); }
+.account__head h1 { margin-bottom: var(--space-1); }
+.account__head p { margin: 0; }
+.account__logout { margin-left: auto; }
+.account__grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); align-items: start; }
+.account__grid h2 { font-size: var(--fs-lg); }
+
+.install-checks { display: grid; gap: var(--space-2); margin: var(--space-4) 0; }
+.install-checks li { padding-left: 1.6rem; position: relative; }
+.install-checks li::before { content: "•"; position: absolute; left: 0.4rem; color: var(--text-muted); }
+.install-checks li.is-ok::before { content: "✓"; color: var(--success); font-weight: var(--fw-black); }
+.install-checks li.is-bad::before { content: "✗"; color: var(--danger); font-weight: var(--fw-black); }

@@ -96,7 +96,7 @@ const WEEK = 7 * 24 * 3600 * 1000;
 function renderBanner(state = load()) {
   document.querySelectorAll('[data-guest-banner]').forEach((b) => {
     const dismissed = state.ui?.bannerDismissedAt && Date.now() - Date.parse(state.ui.bannerDismissedAt) < WEEK;
-    b.hidden = !(Object.keys(state.progress || {}).length > 0) || !!dismissed;
+    b.hidden = !!document.documentElement.dataset.user || !(Object.keys(state.progress || {}).length > 0) || !!dismissed;
   });
 }
 renderBanner();
@@ -106,3 +106,8 @@ document.addEventListener('click', (e) => {
   renderBanner();
 });
 document.addEventListener('kq:progress', () => renderBanner());
+
+/* ---- Account sync (signed-in learners, or clean-up after signing out) ---- */
+if (document.documentElement.dataset.user || load().account?.userId) {
+  import('./core/sync.js').then((m) => m.initSync()).catch(() => {});
+}

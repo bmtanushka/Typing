@@ -53,11 +53,15 @@
 
         <section class="card settings__group" aria-labelledby="set-data">
             <h2 id="set-data">Your progress</h2>
-            <p class="text-muted">Your progress is stored in this browser. Create a free account (coming soon) to keep it safe on any device.</p>
-            <div class="cluster">
-                <button class="btn btn--secondary" type="button" data-export>Download my progress</button>
-                <button class="btn btn--danger" type="button" data-reset>Reset progress…</button>
-            </div>
+            <?php if (\App\Services\Auth::user()): ?>
+                <p class="text-muted">Your progress and settings are saved to your account. Download your data or delete your account on the <a href="<?= e(url('/account')) ?>">Account page</a>.</p>
+            <?php else: ?>
+                <p class="text-muted">Your progress is stored in this browser. <a href="<?= e(url('/register')) ?>">Create a free account</a> to keep it safe on any device.</p>
+                <div class="cluster">
+                    <button class="btn btn--secondary" type="button" data-export>Download my progress</button>
+                    <button class="btn btn--danger" type="button" data-reset>Reset progress…</button>
+                </div>
+            <?php endif; ?>
         </section>
     </form>
 

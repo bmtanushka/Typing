@@ -28,6 +28,8 @@ export function defaultState() {
     badges: {},               // badgeId -> earnedAt
     skipped: {},              // lessonId -> true (skipped ahead / tested out)
     ui: { bannerDismissedAt: null, seenBadges: {} },
+    account: null,            // { userId } when this store mirrors a signed-in account
+    syncQueue: [],            // events waiting to be sent (signed-in only)
     gameScores: {},           // gameId -> bestScore
     xp: 0,
     streak: { current: 0, best: 0, lastDay: null },

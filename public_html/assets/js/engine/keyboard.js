@@ -111,9 +111,13 @@ export class Keyboard {
     }
   }
 
-  /** Optional: colour keys by error rate (problem-key heatmap). rates: {char: 0..1} */
-  setHeat(rates = {}) {
+  /**
+   * Problem-key heatmap: keys turn neutral and are shaded by error rate (one hue, light → dark).
+   * rates: {char: 0..1}; pass {} (or nothing) to return to finger colours.
+   */
+  setHeat(rates = {}, { always = false } = {}) {
     for (const els of this.keys.values()) els.forEach((k) => k.removeAttribute('data-heat'));
+    this.el.classList.toggle('kb--heatmap', always || Object.keys(rates).length > 0);
     for (const [char, rate] of Object.entries(rates)) {
       const info = this.info(char);
       if (!info) continue;

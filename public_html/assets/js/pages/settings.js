@@ -40,7 +40,7 @@ form.addEventListener('change', (e) => {
 
 document.querySelector('[data-test-sound]').addEventListener('click', () => play('success', { force: true }));
 
-document.querySelector('[data-export]').addEventListener('click', () => {
+document.querySelector('[data-export]')?.addEventListener('click', () => {
   const data = JSON.stringify({ exportedAt: new Date().toISOString(), app: 'KeyQuest', data: load() }, null, 2);
   const url = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
   const a = Object.assign(document.createElement('a'), { href: url, download: `keyquest-progress-${new Date().toISOString().slice(0, 10)}.json` });
@@ -51,7 +51,7 @@ document.querySelector('[data-export]').addEventListener('click', () => {
 });
 
 const dialog = document.querySelector('[data-reset-dialog]');
-document.querySelector('[data-reset]').addEventListener('click', () => dialog.showModal());
+document.querySelector('[data-reset]')?.addEventListener('click', () => dialog.showModal());
 dialog.addEventListener('close', () => {
   if (dialog.returnValue !== 'reset') return;
   update((st) => ({ ...defaultState(), settings: st.settings }));

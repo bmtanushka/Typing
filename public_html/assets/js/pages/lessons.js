@@ -6,6 +6,7 @@ import { load, update } from '../core/store.js';
 import { lessonState, blockingLesson, skipUnit, nextLessonId, courseOrder } from '../core/lesson-logic.js';
 import { isUnitComplete } from '../core/rewards.js';
 import { greeting } from '../core/mascot.js';
+import { trackSkipped } from '../core/sync.js';
 
 const base = document.documentElement.dataset.base || '';
 const index = await fetch(`${base}/api/lessons`).then((r) => r.json());
@@ -64,7 +65,9 @@ function render() {
     } else if (!checkpoint && reached) {
       const b = Object.assign(document.createElement('button'), { className: 'btn btn--ghost btn--sm', type: 'button', textContent: 'Skip – I know this already' });
       b.addEventListener('click', () => {
+        const before = new Set(Object.keys(load().skipped || {}));
         update((s) => skipUnit(s, index, unit.id));
+        trackSkipped(Object.keys(load().skipped || {}).filter((id) => !before.has(id)));
         status.textContent = `${unit.title} skipped. You can still play those lessons any time.`;
         render();
       });
@@ -107,3 +110,4 @@ document.addEventListener('click', (e) => {
 });
 
 render();
+document.addEventListener('kq:synced', render);

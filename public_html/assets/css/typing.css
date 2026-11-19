@@ -141,9 +141,12 @@
 .kb__key--enter-top { border-bottom-left-radius: var(--radius-xs); border-bottom-right-radius: 0; border-bottom-width: 0; height: calc(var(--kb-key-h) + var(--kb-gap)); margin-bottom: calc(-1 * var(--kb-gap)); z-index: 1; }
 .kb__key--enter-bottom { border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
 .kb .keycap.is-next { z-index: 2; }
-.kb__key[data-heat="1"] { box-shadow: inset 0 0 0 99px color-mix(in srgb, var(--warning) 22%, transparent); }
-.kb__key[data-heat="2"] { box-shadow: inset 0 0 0 99px color-mix(in srgb, var(--danger) 28%, transparent); }
-.kb__key[data-heat="3"] { box-shadow: inset 0 0 0 99px color-mix(in srgb, var(--danger) 50%, transparent); }
+/* Heatmap mode: neutral keys, problem keys shaded in one hue (light → dark) */
+.kb--heatmap .kb__key { --k-fill: var(--surface); --k-edge: var(--border-strong); color: var(--text); }
+.kb--heatmap .kb__key[data-heat="1"] { --k-fill: color-mix(in srgb, var(--danger) 18%, var(--surface)); }
+.kb--heatmap .kb__key[data-heat="2"] { --k-fill: color-mix(in srgb, var(--danger) 38%, var(--surface)); }
+.kb--heatmap .kb__key[data-heat="3"] { --k-fill: color-mix(in srgb, var(--danger) 62%, var(--surface)); --k-edge: var(--danger); color: var(--surface); }
+.dash__stats .stat__value [data-s] { font-size: inherit; color: inherit; }
 
 /* Fade keyboard hints (used in later lesson steps) */
 .kb.is-faded .keycap:not(.is-next) { --k-fill: var(--surface); --k-edge: var(--border); color: var(--text-muted); }
