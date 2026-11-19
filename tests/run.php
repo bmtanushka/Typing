@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 define('KQ_ROOT', dirname(__DIR__));
 define('KQ_PUBLIC', KQ_ROOT . '/public_html');
+$_SERVER['SCRIPT_NAME'] = '/index.php'; // behave like the front controller at domain root
 
 spl_autoload_register(static function (string $class): void {
     if (str_starts_with($class, 'App\\')) {
