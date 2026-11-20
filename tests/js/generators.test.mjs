@@ -45,3 +45,23 @@ test('weightedDrill practises weak keys most', () => {
   const count = (c) => [...t].filter((x) => x === c).length;
   assert.ok(count('d') > count('k') * 2, `d=${count('d')} k=${count('k')}`);
 });
+
+import { capitaliseWords, toSentences, sprinkleNumbers } from '../../public_html/assets/js/engine/generators.js';
+
+test('capitaliseWords only uses capitals the learner has learnt', () => {
+  const t = capitaliseWords('jam kid lad ham dad', new Set('jamkidlhJKL '), { ratio: 1 });
+  assert.equal(t, 'Jam Kid Lad ham dad');
+});
+
+test('toSentences makes capitalised sentences ending in full stops', () => {
+  const allowed = new Set('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. ');
+  const t = toSentences('the cat sat on the mat and then it slept all day long', allowed, { r: createRng(4) });
+  for (const s of t.split('. ').map((x) => x.replace(/\.$/, ''))) assert.match(s, /^[A-Z][a-z]*( [a-z]+)*$/, s);
+  assert.ok(t.endsWith('.'));
+});
+
+test('sprinkleNumbers only uses allowed digits', () => {
+  const t = sprinkleNumbers('one two three four five six seven', new Set('12 abcdefghijklmnopqrstuvwxyz'), { ratio: 1, r: createRng(2) });
+  assert.match(t, /^(([12]+ )?[a-z]+ ?)+$/);
+  assert.ok(/[12]/.test(t));
+});

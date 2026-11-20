@@ -7,8 +7,8 @@ import { Keyboard } from '../engine/keyboard.js';
 import { Hands } from '../engine/hands.js';
 import { connectVisuals } from '../engine/visuals.js';
 import { loadLayout, detectLayout, fingersFor, FINGER_NAMES } from '../engine/layouts.js';
-import { createRng, pick, keyRepeats, patternDrill, wordDrill, weightedDrill } from '../engine/generators.js';
-import { formatTime, mergeKeyStats } from '../engine/stats.js';
+import { createRng, pick, keyRepeats, patternDrill, wordDrill, weightedDrill, capitaliseWords, toSentences, sprinkleNumbers } from '../engine/generators.js';
+import { formatTime } from '../engine/stats.js';
 import { allowedKeys, combineResults, computeStars, lessonAfter, lessonState, blockingLesson, DEFAULT_PASS } from '../core/lesson-logic.js';
 import { recordLesson, recordPractice, levelInfo } from '../core/rewards.js';
 import { resultMessages } from '../core/mascot.js';
@@ -139,11 +139,12 @@ function intro() {
   const keys = lesson.newKeys || [];
   const infos = keys.map((k) => ({ k, info: keyboard.info(k) }));
 
+  const many = keys.length > 4; // e.g. all the capitals: smaller keys, no finger captions
   const keyCards = keys.length
-    ? h('div', { class: 'intro__keys' }, infos.map(({ k, info }) =>
+    ? h('div', { class: `intro__keys${many ? ' intro__keys--many' : ''}` }, infos.map(({ k, info }) =>
         h('div', { class: 'intro__key' },
-          h('span', { class: `keycap keycap--xl${info ? ` keycap--${info.finger}` : ''}${'fj'.includes(k) ? ' keycap--bump' : ''}` }, keyLabel(k)),
-          h('span', { class: 'intro__finger' }, info ? capitalise(FINGER_NAMES[info.finger]) : ''))))
+          h('span', { class: `keycap ${many ? 'keycap--lg' : 'keycap--xl'}${info ? ` keycap--${info.finger}` : ''}${k === 'f' || k === 'j' ? ' keycap--bump' : ''}` }, keyLabel(k)),
+          many ? null : h('span', { class: 'intro__finger' }, info ? capitalise(FINGER_NAMES[info.finger]) : ''))))
     : null;
 
   showScreen(
@@ -210,7 +211,15 @@ function textFor(step) {
   const focus = step.focus || (lesson.newKeys?.length ? lesson.newKeys : pool);
   switch (step.type) {
     case 'keys': return keyRepeats(step.keys || lesson.newKeys, { rounds: step.rounds ?? 3, groupSize: step.groupSize ?? 3 });
-    case 'words': return wordDrill(wordlist.words, allowed, focus, { count: step.count ?? 12, r: rng });
+    case 'words': {
+      // Word choice uses lower-case focus letters (capitals lessons focus on Shift + letter).
+      const lower = [...new Set(focus.map((k) => k.toLowerCase()))];
+      let text = wordDrill(wordlist.words, allowed, lower, { count: step.count ?? 12, r: rng });
+      if (step.sentences) text = toSentences(text, allowed, { r: rng });
+      else if (step.capitalise) text = capitaliseWords(text, allowed, { ratio: step.capitalise === true ? 1 : step.capitalise, r: rng });
+      if (step.numbers) text = sprinkleNumbers(text, allowed, { r: rng });
+      return text;
+    }
     default: return patternDrill(focus, pool, { length: step.length ?? 48, r: rng });
   }
 }
@@ -279,7 +288,9 @@ function typingStep(i, step, { text, onDone, title = null }) {
   const hintEl = h('div', { class: 'speech speech--hint', role: 'status', hidden: true });
   const capsEl = h('p', { class: 'alert alert--warning', role: 'status', hidden: true }, 'Caps Lock is on – turn it off to type lower-case letters.');
 
-  showScreen(title || stepHeader(i, step), typingEl, h('div', { class: 'player__notices' }, capsEl, hintEl));
+  const timed = Number(step.timeLimit) > 0;
+  const timerEl = timed ? h('p', { class: 'player__timer', role: 'timer', 'aria-live': 'off' }, `Time left: ${formatTime(step.timeLimit * 1000)}`) : null;
+  showScreen(title || stepHeader(i, step), timerEl, typingEl, h('div', { class: 'player__notices' }, capsEl, hintEl));
 
   const showKb = isKeys || (hints !== 'none' && settings.showKeyboard !== false);
   const showHands = isKeys || (hints === 'show' && settings.showHands !== false);
@@ -291,7 +302,12 @@ function typingStep(i, step, { text, onDone, title = null }) {
     stopOnError: isKeys || !!step.stopOnError,
     allowBackspace: settings.allowBackspace !== false,
     size: isKeys ? 'large' : 'normal',
+    timeLimit: timed ? Number(step.timeLimit) : 0,
+    getMoreText: timed ? () => ` ${text}` : null,
   });
+  if (timed) {
+    engine.addEventListener('tick', (e) => (timerEl.textContent = `Time left: ${formatTime(e.detail.remainingMs)}`));
+  }
   let hintTimer;
   visuals = connectVisuals(engine, {
     keyboard: showKb ? keyboard : null,
@@ -509,10 +525,7 @@ function practise(problem) {
       h('p', { class: 'text-muted step-head__text' }, 'This drill focuses on the keys you found tricky.')),
     onDone: (res) => {
       let out;
-      update((s) => {
-        s.keyStats = mergeKeyStats(s.keyStats, res.keyStats);
-        out = recordPractice(s, { result: res, ref: lesson.id, badges: badgeDefs, index });
-      });
+      update((s) => { out = recordPractice(s, { result: res, ref: lesson.id, badges: badgeDefs, index }); });
       track(makeEvent('practice', lesson.id, res, { xp: out.xpGained, badges: out.newBadges }));
       // Show what the practice earned on the results screen.
       lastResults.summary = { ...lastResults.summary, xpGained: out.xpGained, newBadges: out.newBadges,

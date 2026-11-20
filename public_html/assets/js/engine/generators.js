@@ -116,3 +116,46 @@ export function weightedDrill(weights, allowed, { length = 60, r = createRng() }
   }
   return tidy(out.join(' '));
 }
+
+/* ---------------------------------------------------------------------------
+ * Word-text transforms for later units (capitals, sentences, numbers).
+ * Each only uses characters in `allowed`, so lessons stay within learnt keys.
+ * ------------------------------------------------------------------------- */
+
+/** Capitalise the first letter of roughly `ratio` of the words (only capitals that are allowed). */
+export function capitaliseWords(text, allowed, { ratio = 0.5, r = createRng() } = {}) {
+  const set = allowed instanceof Set ? allowed : new Set(allowed);
+  return text.split(' ').map((w) => {
+    const cap = w.charAt(0).toUpperCase() + w.slice(1);
+    return set.has(cap.charAt(0)) && cap !== w && (ratio >= 1 || r() < ratio) ? cap : w;
+  }).join(' ');
+}
+
+/** Turn a word list into sentences of 4–8 words: Capital start, full stop end. */
+export function toSentences(text, allowed, { r = createRng() } = {}) {
+  const set = allowed instanceof Set ? allowed : new Set(allowed);
+  const words = text.split(' ').filter(Boolean);
+  const out = [];
+  let i = 0;
+  while (i < words.length) {
+    const n = Math.min(words.length - i, 4 + Math.floor(r() * 5));
+    const s = words.slice(i, i + n);
+    i += n;
+    s[0] = capitaliseWords(s[0], set, { ratio: 1, r });
+    out.push(s.join(' ') + (set.has('.') ? '.' : ''));
+  }
+  return out.join(' ');
+}
+
+/** Mix numbers (1–4 digits, using allowed digits) in between words. */
+export function sprinkleNumbers(text, allowed, { ratio = 0.35, r = createRng() } = {}) {
+  const digits = [...(allowed instanceof Set ? allowed : new Set(allowed))].filter((c) => /[0-9]/.test(c));
+  if (!digits.length) return text;
+  return text.split(' ').map((w) => {
+    if (r() >= ratio) return w;
+    const len = 1 + Math.floor(r() * 4);
+    let n = '';
+    for (let i = 0; i < len; i++) n += pick(digits, r);
+    return `${n} ${w}`;
+  }).join(' ');
+}

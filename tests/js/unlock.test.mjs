@@ -44,3 +44,15 @@ test('a passed checkpoint opens the whole unit and the next unit', () => {
 test('checkpoint stays locked until its unit is reached', () => {
   assert.equal(isUnlocked(index, st(), 'chk'), false);
 });
+
+import { placementSkips } from '../../public_html/assets/js/core/lesson-logic.js';
+
+test('placement recommends skipping units by speed, only with good accuracy', () => {
+  const idx = { units: ['getting-started', 'home-row', 'top-row', 'bottom-row', 'capitals', 'punctuation', 'numbers', 'symbols', 'real-world', 'speed'].map((id) => ({ id, lessons: [] })) };
+  assert.deepEqual(placementSkips(idx, { wpm: 60, accuracy: 85 }), []);
+  assert.deepEqual(placementSkips(idx, { wpm: 8, accuracy: 99 }), []);
+  assert.deepEqual(placementSkips(idx, { wpm: 12, accuracy: 95 }), ['getting-started', 'home-row']);
+  assert.deepEqual(placementSkips(idx, { wpm: 26, accuracy: 95 }).length, 6);
+  const all = placementSkips(idx, { wpm: 80, accuracy: 99 });
+  assert.ok(!all.includes('real-world') && !all.includes('speed') && all.includes('symbols'));
+});

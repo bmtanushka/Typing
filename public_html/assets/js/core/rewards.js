@@ -2,6 +2,7 @@
  * Motivation rules – XP, levels, streaks and badges. Pure functions (unit-tested).
  */
 import { applyLessonResult, courseOrder, skipUnit } from './lesson-logic.js';
+import { mergeKeyStats } from '../engine/stats.js';
 
 /* ---------------------------------------------------------------- XP / levels */
 
@@ -70,7 +71,8 @@ export function currentStreak(streak, today = dayKey()) {
 export function badgeFacts(state, index) {
   const lessons = Object.entries(state.progress || {});
   const passed = lessons.filter(([, p]) => p.stars > 0);
-  const lessonResults = (state.results || []).filter((r) => r.type === 'lesson' && r.stars > 0);
+  // Speed/accuracy badges count passed lessons and typing tests.
+  const lessonResults = (state.results || []).filter((r) => (r.type === 'lesson' && r.stars > 0) || r.type === 'test');
   const unitsComplete = new Set();
   if (index) {
     for (const u of index.units) {
@@ -165,17 +167,29 @@ export function recordLesson(state, { lesson, index, result, stars, badges = [],
   };
 }
 
-/** Record a practice session (problem keys, playground) – XP + streak + badges. */
-export function recordPractice(state, { result, ref = 'practice', badges = [], index = null, now = new Date() }) {
+/** Record a practice session (problem keys, free practice) – XP + streak + badges. */
+export function recordPractice(state, { result, ref = 'practice', badges = [], index = null, now = new Date(), type = 'practice', xp = XP_PRACTICE }) {
+  const levelBefore = levelInfo(state.xp).level;
   state.results.push({
-    type: 'practice', ref, wpm: result.wpm, rawWpm: result.rawWpm, accuracy: result.accuracy,
+    type, ref, wpm: result.wpm, rawWpm: result.rawWpm, accuracy: result.accuracy,
     durationMs: result.elapsedMs, chars: result.keystrokes ?? 0, at: now.toISOString(),
   });
   if (state.results.length > 300) state.results.splice(0, state.results.length - 300);
-  state.xp = (state.xp || 0) + XP_PRACTICE;
+  if (result.keyStats) state.keyStats = mergeKeyStats(state.keyStats, result.keyStats);
+  state.xp = (state.xp || 0) + xp;
   const streak = updateStreak(state.streak, dayKey(now));
   state.streak = { current: streak.current, best: streak.best, lastDay: streak.lastDay };
-  return { xpGained: XP_PRACTICE, newBadges: awardBadges(state, badges, index, now), streak: state.streak.current };
+  return {
+    xpGained: xp, newBadges: awardBadges(state, badges, index, now), streak: state.streak.current,
+    streakGrew: streak.grew, level: levelInfo(state.xp), levelUp: levelInfo(state.xp).level > levelBefore,
+  };
+}
+
+export const XP_TEST = 12;
+
+/** Record a timed typing test (counts towards speed badges). */
+export function recordTest(state, opts) {
+  return recordPractice(state, { ...opts, type: 'test', xp: XP_TEST });
 }
 
 export function isUnitComplete(state, index, unitId) {

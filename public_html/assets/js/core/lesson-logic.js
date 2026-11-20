@@ -152,3 +152,23 @@ export function skipUnit(state, index, unitId) {
   for (const l of unit?.lessons || []) if (!(state.progress?.[l.id]?.stars > 0)) state.skipped[l.id] = true;
   return state;
 }
+
+/* --------------------------------------------------------------- placement */
+
+/**
+ * Units an experienced typist can skip after the placement test.
+ * Accuracy matters most: below 90% we recommend starting from the beginning.
+ * Real-world practice and speed building are never skipped.
+ */
+export const PLACEMENT_BANDS = [
+  { wpm: 10, units: ['getting-started', 'home-row'] },
+  { wpm: 18, units: ['top-row', 'bottom-row'] },
+  { wpm: 25, units: ['capitals', 'punctuation'] },
+  { wpm: 32, units: ['numbers', 'symbols'] },
+];
+
+export function placementSkips(index, { wpm = 0, accuracy = 0 } = {}) {
+  if (accuracy < 90) return [];
+  const known = new Set(index.units.map((u) => u.id));
+  return PLACEMENT_BANDS.filter((b) => wpm >= b.wpm).flatMap((b) => b.units).filter((id) => known.has(id));
+}
