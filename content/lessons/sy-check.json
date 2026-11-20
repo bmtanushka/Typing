@@ -1,0 +1,42 @@
+{
+  "id": "sy-check",
+  "unit": "symbols",
+  "title": "Symbols checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Emails, prices, percentages and sums – with no hints.",
+    "tip": "Reach 88% accuracy and 10 WPM to pass. Breathe and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": "Invoice #308: 2 tickets @ $35 = $70, plus 5% booking fee. Questions? Email info@example.com & quote #308.",
+      "instructions": "No hints – trust your fingers."
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": "Recipe for 4 people: 200g flour + 2 eggs + 300ml milk. Cook for 20 minutes at 180 degrees. Rated *****!",
+      "instructions": "No hints this time – keep a steady rhythm."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 88,
+    "minWpm": 10
+  },
+  "stars": {
+    "two": {
+      "accuracy": 93,
+      "wpm": 14
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 20
+    }
+  }
+}

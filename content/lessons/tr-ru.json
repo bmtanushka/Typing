@@ -1,0 +1,68 @@
+{
+  "id": "tr-ru",
+  "unit": "top-row",
+  "title": "R and U",
+  "type": "lesson",
+  "newKeys": [
+    "r",
+    "u"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "R and U are reached by your index fingers. R sits above F, and U sits above J.",
+    "tip": "Keep your little fingers resting on A and ; while the index fingers stretch."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet R and U",
+      "keys": [
+        "r",
+        "u"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "frf juj frf juj rrr uuu rug sure fur rush ruler",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "a red rug is here; her dad uses a ruler; sugar is sure fresh; a girl hears a duke laugh;",
+        "a large jar is full; her hair is red; sure fresh figs are real; dad agrees; a judge is fair;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "rw-check",
+  "unit": "real-world",
+  "title": "Real-world checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "A mix of everything: sentences, numbers, punctuation and an email address. No hints.",
+    "tip": "Reach 90% accuracy and 15 WPM to pass. Breathe and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": "Our class trip to the Natural History Museum is on Thursday 12 March. The coach leaves at 8:45 sharp, so please don't be late!",
+      "instructions": "No hints – trust your fingers."
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": "If you have any questions, email Mrs Okafor at trips@school.example (she replies within 24 hours). Bring a packed lunch and a waterproof coat.",
+      "instructions": "No hints this time – keep a steady rhythm."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 90,
+    "minWpm": 15
+  },
+  "stars": {
+    "two": {
+      "accuracy": 94,
+      "wpm": 20
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 28
+    }
+  }
+}

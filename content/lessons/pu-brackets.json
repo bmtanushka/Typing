@@ -1,0 +1,63 @@
+{
+  "id": "pu-brackets",
+  "unit": "punctuation",
+  "title": "Brackets",
+  "type": "lesson",
+  "newKeys": [
+    "(",
+    ")"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Brackets need Shift as well: ( is Shift and 9, ) is Shift and 0. Your right ring and little fingers reach up.",
+    "tip": "Brackets come in pairs – always close the one you open."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet open bracket and close bracket",
+      "keys": [
+        "(",
+        ")"
+      ],
+      "rounds": 2,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "(( )) (yes) (no) (maybe) (see below)",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "The museum (which opened last year) was busy. Bring a drink (water is best) and a coat.",
+        "Our cat (called Pickle) loves boxes. The test (only ten minutes) went well!"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "( )"
+}

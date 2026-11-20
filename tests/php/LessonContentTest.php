@@ -37,17 +37,22 @@ return [
             foreach (['id', 'unit', 'title', 'newKeys', 'intro', 'steps', 'passCriteria', 'estimatedMinutes'] as $k) {
                 assert_true(array_key_exists($k, $l), "{$s['id']} lacks {$k}");
             }
-            assert_true(count($l['steps']) >= 2, "{$s['id']} needs steps");
+            assert_true(count($l['steps']) >= 1, "{$s['id']} needs steps");
+            foreach ($l['steps'] as $i => $step) {
+                if (isset($step['timeLimit'])) {
+                    assert_true(is_int($step['timeLimit']) && $step['timeLimit'] >= 15 && $step['timeLimit'] <= 600, "{$s['id']} step {$i} timeLimit");
+                }
+            }
             foreach ($l['steps'] as $i => $step) {
                 assert_true(in_array($step['type'], $types, true), "{$s['id']} step {$i} type");
                 assert_true(!empty($step['title']), "{$s['id']} step {$i} title");
             }
         }
     },
-    'unit 2 texts only use keys learnt so far' => function () use ($repo, $allowedByLesson) {
+    'every text only uses keys learnt so far (units 2–10)' => function () use ($repo, $allowedByLesson) {
         foreach ($repo->order() as $s) {
-            if ($s['unit'] !== 'home-row') {
-                continue;
+            if ($s['unit'] === 'getting-started') {
+                continue; // tutorial: walks the home row before it is formally taught
             }
             $allowed = $allowedByLesson[$s['id']];
             foreach ($repo->lesson($s['id'])['steps'] as $i => $step) {

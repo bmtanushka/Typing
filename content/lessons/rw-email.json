@@ -1,0 +1,40 @@
+{
+  "id": "rw-email",
+  "unit": "real-world",
+  "title": "Writing an email",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Emails need capitals, punctuation, numbers and the @ sign – a perfect all-round workout.",
+    "tip": "Line breaks in an email are made with Enter – here, everything stays on one line."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "A friendly email",
+      "hints": "none",
+      "text": "Hi Jess, thanks for inviting me to your party on Saturday! I'll be there at 7:30. Shall I bring some snacks? See you soon, Arjun",
+      "instructions": "Friendly and informal."
+    },
+    {
+      "type": "challenge",
+      "title": "A polite request",
+      "hints": "none",
+      "text": "Dear Ms Clarke, I am writing to ask whether the art club (Wednesdays, 3:30-4:30) has any spaces left. Please reply to sam.jones@example.com. Kind regards, Sam Jones",
+      "instructions": "A little more formal."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "nu-mixed",
+  "unit": "numbers",
+  "title": "Numbers in sentences",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Numbers turn up everywhere: dates, times, prices and addresses. Let’s practise them inside real sentences.",
+    "tip": "Say each number in your head as you type it – it helps your fingers stay in order."
+  },
+  "steps": [
+    {
+      "type": "drill",
+      "title": "Number drill",
+      "focus": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "0"
+      ],
+      "length": 50,
+      "instructions": "Every number key, mixed together."
+    },
+    {
+      "type": "words",
+      "title": "Words and numbers",
+      "count": 14,
+      "numbers": true,
+      "instructions": "Numbers mixed in with words."
+    },
+    {
+      "type": "challenge",
+      "title": "Real-world numbers",
+      "hints": "fade",
+      "text": [
+        "Meet me at 10 Station Road at 2:30. The train costs 15 pounds and takes 45 minutes.",
+        "On 4 June 2026, 120 children ran 5 kilometres for charity. They raised 2500 pounds!"
+      ],
+      "instructions": "Dates, times and amounts."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

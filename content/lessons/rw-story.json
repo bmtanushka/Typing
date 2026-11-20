@@ -1,0 +1,47 @@
+{
+  "id": "rw-story",
+  "unit": "real-world",
+  "title": "A short story",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 5,
+  "intro": {
+    "text": "Here is a short story in three parts. Enjoy the tale while your fingers do the work.",
+    "tip": "If you make a mistake, carry on. Smooth and steady wins the race."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "The lighthouse – part one",
+      "hints": "none",
+      "text": "On a rocky island far out at sea stood an old lighthouse. Every night, its keeper, a kind woman called Morwenna, climbed the 98 steps to light the great lamp.",
+      "instructions": "Part one of three."
+    },
+    {
+      "type": "challenge",
+      "title": "The lighthouse – part two",
+      "hints": "none",
+      "text": "One stormy evening, she spotted a small boat tossed by the waves. \"Hold on!\" she whispered, and she turned the lamp towards it, sweeping the beam across the dark water.",
+      "instructions": "Part two of three."
+    },
+    {
+      "type": "challenge",
+      "title": "The lighthouse – part three",
+      "hints": "none",
+      "text": "Guided by the light, the boat reached the harbour safely. The next morning, the grateful fishermen left a basket of fresh bread and honey at her door.",
+      "instructions": "The final part."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

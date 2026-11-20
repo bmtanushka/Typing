@@ -1,0 +1,46 @@
+{
+  "id": "rw-quotes",
+  "unit": "real-world",
+  "title": "Famous words",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "These lines come from well-known writers whose work is now in the public domain, plus a few proverbs.",
+    "tip": "Read each quotation once before you start – it makes typing it much easier."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Shakespeare",
+      "hints": "none",
+      "text": [
+        "All the world's a stage, and all the men and women merely players; they have their exits and their entrances.",
+        "We know what we are, but know not what we may be."
+      ],
+      "instructions": "From plays written over 400 years ago."
+    },
+    {
+      "type": "challenge",
+      "title": "Proverbs",
+      "hints": "none",
+      "text": [
+        "Practice makes perfect. Little by little, the bird builds its nest. Many hands make light work.",
+        "Slow and steady wins the race. Every journey begins with a single step. Well begun is half done."
+      ],
+      "instructions": "Old sayings that are still true – especially about typing!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

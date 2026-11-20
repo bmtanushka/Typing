@@ -1,0 +1,42 @@
+{
+  "id": "br-check",
+  "unit": "bottom-row",
+  "title": "Bottom row checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Every letter, commas and full stops – no hints. You’ve come a long way!",
+    "tip": "Reach 90% accuracy and 10 WPM to pass. Breathe and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": "my brave friend climbed the mountain. we packed boxes of snacks, maps and a compass. the view was amazing.",
+      "instructions": "No hints – trust your fingers."
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": "every morning, ben walks his dog by the river. the weather can be cold, but the sunrise is lovely.",
+      "instructions": "No hints this time – keep a steady rhythm."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 90,
+    "minWpm": 10
+  },
+  "stars": {
+    "two": {
+      "accuracy": 94,
+      "wpm": 15
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 22
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "pu-check",
+  "unit": "punctuation",
+  "title": "Punctuation checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Apostrophes, quotation marks, questions, exclamations, colons, hyphens and brackets – no hints!",
+    "tip": "Reach 88% accuracy and 10 WPM to pass. Breathe and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": "\"Can I help?\" asked Ruby. \"Yes, please!\" said Mr Lee. \"We need: string, glue and a well-sharpened pencil.\"",
+      "instructions": "No hints – trust your fingers."
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": "It's Max's birthday (he's nine) on Sunday. Will there be cake? Of course! It's a chocolate one.",
+      "instructions": "No hints this time – keep a steady rhythm."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 88,
+    "minWpm": 10
+  },
+  "stars": {
+    "two": {
+      "accuracy": 93,
+      "wpm": 15
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 20
+    }
+  }
+}

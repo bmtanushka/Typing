@@ -1,0 +1,69 @@
+{
+  "id": "nu-12345",
+  "unit": "numbers",
+  "title": "Numbers 1 to 5",
+  "type": "lesson",
+  "newKeys": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "The number row is the furthest reach. 1 is for your left little finger, 2 ring, 3 middle, and 4 and 5 for your index finger.",
+    "tip": "Reach up from the home row and come straight back – keep your eyes on the screen."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet 1, 2, 3, 4, 5",
+      "keys": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "rounds": 2,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "1 2 3 4 5 11 22 33 44 55 12 34 51 23 45",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "I have 3 cats, 2 dogs and 1 rabbit. We need 4 eggs and 5 apples. Count to 15 slowly.",
+        "There are 52 cards in a pack. The bus left at 4 and came back at 5. Page 21 is next."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "1–5"
+}

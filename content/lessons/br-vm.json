@@ -1,0 +1,72 @@
+{
+  "id": "br-vm",
+  "unit": "bottom-row",
+  "title": "V and M",
+  "type": "lesson",
+  "newKeys": [
+    "v",
+    "m"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "V and M are reached by your index fingers: V is below F, and M is below J.",
+    "tip": "Index fingers do a lot of work – keep them light and quick."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet V and M",
+      "keys": [
+        "v",
+        "m"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "fvf jmj fvf jmj vvv mmm move, vote, mum, more,",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt.",
+      "focus": [
+        "v",
+        "m"
+      ]
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "move over, my dear; the movie was marvellous; we have a vast mountain view; my mum makes a lovely meal;",
+        "a very small mouse moved, then vanished; give me some more time; we visit my aunt every summer;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "pu-practice",
+  "unit": "punctuation",
+  "title": "Punctuation practice",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Real writing is full of punctuation. These sentences mix everything you have learnt so far.",
+    "tip": "Slow down a little around punctuation – it is where most mistakes happen."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Conversation",
+      "hints": "fade",
+      "text": [
+        "\"Where are you going?\" asked Lena. \"To the library,\" said Jack. \"I need a book about space!\"",
+        "\"Is it raining?\" asked Mum. \"Yes - bring an umbrella!\" said Dad. \"Don't forget your boots.\""
+      ],
+      "instructions": "Speech marks, questions and exclamations."
+    },
+    {
+      "type": "challenge",
+      "title": "Notes and lists",
+      "hints": "fade",
+      "text": [
+        "Shopping list: bread, milk (semi-skimmed), apples and cheese. Don't forget the eggs!",
+        "Reminder: the school trip (to the castle) is on Friday. Bring a packed lunch - and a coat!"
+      ],
+      "instructions": "Colons, brackets and hyphens in real notes."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

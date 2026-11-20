@@ -1,0 +1,68 @@
+{
+  "id": "tr-wo",
+  "unit": "top-row",
+  "title": "W and O",
+  "type": "lesson",
+  "newKeys": [
+    "w",
+    "o"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "W is reached by your left ring finger, above S. O is for your right ring finger, above L.",
+    "tip": "Ring fingers are less strong, so go slowly and let accuracy come first."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet W and O",
+      "keys": [
+        "w",
+        "o"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "sws lol sws lol www ooo low who wow slow toe",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "we sit at the shore; who would like a slow walk; the wise owl looks out of a tower; we work hard all day;",
+        "our dog follows us to the hollow; would you like water; the world is wide; two owls look so wise;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

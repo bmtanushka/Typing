@@ -1,0 +1,65 @@
+{
+  "id": "sy-maths",
+  "unit": "symbols",
+  "title": "*, + and =",
+  "type": "lesson",
+  "newKeys": [
+    "*",
+    "+",
+    "="
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "The asterisk (*) is Shift and 8. The plus (+) and equals (=) share a key next to Backspace: = on its own, + with Shift.",
+    "tip": "These are handy for sums, ratings and footnotes."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet * and + and =",
+      "keys": [
+        "*",
+        "+",
+        "="
+      ],
+      "rounds": 2,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "** ++ == 2+2=4 5*3=15 *note",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "2 + 3 = 5 and 4 * 5 = 20. Rate it: *****. Remember: 10 + 10 = 20.",
+        "Add them up: 7 + 8 = 15, then 15 * 2 = 30. Footnote* - see below."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "* + ="
+}

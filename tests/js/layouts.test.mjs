@@ -66,3 +66,26 @@ test('detectLayout from browser languages', () => {
   assert.equal(detectLayout(['fr-FR', 'en-GB']), 'uk');
   assert.equal(detectLayout([]), 'us');
 });
+
+test('every character in every lesson can be typed on both UK and US keyboards', () => {
+  const dir = new URL('../../content/lessons/', import.meta.url);
+  const maps = { uk: buildCharMap(uk), us: buildCharMap(us) };
+  const units = JSON.parse(readFileSync(new URL('units.json', dir)));
+  for (const id of units.units.flatMap((u) => u.lessons)) {
+    const lesson = JSON.parse(readFileSync(new URL(`${id}.json`, dir)));
+    const texts = [...lesson.newKeys, ...lesson.steps.flatMap((s) => (s.text == null ? [] : [].concat(s.text)))];
+    for (const t of texts) {
+      for (const ch of t) {
+        for (const [name, map] of Object.entries(maps)) assert.ok(map.has(ch), `${id}: "${ch}" not on ${name} layout`);
+      }
+    }
+  }
+});
+
+test('typing-test and placement texts are typeable on both layouts', () => {
+  const t = JSON.parse(readFileSync(new URL('../../content/texts/tests.json', import.meta.url)));
+  const maps = [buildCharMap(uk), buildCharMap(us)];
+  for (const text of [...t.texts.map((x) => x.text), t.placement]) {
+    for (const ch of text) for (const m of maps) assert.ok(m.has(ch), `"${ch}" in ${text.slice(0, 30)}`);
+  }
+});

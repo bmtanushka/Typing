@@ -1,0 +1,35 @@
+{
+  "id": "sp-two-minutes",
+  "unit": "speed",
+  "title": "Two-minute stamina",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Two full minutes of typing. This builds stamina, so you can keep a good speed for longer.",
+    "tip": "Relax your shoulders and breathe. Tension slows you down."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Two minutes",
+      "hints": "none",
+      "text": "On clear nights, you can see thousands of stars without a telescope. Some of them are so far away that their light set off before the first castles were built. Looking up at them is a good reminder that great things take time. Typing quickly is really about typing smoothly. Each finger knows its keys, your eyes stay on the screen, and your hands move as little as possible. When you stop worrying about every single letter, your speed starts to climb all by itself.",
+      "timeLimit": 120,
+      "instructions": "Two minutes – pace yourself."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 88
+  },
+  "stars": {
+    "two": {
+      "accuracy": 93,
+      "wpm": 22
+    },
+    "three": {
+      "accuracy": 96,
+      "wpm": 32
+    }
+  }
+}

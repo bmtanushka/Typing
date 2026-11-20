@@ -47,6 +47,7 @@ final class LessonRepository
                         'type' => $l['type'] ?? 'lesson',
                         'newKeys' => $l['newKeys'] ?? [],
                         'estimatedMinutes' => $l['estimatedMinutes'] ?? 3,
+                        'mapLabel' => $l['mapLabel'] ?? null,
                     ];
                 }, $unit['lessons'])));
                 return $unit;

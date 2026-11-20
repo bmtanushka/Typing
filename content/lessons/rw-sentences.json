@@ -1,0 +1,46 @@
+{
+  "id": "rw-sentences",
+  "unit": "real-world",
+  "title": "Everyday sentences",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "You can type every key now. Time to practise the kind of writing you do every day.",
+    "tip": "Read a few words ahead while you type – your fingers will follow your eyes."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Short sentences",
+      "hints": "none",
+      "text": [
+        "The kettle is boiling. Would you like a cup of tea? I'll bring some biscuits too.",
+        "Please remember to water the plants on Tuesday. The tomatoes need extra care."
+      ],
+      "instructions": "No keyboard on screen any more – you don’t need it."
+    },
+    {
+      "type": "challenge",
+      "title": "Longer sentences",
+      "hints": "none",
+      "text": [
+        "When the rain finally stopped, the children rushed outside to splash in the puddles, laughing all the way to the park.",
+        "Although the hill looked steep, we reached the top in twenty minutes and enjoyed a wonderful view of the valley below."
+      ],
+      "instructions": "Keep a steady rhythm through the commas."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

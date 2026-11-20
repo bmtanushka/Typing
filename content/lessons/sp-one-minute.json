@@ -1,0 +1,43 @@
+{
+  "id": "sp-one-minute",
+  "unit": "speed",
+  "title": "One-minute sprint",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "A one-minute timed paragraph. Type as much as you can – accurately – before the time runs out.",
+    "tip": "Don’t chase speed. Keep your accuracy above 95% and the words per minute will rise."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "One minute",
+      "hints": "none",
+      "text": "The best way to get faster is to practise a little every day. Ten calm minutes are worth more than an hour of rushing. Try to keep an even rhythm, like a ticking clock, and let accuracy lead the way. Speed always follows.",
+      "timeLimit": 60,
+      "instructions": "The clock starts with your first key."
+    },
+    {
+      "type": "challenge",
+      "title": "One more minute",
+      "hints": "none",
+      "text": "Rivers begin as tiny streams high in the hills. As they travel towards the sea, other streams join them, and they grow wider and stronger. Your typing grows in just the same way: one key, one word and one lesson at a time.",
+      "timeLimit": 60,
+      "instructions": "Can you beat your first minute?"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 88
+  },
+  "stars": {
+    "two": {
+      "accuracy": 93,
+      "wpm": 22
+    },
+    "three": {
+      "accuracy": 96,
+      "wpm": 32
+    }
+  }
+}

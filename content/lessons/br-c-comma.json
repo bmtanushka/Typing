@@ -1,0 +1,71 @@
+{
+  "id": "br-c-comma",
+  "unit": "bottom-row",
+  "title": "C and comma",
+  "type": "lesson",
+  "newKeys": [
+    "c",
+    ","
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "C is below D, for your left middle finger. The comma sits below K, for your right middle finger.",
+    "tip": "Curl your middle fingers down gently – don’t move your whole hand."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet C and comma",
+      "keys": [
+        "c",
+        ","
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "dcd k,k dcd k,k ccc ,,, cat, cup, ice, face,",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt.",
+      "focus": [
+        "c"
+      ]
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "catch the cake, please; a cat sat, purred and slept; the city is quiet, cold and clear;",
+        "we picked a ripe peach, a crisp pear, a juicy cherry; the clock struck four;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

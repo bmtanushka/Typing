@@ -1,0 +1,71 @@
+{
+  "id": "br-x-period",
+  "unit": "bottom-row",
+  "title": "X and full stop",
+  "type": "lesson",
+  "newKeys": [
+    "x",
+    "."
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "X is below S, for your left ring finger. The full stop sits below L, for your right ring finger.",
+    "tip": "A full stop is followed by a space – the space bar is always your thumb’s job."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet X and full stop",
+      "keys": [
+        "x",
+        "."
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "sxs l.l sxs l.l xxx ... six. box. fix. extra.",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt.",
+      "focus": [
+        "x"
+      ]
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "the fox jumped over six boxes. it was an exciting day. we fixed the axle. relax and type.",
+        "max packed an extra box. the expert explained it. we excitedly waited. the sky was clear."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

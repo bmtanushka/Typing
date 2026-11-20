@@ -2,16 +2,6 @@
 /** @var array $course ['units' => [...]] */
 use App\Core\View;
 
-$upcoming = [
-    ['Top row', 'E I R U T Y W O Q P'],
-    ['Bottom row', 'C , V M X . Z / B N'],
-    ['Capitals and Shift', 'Left and right Shift'],
-    ['Punctuation', '\' " ? ! : - ( )'],
-    ['Numbers', '1 2 3 4 5 6 7 8 9 0'],
-    ['Symbols', '@ £ $ % & * and friends'],
-    ['Real-world practice', 'Sentences, stories and emails'],
-    ['Speed building', 'Timed paragraphs'],
-];
 $unitNo = 0;
 $keyLabel = static fn (array $keys): string => implode(' ', array_map(static fn ($k) => mb_strtoupper($k), $keys));
 ?>
@@ -56,7 +46,7 @@ $keyLabel = static fn (array $keys): string => implode(' ', array_map(static fn 
             <ol class="path">
                 <?php foreach ($unit['lessons'] as $i => $l):
                     $type = $l['type'] ?? 'lesson';
-                    $keys = $keyLabel($l['newKeys']);
+                    $keys = $l['mapLabel'] ?? $keyLabel($l['newKeys']);
                     ?>
                     <li class="path__step">
                         <a class="map-node map-node--todo map-node--<?= e($type) ?>" href="<?= e(url('/lessons/' . $l['id'])) ?>"
@@ -95,20 +85,4 @@ $keyLabel = static fn (array $keys): string => implode(' ', array_map(static fn 
             </div>
         </form>
     </dialog>
-
-    <h2 class="journey__soon-title">Coming next on your journey</h2>
-    <div class="islands-soon">
-    <?php foreach ($upcoming as [$title, $desc]): $unitNo++; ?>
-        <section class="island island--soon" aria-label="Unit <?= $unitNo ?>: <?= e($title) ?> (coming soon)">
-            <header class="island__head">
-                <span class="island__num" aria-hidden="true"><?= $unitNo ?></span>
-                <div>
-                    <h3 class="island__title"><?= e($title) ?></h3>
-                    <p class="island__desc"><?= e($desc) ?></p>
-                </div>
-                <p class="island__progress"><span class="pill">Coming soon</span></p>
-            </header>
-        </section>
-    <?php endforeach; ?>
-    </div>
 </div>

@@ -1,0 +1,68 @@
+{
+  "id": "tr-ty",
+  "unit": "top-row",
+  "title": "T and Y",
+  "type": "lesson",
+  "newKeys": [
+    "t",
+    "y"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "T and Y are stretch keys for your index fingers, just like G and H, but one row up.",
+    "tip": "Stretch, press, return. Your index fingers come back to F and J every time."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet T and Y",
+      "keys": [
+        "t",
+        "y"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "ftf jyj ftf jyj ttt yyy the yes try they tidy",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "they sat at the lake; it is a tidy shed; her kitty is shy; the sky is dark; fresh fruit is tasty;",
+        "the first day is the hardest; try harder; they like the sea air; a little tree is tall; stay steady;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

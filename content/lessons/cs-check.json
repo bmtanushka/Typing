@@ -1,0 +1,42 @@
+{
+  "id": "cs-check",
+  "unit": "capitals",
+  "title": "Capitals checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Capitals at the start of sentences, names and places – all without hints.",
+    "tip": "Reach 90% accuracy and 10 WPM to pass. Breathe and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": "Last summer, Maya and her brother Leo visited Edinburgh. They climbed Arthurs Seat and watched the sunset.",
+      "instructions": "No hints – trust your fingers."
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": "Every Friday, Mr Patel reads a story to Class Four. This week it is about a brave dragon called Ember.",
+      "instructions": "No hints this time – keep a steady rhythm."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 90,
+    "minWpm": 10
+  },
+  "stars": {
+    "two": {
+      "accuracy": 94,
+      "wpm": 15
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 22
+    }
+  }
+}

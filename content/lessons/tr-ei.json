@@ -1,0 +1,68 @@
+{
+  "id": "tr-ei",
+  "unit": "top-row",
+  "title": "E and I",
+  "type": "lesson",
+  "newKeys": [
+    "e",
+    "i"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Time to leave home! E is just above D, so your left middle finger reaches up for it. I sits above K, for your right middle finger.",
+    "tip": "Reach up, tap, and come straight back to the home row – like a quick hop."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet E and I",
+      "keys": [
+        "e",
+        "i"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "ded kik ded kik eee iii die lie fie hide side",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "she likes a fish dish; his kids feel glad; a leaf falls; she hides a shell; he sees a high hill;",
+        "a kid fills a dish; she feels safe; he seeks a field; his idea is ideal; she sells a sea shell;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

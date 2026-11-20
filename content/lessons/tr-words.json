@@ -1,0 +1,71 @@
+{
+  "id": "tr-words",
+  "unit": "top-row",
+  "title": "Top row words",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "You know the home row and the top row now – that’s most of the alphabet! Let’s practise real words that use both rows.",
+    "tip": "Glance at the screen, not your fingers. If you make a slip, keep going calmly."
+  },
+  "steps": [
+    {
+      "type": "words",
+      "title": "Up and back",
+      "count": 14,
+      "focus": [
+        "e",
+        "r",
+        "t",
+        "y",
+        "u",
+        "i",
+        "o",
+        "p"
+      ],
+      "instructions": "Words that hop between the home row and the top row."
+    },
+    {
+      "type": "words",
+      "title": "Left side reach",
+      "count": 14,
+      "focus": [
+        "q",
+        "w",
+        "e",
+        "r",
+        "t"
+      ],
+      "instructions": "Words that use the left-hand top row keys."
+    },
+    {
+      "type": "words",
+      "title": "Any words at all",
+      "count": 18,
+      "instructions": "Every word you can type so far."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "hints": "fade",
+      "text": [
+        "people are always ready to help; a quiet ship sails out to sea; it is your day to type a short story;",
+        "the old yard is full of flowers; we hope to go to the tower; your kite flies right up high;"
+      ],
+      "instructions": "Hints fade out – you’ve got this."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

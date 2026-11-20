@@ -1,0 +1,63 @@
+{
+  "id": "pu-quotes",
+  "unit": "punctuation",
+  "title": "Apostrophes and quotation marks",
+  "type": "lesson",
+  "newKeys": [
+    "'",
+    "\""
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "The apostrophe (') sits beside the semicolon – reach with your right little finger. Quotation marks (\") need Shift too: on a UK keyboard they are on the 2 key; on a US keyboard they share the apostrophe key.",
+    "tip": "Watch the on-screen keyboard to see where the quotation mark lives on your layout."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet apostrophe and quotation mark",
+      "keys": [
+        "'",
+        "\""
+      ],
+      "rounds": 2,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "'' \"\" it's I'm don't \"yes\" \"no\"",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "\"It's a lovely day,\" said Ava. \"Let's go to the park.\" I'm sure we'll have fun. Don't forget your hat.",
+        "\"It is only me,\" said Gran. We're glad she's here. It's Sam's turn next."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "' \""
+}

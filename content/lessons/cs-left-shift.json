@@ -1,0 +1,88 @@
+{
+  "id": "cs-left-shift",
+  "unit": "capitals",
+  "title": "Left Shift for right-hand capitals",
+  "type": "lesson",
+  "newKeys": [
+    "Y",
+    "U",
+    "I",
+    "O",
+    "P",
+    "H",
+    "J",
+    "K",
+    "L",
+    "N",
+    "M"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "To type a capital letter, hold Shift with the little finger of the OTHER hand. For letters typed by your right hand, hold the left Shift.",
+    "tip": "Hold Shift down, tap the letter, then let go of both. Don’t press them at the same time."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet Y, U, I, O, P, H, J, K, L, N, M",
+      "keys": [
+        "Y",
+        "U",
+        "I",
+        "O",
+        "P",
+        "H",
+        "J",
+        "K",
+        "L",
+        "N",
+        "M"
+      ],
+      "rounds": 1,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "Jj Kk Ll Hh Uu Ii Oo Pp Nn Mm Yy",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt.",
+      "capitalise": 0.6
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "Kim and Paul met Helen in York. Mum likes Oliver. John, Yusuf and Nina joined in.",
+        "Hello Lily. I met Mia and Uma in Paris. Hugo likes Jam. Nick, Lou and Owen ran home."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "⇧ J"
+}

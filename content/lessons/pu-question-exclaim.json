@@ -1,0 +1,63 @@
+{
+  "id": "pu-question-exclaim",
+  "unit": "punctuation",
+  "title": "Question and exclamation marks",
+  "type": "lesson",
+  "newKeys": [
+    "?",
+    "!"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "The question mark (?) is Shift and slash. The exclamation mark (!) is Shift and 1 – a long reach up for your left little finger.",
+    "tip": "Hold the right Shift for !, and the left Shift for ?."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet question mark and exclamation mark",
+      "keys": [
+        "?",
+        "!"
+      ],
+      "rounds": 2,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "?? !! yes? no! why? wow! really? great!",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "Are you ready? Yes! Can we go now? Of course! What a brilliant idea! Who wants a snack?",
+        "Did you hear that? It was thunder! Shall we stay inside? Good plan! Where is the torch?"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "? !"
+}

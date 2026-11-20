@@ -1,0 +1,57 @@
+{
+  "id": "br-words",
+  "unit": "bottom-row",
+  "title": "Every letter",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "You can now type every letter of the alphabet! These steps mix all three rows with commas and full stops.",
+    "tip": "Aim for a smooth rhythm rather than bursts of speed."
+  },
+  "steps": [
+    {
+      "type": "words",
+      "title": "Bottom row reach",
+      "count": 14,
+      "focus": [
+        "z",
+        "x",
+        "c",
+        "v",
+        "b",
+        "n",
+        "m"
+      ],
+      "instructions": "Words that dip down to the bottom row."
+    },
+    {
+      "type": "words",
+      "title": "Whole keyboard",
+      "count": 18,
+      "instructions": "Any word at all – you know every letter now."
+    },
+    {
+      "type": "challenge",
+      "title": "Pangram practice",
+      "hints": "fade",
+      "text": [
+        "the quick brown fox jumps over the lazy dog. pack my box with five dozen jars of jam.",
+        "how vexingly quick daft zebras jump. sphinx of black quartz, judge my vow."
+      ],
+      "instructions": "These sentences use every letter of the alphabet."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

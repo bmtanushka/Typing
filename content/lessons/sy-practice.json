@@ -1,0 +1,52 @@
+{
+  "id": "sy-practice",
+  "unit": "symbols",
+  "title": "Symbols in real life",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Symbols appear in emails, prices, maths and social media. Let’s mix them all together.",
+    "tip": "Accuracy matters most with symbols – one wrong key changes the meaning."
+  },
+  "steps": [
+    {
+      "type": "drill",
+      "title": "Symbol drill",
+      "focus": [
+        "@",
+        "#",
+        "$",
+        "%",
+        "&",
+        "*",
+        "+",
+        "="
+      ],
+      "length": 40,
+      "instructions": "All the symbols you have learnt, mixed."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "hints": "fade",
+      "text": [
+        "Order #4521: 3 x notebooks @ $4 each = $12. Discount: 10%. Contact: shop@example.com & keep your receipt.",
+        "Team score: 18 + 24 = 42 (a 15% rise!). Share it with #teamwork & email coach@example.com."
+      ],
+      "instructions": "Orders, scores and emails."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

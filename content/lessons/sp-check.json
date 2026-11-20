@@ -1,0 +1,44 @@
+{
+  "id": "sp-check",
+  "unit": "speed",
+  "title": "Speed checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "The final checkpoint: two one-minute paragraphs. Show how far you’ve come!",
+    "tip": "Reach 90% accuracy and 20 WPM to pass. Breathe and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": "Rivers begin as tiny streams high in the hills. As they travel towards the sea, other streams join them, and they grow wider and stronger. Your typing grows in just the same way: one key, one word and one lesson at a time.",
+      "instructions": "No hints – trust your fingers.",
+      "timeLimit": 60
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": "The best way to get faster is to practise a little every day. Ten calm minutes are worth more than an hour of rushing. Try to keep an even rhythm, like a ticking clock, and let accuracy lead the way. Speed always follows.",
+      "instructions": "No hints this time – keep a steady rhythm.",
+      "timeLimit": 60
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 90,
+    "minWpm": 20
+  },
+  "stars": {
+    "two": {
+      "accuracy": 94,
+      "wpm": 28
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 38
+    }
+  }
+}

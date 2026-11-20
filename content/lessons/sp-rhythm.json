@@ -1,0 +1,46 @@
+{
+  "id": "sp-rhythm",
+  "unit": "speed",
+  "title": "Find your rhythm",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Speed comes from rhythm. In this lesson you’ll type common words in a steady beat, without rushing.",
+    "tip": "Tap the keys lightly. A light touch is faster than a heavy one."
+  },
+  "steps": [
+    {
+      "type": "words",
+      "title": "Common words",
+      "count": 24,
+      "instructions": "Short, everyday words – keep an even beat."
+    },
+    {
+      "type": "words",
+      "title": "More common words",
+      "count": 24,
+      "instructions": "Same again – try to feel the rhythm."
+    },
+    {
+      "type": "challenge",
+      "title": "Rhythm paragraph",
+      "hints": "none",
+      "text": "Typing quickly is really about typing smoothly. Each finger knows its keys, your eyes stay on the screen, and your hands move as little as possible. When you stop worrying about every single letter, your speed starts to climb all by itself.",
+      "instructions": "Steady and smooth."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 88
+  },
+  "stars": {
+    "two": {
+      "accuracy": 93,
+      "wpm": 20
+    },
+    "three": {
+      "accuracy": 96,
+      "wpm": 30
+    }
+  }
+}

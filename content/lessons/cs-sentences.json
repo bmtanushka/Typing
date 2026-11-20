@@ -1,0 +1,50 @@
+{
+  "id": "cs-sentences",
+  "unit": "capitals",
+  "title": "Capital sentences",
+  "type": "lesson",
+  "newKeys": [],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Every sentence starts with a capital letter, and so do names and places. Let’s put Shift to work in real sentences.",
+    "tip": "Choose the Shift on the opposite side to the letter, every time."
+  },
+  "steps": [
+    {
+      "type": "words",
+      "title": "Names and places",
+      "count": 14,
+      "capitalise": 1,
+      "instructions": "Every word starts with a capital letter."
+    },
+    {
+      "type": "words",
+      "title": "Sentences",
+      "count": 18,
+      "sentences": true,
+      "instructions": "Capital at the start, full stop at the end."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "hints": "fade",
+      "text": [
+        "My friend Priya lives in Leeds. On Monday we went to the Science Museum in London. Then we had lunch by the River Thames.",
+        "The Isle of Skye is in Scotland. Owen and Beth went there in June. They saw seals, puffins and a golden eagle."
+      ],
+      "instructions": "Hints fade out. Watch for the capitals."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "nu-check",
+  "unit": "numbers",
+  "title": "Numbers checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Words and numbers together, with no hints. Dates, times and amounts!",
+    "tip": "Reach 88% accuracy and 10 WPM to pass. Breathe and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": "The library opens at 9:15 and closes at 5:30. It has 4800 books, 36 computers and 12 study rooms.",
+      "instructions": "No hints – trust your fingers."
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": "Flight 274 departs at 18:40 from gate 6. The journey is 1350 miles and takes about 3 hours.",
+      "instructions": "No hints this time – keep a steady rhythm."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 88,
+    "minWpm": 10
+  },
+  "stars": {
+    "two": {
+      "accuracy": 93,
+      "wpm": 14
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 20
+    }
+  }
+}

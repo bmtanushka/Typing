@@ -1,0 +1,96 @@
+{
+  "id": "cs-right-shift",
+  "unit": "capitals",
+  "title": "Right Shift for left-hand capitals",
+  "type": "lesson",
+  "newKeys": [
+    "Q",
+    "W",
+    "E",
+    "R",
+    "T",
+    "A",
+    "S",
+    "D",
+    "F",
+    "G",
+    "Z",
+    "X",
+    "C",
+    "V",
+    "B"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Now the other side: for letters typed by your left hand, hold the right Shift with your right little finger.",
+    "tip": "Opposite hand Shift keeps both hands balanced and helps you stay accurate."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet Q, W, E, R, T, A, S, D, F, G, Z, X, C, V, B",
+      "keys": [
+        "Q",
+        "W",
+        "E",
+        "R",
+        "T",
+        "A",
+        "S",
+        "D",
+        "F",
+        "G",
+        "Z",
+        "X",
+        "C",
+        "V",
+        "B"
+      ],
+      "rounds": 1,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "Aa Ss Dd Ff Gg Tt Rr Ee Ww Qq Zz Xx Cc Vv Bb",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt.",
+      "capitalise": 0.6
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "Sam and Grace visited Tara in Wales. Ben, Rosa and Zara went to Cardiff. Dad baked a cake.",
+        "Fred saw Clara at the Square. Emma and Abdul are in Glasgow. Vera writes to Xavier."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "F ⇧"
+}

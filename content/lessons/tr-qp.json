@@ -1,0 +1,72 @@
+{
+  "id": "tr-qp",
+  "unit": "top-row",
+  "title": "Q and P",
+  "type": "lesson",
+  "newKeys": [
+    "q",
+    "p"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Q and P are for your little fingers: Q above A, and P above the semicolon.",
+    "tip": "Little fingers reach up and back. Keep your wrists level and relaxed."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet Q and P",
+      "keys": [
+        "q",
+        "p"
+      ],
+      "rounds": 3,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "aqa ;p; aqa ;p; qqq ppp quit pop quiet paper",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "words",
+      "title": "Real words",
+      "count": 14,
+      "instructions": "Every word uses only keys you have learnt.",
+      "focus": [
+        "q",
+        "p"
+      ]
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "a quiet spider sits up high; pip likes to type; the quiet squid sips tea; a happy pup plays at the park;",
+        "please keep quiet; the purple kite is up; a quirky quest is here; type the paper slowly; pop the top up;"
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  }
+}

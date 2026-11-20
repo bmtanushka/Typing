@@ -1,0 +1,69 @@
+{
+  "id": "nu-67890",
+  "unit": "numbers",
+  "title": "Numbers 6 to 0",
+  "type": "lesson",
+  "newKeys": [
+    "6",
+    "7",
+    "8",
+    "9",
+    "0"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "Now the right hand: 6 and 7 for your right index finger, 8 middle, 9 ring and 0 for your little finger.",
+    "tip": "Some typists reach 6 with the left hand – here we use the right index finger, matching the finger guide."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet 6, 7, 8, 9, 0",
+      "keys": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "0"
+      ],
+      "rounds": 2,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "6 7 8 9 0 66 77 88 99 00 67 89 90 76 98",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "The year has 365 days and 12 months. My phone number ends in 7890. We walked 6 miles in 2 hours.",
+        "There were 1000 people at the match. Train 9 leaves at 8. A week has 7 days and 168 hours."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "6–0"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "tr-check",
+  "unit": "top-row",
+  "title": "Top row checkpoint",
+  "type": "checkpoint",
+  "newKeys": [],
+  "estimatedMinutes": 3,
+  "intro": {
+    "text": "Show off your new top row skills. This checkpoint uses the home row and the top row – no keyboard hints.",
+    "tip": "Reach 90% accuracy and 8 WPM to pass. Breathe and take it steady."
+  },
+  "steps": [
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part one",
+      "hints": "none",
+      "text": "we waited for a quiet day; the girls rode their horses to the sea; please write a short story; our first trip was a great day;",
+      "instructions": "No hints – trust your fingers."
+    },
+    {
+      "type": "challenge",
+      "title": "Checkpoint, part two",
+      "hints": "none",
+      "text": "type at a steady speed; a puppy is a happy pet; the wise old owl sat quietly; you type faster today;",
+      "instructions": "No hints this time – keep a steady rhythm."
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 90,
+    "minWpm": 8
+  },
+  "stars": {
+    "two": {
+      "accuracy": 94,
+      "wpm": 12
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 18
+    }
+  }
+}

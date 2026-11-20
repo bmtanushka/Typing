@@ -24,6 +24,112 @@
         "hr-words",
         "hr-check"
       ]
+    },
+    {
+      "id": "top-row",
+      "title": "The top row",
+      "description": "Reach up to Q W E R T Y U I O P.",
+      "colour": "info",
+      "lessons": [
+        "tr-ei",
+        "tr-ru",
+        "tr-ty",
+        "tr-wo",
+        "tr-qp",
+        "tr-words",
+        "tr-check"
+      ]
+    },
+    {
+      "id": "bottom-row",
+      "title": "The bottom row",
+      "description": "Reach down to Z X C V B N M , . /",
+      "colour": "success",
+      "lessons": [
+        "br-bn",
+        "br-c-comma",
+        "br-vm",
+        "br-x-period",
+        "br-z-slash",
+        "br-words",
+        "br-check"
+      ]
+    },
+    {
+      "id": "capitals",
+      "title": "Capitals and Shift",
+      "description": "Capital letters with the opposite-hand Shift.",
+      "colour": "primary",
+      "lessons": [
+        "cs-left-shift",
+        "cs-right-shift",
+        "cs-sentences",
+        "cs-check"
+      ]
+    },
+    {
+      "id": "punctuation",
+      "title": "Punctuation",
+      "description": "' \" ? ! : - ( )",
+      "colour": "accent",
+      "lessons": [
+        "pu-quotes",
+        "pu-question-exclaim",
+        "pu-colon-hyphen",
+        "pu-brackets",
+        "pu-practice",
+        "pu-check"
+      ]
+    },
+    {
+      "id": "numbers",
+      "title": "Numbers",
+      "description": "1 2 3 4 5 6 7 8 9 0",
+      "colour": "info",
+      "lessons": [
+        "nu-12345",
+        "nu-67890",
+        "nu-mixed",
+        "nu-check"
+      ]
+    },
+    {
+      "id": "symbols",
+      "title": "Symbols",
+      "description": "@ # $ % & * + = and friends",
+      "colour": "primary",
+      "lessons": [
+        "sy-at-hash",
+        "sy-money-percent",
+        "sy-maths",
+        "sy-practice",
+        "sy-check"
+      ]
+    },
+    {
+      "id": "real-world",
+      "title": "Real-world practice",
+      "description": "Sentences, stories, emails and famous words.",
+      "colour": "success",
+      "lessons": [
+        "rw-sentences",
+        "rw-story",
+        "rw-email",
+        "rw-quotes",
+        "rw-check"
+      ]
+    },
+    {
+      "id": "speed",
+      "title": "Speed building",
+      "description": "Timed paragraphs to build speed and stamina.",
+      "colour": "accent",
+      "lessons": [
+        "sp-rhythm",
+        "sp-one-minute",
+        "sp-two-minutes",
+        "sp-check"
+      ]
     }
   ]
 }

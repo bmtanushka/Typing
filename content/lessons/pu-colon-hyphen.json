@@ -1,0 +1,63 @@
+{
+  "id": "pu-colon-hyphen",
+  "unit": "punctuation",
+  "title": "Colons and hyphens",
+  "type": "lesson",
+  "newKeys": [
+    ":",
+    "-"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "The colon (:) is Shift and semicolon. The hyphen (-) is on the top row, next to 0 – a stretch for your right little finger.",
+    "tip": "Colons introduce lists; hyphens join words like well-known and twenty-one."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet colon and hyphen",
+      "keys": [
+        ":",
+        "-"
+      ],
+      "rounds": 2,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": ":: -- note: well-known up-to-date list:",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "You will need: a pencil, a ruler and a rubber. It was a well-known, up-to-date guide.",
+        "Remember this: practise a little every day. My mother-in-law has a part-time job."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": ": -"
+}

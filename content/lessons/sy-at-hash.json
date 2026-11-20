@@ -1,0 +1,63 @@
+{
+  "id": "sy-at-hash",
+  "unit": "symbols",
+  "title": "@ and #",
+  "type": "lesson",
+  "newKeys": [
+    "@",
+    "#"
+  ],
+  "estimatedMinutes": 4,
+  "intro": {
+    "text": "The @ sign is used in every email address. On a UK keyboard it is Shift and apostrophe; on a US keyboard it is Shift and 2. The # (hash) is a key of its own on UK keyboards, and Shift and 3 on US keyboards.",
+    "tip": "Follow the on-screen keyboard – it shows exactly where each symbol is on your layout."
+  },
+  "steps": [
+    {
+      "type": "keys",
+      "title": "Meet @ and #",
+      "keys": [
+        "@",
+        "#"
+      ],
+      "rounds": 2,
+      "groupSize": 3,
+      "instructions": "Press each key as it lights up. The cursor waits for the right key."
+    },
+    {
+      "type": "drill",
+      "title": "Guided drill",
+      "text": "@@ ## @ # hi@pip #1 #fun",
+      "instructions": "Reach for the new keys, then return to the home row."
+    },
+    {
+      "type": "drill",
+      "title": "Mix it up",
+      "length": 54,
+      "instructions": "New keys mixed with the ones you already know."
+    },
+    {
+      "type": "challenge",
+      "title": "Hands-on challenge",
+      "text": [
+        "Email me at sam@example.com or tag the photo #summer. My best score is #1 on the list.",
+        "Write to help@keyquest.example for support. Use #typing and #practice in your post."
+      ],
+      "hints": "fade",
+      "instructions": "The keyboard hints fade out – trust your fingers!"
+    }
+  ],
+  "passCriteria": {
+    "minAccuracy": 85
+  },
+  "stars": {
+    "two": {
+      "accuracy": 92
+    },
+    "three": {
+      "accuracy": 97,
+      "wpm": 15
+    }
+  },
+  "mapLabel": "@ #"
+}

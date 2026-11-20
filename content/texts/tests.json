@@ -1,0 +1,55 @@
+{
+  "texts": [
+    {
+      "id": "lighthouse-keeper",
+      "title": "The lighthouse keeper",
+      "text": "Every evening, the keeper climbed the spiral stairs to light the great lamp. From the top, she could see the fishing boats heading home, their small lights bobbing on the dark water. She liked to imagine the families waiting on the harbour wall, waving as each boat came safely in."
+    },
+    {
+      "id": "allotment",
+      "title": "The allotment",
+      "text": "Grandad's allotment is a patchwork of vegetables, flowers and old wooden sheds. In spring we plant potatoes and broad beans; in summer we pick strawberries and runner beans. By autumn the pumpkins are enormous, and we carry them home in a wobbly wheelbarrow."
+    },
+    {
+      "id": "rain",
+      "title": "A rainy afternoon",
+      "text": "When the rain finally arrived, it drummed on the windows and gurgled in the drainpipes. We made a den out of cushions, read comics by torchlight and listened to the storm. By teatime the clouds had cleared, leaving a rainbow stretched across the hills."
+    },
+    {
+      "id": "museum",
+      "title": "The museum trip",
+      "text": "Our class visited the museum on a sunny Tuesday. We saw the bones of a huge dinosaur, a mummy wrapped in ancient bandages and a room full of glittering minerals. My favourite was the moon rock, which was smaller than I expected but older than anything I had ever touched."
+    },
+    {
+      "id": "bakery",
+      "title": "The corner bakery",
+      "text": "The bakery on the corner opens at seven o'clock, and by then a queue has already formed. There are crusty loaves, sticky buns and warm pasties filled with cheese and onion. The baker remembers everyone's name and always has a smile ready, even on cold winter mornings."
+    },
+    {
+      "id": "river",
+      "title": "Down by the river",
+      "text": "A heron stood perfectly still at the edge of the river, waiting for a fish to swim past. Ducks paddled in circles, and a kingfisher flashed by like a streak of blue paint. We sat on the bank with our sandwiches and counted the boats drifting slowly downstream."
+    },
+    {
+      "id": "robots",
+      "title": "Helpful robots",
+      "text": "Some robots build cars, some explore other planets and some simply vacuum the living room. Engineers design them to do jobs that are dull, dangerous or very precise. Even so, every robot needs people to plan, program and repair it, so there will always be work for curious minds."
+    },
+    {
+      "id": "bees",
+      "title": "Busy bees",
+      "text": "A single honeybee visits hundreds of flowers in a day, collecting nectar and spreading pollen as it goes. Back at the hive, thousands of bees work together to make honey and look after the young. Without bees, many of the fruits and vegetables we enjoy would be much harder to grow."
+    },
+    {
+      "id": "trains",
+      "title": "The night train",
+      "text": "The night train leaves the city at ten o'clock and arrives by the sea at breakfast time. Passengers sleep in narrow bunks while the carriages rock gently through the countryside. In the morning, they open the blinds to see waves rolling onto a golden beach."
+    },
+    {
+      "id": "practice",
+      "title": "Little and often",
+      "text": "Learning to type is a lot like learning a musical instrument. A few minutes of careful practice every day works better than a long session once a week. Keep your eyes on the screen, trust your fingers and celebrate small improvements. Before long, the keyboard will feel like an old friend."
+    }
+  ],
+  "placement": "Hello! This short test helps us find the right starting point for you. Type as accurately as you can; there's no need to rush. If you already know where the keys are, you may be able to skip ahead to the lessons that will help you most. Ready? Let's begin with the next sentence: the quick brown fox jumps over the lazy dog, and 3 sleepy cats watch from the wall."
+}
