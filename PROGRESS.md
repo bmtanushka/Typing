@@ -7,8 +7,8 @@
 | 2 – Lesson framework + Units 1–2 | ✅ Done |
 | 3 – Guest progress + motivation | ✅ Done |
 | 4 – Accounts + sync | ✅ Done (user asked to continue straight to Phase 6) |
-| 5 – Remaining curriculum + practice modes | ⏳ In progress |
-| 6 – Games | – |
+| 5 – Remaining curriculum + practice modes | ✅ Done |
+| 6 – Games | ⏳ In progress |
 | 7 – Polish | – |
 | 8 – Deployment to Hostinger | – |
 
@@ -50,6 +50,45 @@
 4. Click the theme button in the header (System → Light → Dark), reload: it persists.
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
+
+## Phase 5 – Remaining curriculum + practice modes
+
+**Built**
+- Units 3–10 (42 new lessons, 51 in total), all original British-English copy:
+  Top row (E I, R U, T Y, W O, Q P, words, checkpoint) · Bottom row (**B N first**, then C ,
+  V M, X ., Z /, words with pangrams, checkpoint) · Capitals and Shift (left Shift for
+  right-hand capitals, right Shift for left-hand capitals, sentences, checkpoint) ·
+  Punctuation (' ", ? !, : -, ( ), practice, checkpoint) · Numbers (1–5, 6–0, numbers in
+  sentences, checkpoint) · Symbols (@ #, $ % &, * + =, practice, checkpoint) · Real-world
+  practice (sentences, a three-part story, emails, Shakespeare + proverbs, checkpoint) · Speed
+  building (rhythm, one-minute sprints, two-minute stamina, timed checkpoint).
+- Decision: the bottom row teaches **B and N first** (the brief listed them last). N is one of
+  the most common letters, so without it the next four lessons could not use real sentences.
+- Lesson format additions: `timeLimit` on steps (countdown, text keeps coming), words-step
+  options `capitalise` (ratio), `sentences`, `numbers`; optional `mapLabel` for the map disc.
+  Generators `capitaliseWords`, `toSentences`, `sprinkleNumbers` (pure, tested) only ever use
+  learnt characters.
+- Content checks: every text in units 2–10 uses only keys learnt so far (PHP test) and every
+  character in every lesson, test and placement text is typeable on **both** UK and US layouts
+  (JS test). The generator script refuses to write a lesson that breaks this.
+- `/placement`: one-minute test → recommends units to skip (needs ≥ 90% accuracy; 10/18/25/32
+  WPM bands; real-world practice and speed building are never skipped) → "Skip these and
+  start". Linked from the home page and the lessons map.
+- `/practice`: problem keys (weighted drill from your key stats, or a warm-up when you have no
+  problem keys yet), word sets (learnt keys / common words / sentences / paragraphs), your own
+  text (smart quotes and dashes converted, untypeable characters removed); untimed, 1 or 2 min.
+- `/test`: 1, 3 or 5-minute tests on original paragraphs (`content/texts/tests.json`),
+  personal-best celebration, history chart (hover + table view). Tests count towards the speed
+  badges; practice/tests award XP and streaks and sync to the account.
+- Shared `core/exercise.js` + `partials/exercise.php` (engine, keyboard, hands, live stats).
+
+**Verified**: 66 JS + 20 PHP unit tests, 18 API tests, 5 browser suites (new
+`curriculum.e2e.cjs` uses Playwright's virtual clock: ten units, placement → skip ahead,
+capitals with opposite Shift, speed unit still locked, timed lesson step, 1-minute test +
+history, own text, problem keys) – no console errors.
+
+**How to test**: `/placement` (type for a minute), `/lessons` (all ten units), `/test`,
+`/practice` (try all three modes), any capitals or numbers lesson.
 
 ## Phase 4 – Accounts + sync
 
