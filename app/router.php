@@ -21,6 +21,8 @@ return static function (Router $r): void {
     $r->get('/practice', [PageController::class, 'practice']);
     $r->get('/test', [PageController::class, 'typingTest']);
     $r->get('/placement', [PageController::class, 'placement']);
+    $r->get('/games', [PageController::class, 'games']);
+    $r->get('/games/{id}', [PageController::class, 'game']);
     $r->get('/lessons', [PageController::class, 'lessons']);
     $r->get('/lessons/{id}', [PageController::class, 'lesson']);
     $r->get('/badges', [PageController::class, 'badges']);

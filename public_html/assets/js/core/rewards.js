@@ -187,6 +187,28 @@ export function recordPractice(state, { result, ref = 'practice', badges = [], i
 
 export const XP_TEST = 12;
 
+/** Record a finished game: best score per game, XP (bonus for a new best), streak, badges. */
+export function recordGame(state, { gameId, summary, badges = [], index = null, now = new Date() }) {
+  const levelBefore = levelInfo(state.xp).level;
+  const previousBest = Number(state.gameScores?.[gameId] || 0);
+  const newBest = summary.score > previousBest;
+  state.gameScores = state.gameScores || {};
+  if (newBest) state.gameScores[gameId] = summary.score;
+  state.results.push({
+    type: 'game', ref: gameId, score: summary.score, wpm: summary.wpm || 0, rawWpm: summary.wpm || 0,
+    accuracy: summary.accuracy ?? 0, durationMs: summary.durationMs || 0, chars: summary.hits || 0, at: now.toISOString(),
+  });
+  if (state.results.length > 300) state.results.splice(0, state.results.length - 300);
+  const xp = 10 + (newBest && previousBest > 0 ? 10 : 0);
+  state.xp = (state.xp || 0) + xp;
+  const streak = updateStreak(state.streak, dayKey(now));
+  state.streak = { current: streak.current, best: streak.best, lastDay: streak.lastDay };
+  return {
+    xpGained: xp, newBest, previousBest, newBadges: awardBadges(state, badges, index, now),
+    streak: state.streak.current, level: levelInfo(state.xp), levelUp: levelInfo(state.xp).level > levelBefore,
+  };
+}
+
 /** Record a timed typing test (counts towards speed badges). */
 export function recordTest(state, opts) {
   return recordPractice(state, { ...opts, type: 'test', xp: XP_TEST });

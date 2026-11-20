@@ -14,7 +14,6 @@ final class PageController
 {
     /** Sections not built yet: path => [title, phase, blurb]. */
     public const PLACEHOLDERS = [
-        '/games'    => ['Games', 6, 'Key Drops, Balloon Pop and more – using only the keys you know.'],
         '/help'     => ['Help and technique', 7, 'Posture, home position and tips for touch typing.'],
         '/privacy'  => ['Privacy', 7, 'What we store, why, and how to delete it.'],
     ];
@@ -49,6 +48,47 @@ final class PageController
             'bodyClass' => 'page-demo',
             'pageScript' => 'js/pages/demo.js',
             'pageStyles' => ['css/typing.css'],
+        ]));
+    }
+
+    /** Games: id => [title, blurb, how to play, colour, ages] */
+    public const GAMES = [
+        'key-drops' => ['Key Drops', 'Letters fall like raindrops – type them before they land.', 'Type each falling letter. The lowest matching drop bursts first.', 'info'],
+        'balloon-pop' => ['Balloon Pop', 'Words float up in balloons. Type a word to pop it!', 'Start typing a word: its balloon is chosen by the first letter. Finish the word to pop it.', 'accent'],
+        'space-defender' => ['Space Defender', 'Asteroids carry words towards your ship. Type to fire your laser.', 'Each correct letter fires your laser. Finish the word to clear the asteroid.', 'primary'],
+        'word-race' => ['Word Race', 'Race a ghost car that drives at a steady speed.', 'Type the text below the track. Your car moves with every correct letter.', 'success'],
+        'typing-bubbles' => ['Typing Bubbles', 'Big, slow bubbles with single letters – perfect for younger typists.', 'Type a letter to pop its bubble. There are no lives to lose – just have fun for 90 seconds.', 'star'],
+    ];
+
+    public function games(Request $request): Response
+    {
+        return Response::html(View::page('pages/games', [
+            'title' => 'Games',
+            'description' => 'Typing games that use only the keys you have learnt.',
+            'bodyClass' => 'page-games',
+            'pageScript' => 'js/pages/games.js',
+            'pageStyles' => ['css/practice.css', 'css/games.css'],
+            'games' => self::GAMES,
+        ]));
+    }
+
+    public function game(Request $request, array $params): Response
+    {
+        $id = $params['id'] ?? '';
+        if (!isset(self::GAMES[$id])) {
+            return $this->notFound($request);
+        }
+        [$title, $blurb, $how] = self::GAMES[$id];
+        return Response::html(View::page('pages/game', [
+            'title' => $title,
+            'description' => $blurb,
+            'bodyClass' => 'page-game',
+            'pageScript' => 'js/pages/game.js',
+            'pageStyles' => ['css/games.css', 'css/practice.css'],
+            'gameId' => $id,
+            'gameTitle' => $title,
+            'blurb' => $blurb,
+            'how' => $how,
         ]));
     }
 

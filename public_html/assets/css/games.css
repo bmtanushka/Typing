@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Games hub and game page
+   ========================================================================== */
+.games-hub { padding-block: var(--space-6); display: grid; gap: var(--space-5); }
+.games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: var(--space-5); }
+.game-card {
+  --tone: var(--primary);
+  --tone-soft: var(--primary-soft);
+  display: grid;
+  height: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur);
+}
+.game-card:hover, .game-card:focus-visible { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--tone); }
+.game-card:focus-visible { box-shadow: var(--focus-ring), var(--shadow-lg); border-radius: var(--radius-xl); }
+.game-card--info { --tone: var(--info); --tone-soft: var(--info-soft); }
+.game-card--accent { --tone: #c2410c; --tone-soft: var(--accent-soft); }
+.game-card--success { --tone: var(--success); --tone-soft: var(--success-soft); }
+.game-card--star { --tone: #b97a00; --tone-soft: #fff1c7; }
+:root[data-theme="dark"] .game-card--accent { --tone: var(--accent); }
+:root[data-theme="dark"] .game-card--star { --tone: var(--star); --tone-soft: #3d3312; }
+.game-card__art { position: relative; height: 9rem; background: var(--tone-soft); overflow: hidden; }
+.game-card__art::before, .game-card__art::after {
+  content: "";
+  position: absolute;
+  display: grid;
+  place-items: center;
+  font: 800 1.4rem var(--font-mono);
+  color: var(--f-text);
+}
+/* little scenes, drawn with CSS only */
+.game-card__art--key-drops::before { content: "f"; left: 22%; top: 18%; width: 3rem; height: 3.6rem; background: var(--f-li); border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%; }
+.game-card__art--key-drops::after { content: "j"; left: 60%; top: 42%; width: 3rem; height: 3.6rem; background: var(--f-ri); border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%; }
+.game-card__art--balloon-pop::before { content: ""; left: 30%; top: 14%; width: 4rem; height: 5rem; background: var(--f-lp); border-radius: 50%; }
+.game-card__art--balloon-pop::after { content: ""; left: 55%; top: 30%; width: 3.4rem; height: 4.2rem; background: var(--f-rr); border-radius: 50%; }
+.game-card__art--space-defender { background: #1e1b3a; }
+.game-card__art--space-defender::before { content: ""; left: calc(50% - 1.2rem); bottom: 1rem; width: 0; height: 0; border-left: 1.2rem solid transparent; border-right: 1.2rem solid transparent; border-bottom: 2.6rem solid var(--primary-light); }
+.game-card__art--space-defender::after { content: "sky"; left: 18%; top: 1.4rem; padding: 0.2rem 0.6rem; border-radius: 1rem; background: #7a6f9b; color: #fff; font-size: 1rem; }
+.game-card__art--word-race::before { content: ""; left: 12%; top: 32%; width: 4.4rem; height: 1.8rem; background: var(--primary); border-radius: 0.6rem; }
+.game-card__art--word-race::after { content: ""; left: 40%; top: 60%; width: 4.4rem; height: 1.8rem; background: var(--border-strong); border-radius: 0.6rem; opacity: 0.7; }
+.game-card__art--typing-bubbles::before { content: "A"; left: 20%; top: 20%; width: 4.4rem; height: 4.4rem; background: var(--f-lm); border-radius: 50%; font-family: var(--font-ui); font-size: 1.8rem; }
+.game-card__art--typing-bubbles::after { content: "K"; left: 58%; top: 36%; width: 3.6rem; height: 3.6rem; background: var(--f-rm); border-radius: 50%; font-family: var(--font-ui); font-size: 1.5rem; }
+.game-card__body { display: grid; gap: var(--space-1); padding: var(--space-4) var(--space-5) var(--space-5); }
+.game-card__title { font-size: var(--fs-lg); font-weight: var(--fw-black); }
+.game-card__blurb { color: var(--text-muted); }
+.game-card__best { font-weight: var(--fw-bold); color: var(--tone); }
+
+/* Game page */
+.game-page { padding-block: var(--space-5); }
+.game-page__bar { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-3); }
+.game-page__title { margin: 0; font-size: var(--fs-xl); }
+.game-hud { display: flex; gap: var(--space-5); margin: 0 0 0 auto; }
+.game-hud div { display: grid; text-align: center; }
+.game-hud dt { font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.game-hud dd { margin: 0; font-size: var(--fs-lg); font-weight: var(--fw-black); font-variant-numeric: tabular-nums; min-width: 3ch; }
+.game-hud [data-hud="lives"] { color: var(--danger); letter-spacing: 1px; }
+.game-stage { position: relative; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-md); background: var(--surface); }
+.game-canvas { display: block; width: 100%; outline: none; }
+.game-canvas:focus-visible { box-shadow: inset 0 0 0 3px var(--primary); }
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  overflow: auto;
+}
+.game-overlay[hidden] { display: none; }
+.game-overlay__card { width: min(28rem, 100%); text-align: center; display: grid; justify-items: center; gap: var(--space-2); }
+.game-overlay__card h2 { margin: 0; }
+.game-overlay__card p { margin: 0; }
+.game-options { width: 100%; text-align: left; }
+.game-options .btn--lg { width: 100%; }
+.game-results__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); width: 100%; margin-block: var(--space-2); }
+.game-results__stats .stat__value { font-size: var(--fs-xl); }
+.game-results__stats .stat__value [data-res] { font-size: inherit; color: inherit; }
+.game-results__badges { justify-content: center; margin: 0; }
+.game-results__badges:empty, .game-overlay [data-res-xp]:empty { display: none; }
+.game-page__help { text-align: center; margin-top: var(--space-3); }

@@ -94,3 +94,20 @@ test('practice sessions count towards a badge', () => {
   assert.ok(s.badges['practice-pays']);
   assert.equal(s.xp, 24);
 });
+
+import { recordGame } from '../../public_html/assets/js/core/rewards.js';
+
+test('recordGame keeps the best score, rewards a new best and earns game badges', () => {
+  const s = fresh();
+  const a = recordGame(s, { gameId: 'key-drops', summary: { score: 80, accuracy: 90, hits: 20, durationMs: 60000 }, badges });
+  assert.equal(s.gameScores['key-drops'], 80);
+  assert.equal(a.xpGained, 10, 'first game: no "beat your best" bonus');
+  assert.ok(a.newBadges.includes('game-on') && !a.newBadges.includes('high-scorer'));
+  const b = recordGame(s, { gameId: 'key-drops', summary: { score: 50 }, badges });
+  assert.equal(s.gameScores['key-drops'], 80, 'lower score keeps the best');
+  assert.equal(b.newBest, false);
+  const c = recordGame(s, { gameId: 'key-drops', summary: { score: 140 }, badges });
+  assert.equal(c.xpGained, 20);
+  assert.ok(c.newBadges.includes('high-scorer'));
+  assert.equal(s.results.filter((r) => r.type === 'game').length, 3);
+});

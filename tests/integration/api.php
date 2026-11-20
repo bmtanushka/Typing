@@ -131,6 +131,12 @@ t('best result kept; failed attempt adds an attempt only', function () use ($a, 
     $p = $r['json']['state']['progress']['hr-fj'];
     check($p['stars'] === 2 && (float) $p['bestWpm'] === 20.0 && $p['attempts'] === 2, json_encode($p));
 });
+t('game results keep the best score per game', function () use ($a, $ev) {
+    $game = fn (int $score) => $ev(['type' => 'game', 'ref' => 'key-drops', 'score' => $score, 'stars' => 0, 'xp' => 10, 'wpm' => 25, 'keyStats' => [], 'badges' => ['game-on']]);
+    $a->post('/api/progress/sync', ['events' => [$game(120), $game(80)]]);
+    $s = $a->post('/api/progress/sync', ['events' => []])['json']['state'];
+    check(($s['gameScores']['key-drops'] ?? 0) === 120 && isset($s['badges']['game-on']), json_encode($s['gameScores']));
+});
 t('implausible results are rejected', function () use ($a, $ev) {
     $fast = $ev(['wpm' => 900]);
     $tooMany = $ev(['chars' => 5000, 'durationMs' => 10000]);
@@ -168,10 +174,10 @@ t('guest merge: best per lesson, sum XP, union badges – only once', function (
     $s = $r['json']['state'];
     check($r['json']['merged'] === true, 'merged');
     check($s['progress']['hr-fj']['stars'] === 3 && (float) $s['progress']['hr-fj']['bestWpm'] === 25.0, json_encode($s['progress']['hr-fj']));
-    check($s['xp'] === 150 && isset($s['badges']['hat-trick'], $s['badges']['first-steps']) && !isset($s['badges']['made-up']), 'xp/badges ' . $s['xp']);
+    check($s['xp'] === 170 && isset($s['badges']['hat-trick'], $s['badges']['first-steps']) && !isset($s['badges']['made-up']), 'xp/badges ' . $s['xp']);
     check($s['keyStats']['f']['attempts'] === 25 && $s['streak']['current'] === 3 && $s['streak']['best'] === 5 && $s['gameScores']['key-drops'] === 120, 'keys/streak/games');
     $again = $a->post('/api/progress/merge', ['mergeId' => $id, 'guest' => $guest]);
-    check($again['json']['merged'] === false && $again['json']['state']['xp'] === 150, 'second merge is a no-op');
+    check($again['json']['merged'] === false && $again['json']['state']['xp'] === 170, 'second merge is a no-op');
 });
 t('profile and password changes', function () use ($a, $email, $pass) {
     $r = $a->post('/api/account/profile', ['displayName' => 'Sam T', 'email' => $email]);
