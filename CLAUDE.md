@@ -74,6 +74,14 @@ brief is summarised there; work phase by phase and stop for review at the end of
   plausibility limits.
 - `/install` paths are blocked by .htaccess; the web installer is `/setup`.
 
+## Games
+- One module per game in `assets/js/games/<id>.js` exporting `createGame(ctx)`; register it in
+  `PageController::GAMES` and the `GAMES` list in `pages/game.js`. Use `framework.js`
+  (`runGame`, `Particles`, `drawWord`, `typeAtTargets`, `fingerColour`) – colour items by
+  finger, read colours from `ctx.colours` (theme-aware), respect `ctx.reducedMotion`, start
+  gently, and expose a read-only `peek()` for the browser tests.
+- Record results with `recordGame` + `track(makeEvent('game', id, …, {score}))`.
+
 ## CSS
 - Design tokens in `assets/css/tokens.css` – use variables, never hard-code colours.
   Dark theme overrides live under `:root[data-theme="dark"]`.

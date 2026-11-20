@@ -8,8 +8,8 @@
 | 3 – Guest progress + motivation | ✅ Done |
 | 4 – Accounts + sync | ✅ Done (user asked to continue straight to Phase 6) |
 | 5 – Remaining curriculum + practice modes | ✅ Done |
-| 6 – Games | ⏳ In progress |
-| 7 – Polish | – |
+| 6 – Games | ✅ Built – awaiting review (Phases 4–6 built back to back, as requested) |
+| 7 – Polish | ⏳ Next |
 | 8 – Deployment to Hostinger | – |
 
 ## Phase 0 – Foundations
@@ -50,6 +50,37 @@
 4. Click the theme button in the header (System → Light → Dark), reload: it persists.
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
+
+## Phase 6 – Games
+
+**Built**
+- `/games` hub (best score per game) and `/games/{id}`. Each game is its own module, loaded
+  only on its page (dynamic import).
+- `games/framework.js`: canvas sizing (HiDPI), 60 fps loop with capped frame time, keyboard
+  input, Esc / window blur / tab switch pause, HUD (score, lives, level), polite screen-reader
+  announcements, particles (off with reduced motion), word targeting, theme-aware colours.
+  Items are coloured by the **finger** that types them (same colours as the keyboard).
+- Start screen: difficulty (Gentle – default – / Normal / Speedy: speed, spawn rate, lives),
+  keys (only keys I’ve learnt / home row / all letters), sound on/off; remembered per game.
+- Games (all original):
+  - **Key Drops** – letters fall like raindrops; the lowest matching drop bursts. Levels speed up.
+  - **Balloon Pop** – words float up in balloons; the first letter picks the balloon.
+  - **Space Defender** – asteroids carry words towards your ship; each letter fires the laser.
+  - **Word Race** – race a ghost car at 10 / 20 / 30 WPM; mistakes don’t move you.
+  - **Typing Bubbles** – big, slow, single-letter bubbles; no lives to lose; 90 seconds.
+- Results screen: score, best, accuracy, XP, new badges ("Game on", "High scorer"),
+  confetti for a new best. Scores sync to the account (`game_scores` keeps the best).
+- Beginner friendliness: Gentle by default, generous lives, the next item appears straight
+  away when the screen is empty, items start in view.
+
+**Verified**: `games.e2e.cjs` plays all five games with Playwright's virtual clock (bursts
+drops, pops balloons, clears asteroids, wins the race, pops bubbles; Esc pause; results;
+best scores; hub) – no console errors. API test: game events keep the best score. 72 JS +
+20 PHP unit tests, 19 API tests, 6 browser suites all pass.
+
+**Page weight** (JS + CSS, uncompressed, before gzip): home 79 KB, lesson 177 KB, practice
+141 KB, game 125 KB, progress 119 KB – all under the 200 KB budget. The lesson page is the
+heaviest; it gets a look in the Phase 7 performance pass.
 
 ## Phase 5 – Remaining curriculum + practice modes
 
