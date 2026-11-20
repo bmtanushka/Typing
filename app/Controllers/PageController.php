@@ -14,8 +14,6 @@ final class PageController
 {
     /** Sections not built yet: path => [title, phase, blurb]. */
     public const PLACEHOLDERS = [
-        '/practice' => ['Practice', 5, 'Problem-key drills and free practice with your own text.'],
-        '/test'     => ['Typing test', 5, 'One, three and five minute tests with a history chart.'],
         '/games'    => ['Games', 6, 'Key Drops, Balloon Pop and more – using only the keys you know.'],
         '/help'     => ['Help and technique', 7, 'Posture, home position and tips for touch typing.'],
         '/privacy'  => ['Privacy', 7, 'What we store, why, and how to delete it.'],
@@ -51,6 +49,40 @@ final class PageController
             'bodyClass' => 'page-demo',
             'pageScript' => 'js/pages/demo.js',
             'pageStyles' => ['css/typing.css'],
+        ]));
+    }
+
+    public function practice(Request $request): Response
+    {
+        return Response::html(View::page('pages/practice', [
+            'title' => 'Practice',
+            'description' => 'Practise your problem keys, word sets or your own text.',
+            'bodyClass' => 'page-practice',
+            'pageScript' => 'js/pages/practice.js',
+            'pageStyles' => ['css/typing.css', 'css/practice.css'],
+            'mode' => in_array($request->query['mode'] ?? '', ['problem', 'words', 'own'], true) ? $request->query['mode'] : 'problem',
+        ]));
+    }
+
+    public function typingTest(Request $request): Response
+    {
+        return Response::html(View::page('pages/test', [
+            'title' => 'Typing test',
+            'description' => 'Take a one, three or five minute typing test and track your speed over time.',
+            'bodyClass' => 'page-test',
+            'pageScript' => 'js/pages/test.js',
+            'pageStyles' => ['css/typing.css', 'css/practice.css', 'css/progress.css'],
+        ]));
+    }
+
+    public function placement(Request $request): Response
+    {
+        return Response::html(View::page('pages/placement', [
+            'title' => 'Placement test',
+            'description' => 'Already a confident typist? Take a one-minute test to skip ahead.',
+            'bodyClass' => 'page-placement',
+            'pageScript' => 'js/pages/placement.js',
+            'pageStyles' => ['css/typing.css', 'css/practice.css'],
         ]));
     }
 

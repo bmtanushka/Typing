@@ -12,7 +12,7 @@
                 </a>
                 <a class="btn btn--secondary btn--lg" href="<?= e(url('/demo')) ?>">Try the playground</a>
             </div>
-            <p class="hero__note">Already a confident typist? You can skip ahead with a quick placement test.</p>
+            <p class="hero__note">Already a confident typist? <a href="<?= e(url('/placement')) ?>">Skip ahead with a quick placement test</a>.</p>
         </div>
         <div class="hero__art" aria-hidden="true">
             <div class="speech">

@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Practice, typing test and placement pages
+   ========================================================================== */
+.practice { padding-block: var(--space-6); display: grid; gap: var(--space-5); }
+.practice__intro { display: flex; justify-content: space-between; align-items: center; gap: var(--space-5); }
+.practice__intro h1 { margin-bottom: var(--space-2); }
+.practice__intro .lead { margin: 0; max-width: 40rem; }
+.practice__controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-4); align-items: end; }
+.practice__modes { grid-column: 1 / -1; margin: 0; padding: 0; border: 0; }
+.practice__modes legend { margin-bottom: var(--space-2); }
+.practice__own { grid-column: 1 / -1; justify-items: start; }
+.practice__controls [hidden], .practice [hidden] { display: none; }
+.practice__note { grid-column: 1 / -1; margin: 0; }
+.exercise { display: grid; gap: var(--space-4); }
+.exercise__guides { display: grid; gap: var(--space-4); margin-top: var(--space-2); }
+.practice__results { display: grid; gap: var(--space-4); }
+.practice__results-head { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+.practice__results-head h2 { margin-bottom: var(--space-1); }
+.practice__results-head p { margin: 0; }
+.practice__results-head .rewards__xp { margin-left: auto; padding: 0.25rem 0.8rem; border-radius: var(--radius-pill); background: linear-gradient(90deg, var(--star), var(--accent)); color: #1e1b2e; font-weight: var(--fw-black); }
+.practice__results .results__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); }
+.practice__results .stat__value [data-r] { font-size: inherit; color: inherit; }
+.practice__results .keycap { min-width: 1.8rem; height: 1.8rem; }
+.practice__results .cluster { margin: 0; }
+
+.test-setup h2, .test-history h2 { font-size: var(--fs-lg); }
+.test-setup__options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--space-4); margin-bottom: var(--space-4); }
+.test-option {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  text-align: left;
+  transition: border-color var(--dur-fast), transform var(--dur) var(--ease), box-shadow var(--dur);
+}
+.test-option:hover { border-color: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.test-option:focus-visible { border-radius: var(--radius-lg); }
+.test-option__time { font-size: var(--fs-2xl); font-weight: var(--fw-black); color: var(--primary); line-height: 1.1; }
+.test-option__time span { font-size: var(--fs-md); }
+.test-option__desc { color: var(--text-muted); font-weight: var(--fw-semibold); }
+
+.placement-intro { display: flex; gap: var(--space-6); align-items: center; padding: var(--space-6); }
+.placement-intro h1 { font-size: var(--fs-2xl); }
+.placement-intro__points { display: grid; gap: var(--space-2); margin: 0 0 var(--space-5); padding-left: 1.2rem; list-style: disc; }
+.placement-result { display: grid; gap: var(--space-4); }
+.placement-units { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.placement-units:empty { display: none; }
+
+@media (max-width: 50rem) {
+  .practice__intro .mascot { display: none; }
+  .practice__results .results__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .placement-intro { flex-direction: column; text-align: center; }
+  .placement-intro__points { text-align: left; }
+}

@@ -11,6 +11,7 @@ $keyLabel = static fn (array $keys): string => implode(' ', array_map(static fn 
             <p class="eyebrow">Your typing journey</p>
             <h1>Lessons</h1>
             <p class="lead">Short, friendly lessons – one or two new keys at a time. Earn up to three stars in each.</p>
+            <p class="small text-muted">Already confident? <a href="<?= e(url('/placement')) ?>">Take the placement test</a> to skip ahead.</p>
         </div>
         <div class="journey__continue card card--tinted" data-continue hidden>
             <?= View::render('partials/mascot', ['size' => 64, 'mood' => 'happy']) ?>

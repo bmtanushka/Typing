@@ -19,6 +19,11 @@ final class ContentController
     }
 
     /** GET /api/wordlists/{id} */
+    public function texts(Request $request, array $params): Response
+    {
+        return $this->json('texts', $params['id'] ?? '', $request);
+    }
+
     public function wordlist(Request $request, array $params): Response
     {
         return $this->json('wordlists', $params['id'] ?? '', $request);

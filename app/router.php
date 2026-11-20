@@ -17,7 +17,10 @@ return static function (Router $r): void {
     // Pages
     $r->get('/', [PageController::class, 'home']);
     $r->get('/styleguide', [PageController::class, 'styleguide']); // dev only
-    $r->get('/demo', [PageController::class, 'demo']);
+    $r->get('/demo', [PageController::class, 'demo']); // playground → redirects to /practice
+    $r->get('/practice', [PageController::class, 'practice']);
+    $r->get('/test', [PageController::class, 'typingTest']);
+    $r->get('/placement', [PageController::class, 'placement']);
     $r->get('/lessons', [PageController::class, 'lessons']);
     $r->get('/lessons/{id}', [PageController::class, 'lesson']);
     $r->get('/badges', [PageController::class, 'badges']);
@@ -42,6 +45,7 @@ return static function (Router $r): void {
     $r->get('/api/wordlists/{id}', [ContentController::class, 'wordlist']);
     $r->get('/api/lessons', [ContentController::class, 'lessons']);
     $r->get('/api/badges', [ContentController::class, 'badges']);
+    $r->get('/api/texts/{id}', [ContentController::class, 'texts']);
 
     // Accounts + sync (JSON, CSRF-protected POSTs)
     $r->get('/api/session', [AuthController::class, 'session']);
