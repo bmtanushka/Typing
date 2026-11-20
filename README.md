@@ -71,7 +71,7 @@ folders.
 ## Test site (Railway)
 
 The development branch is deployed to
-**https://web-production-c9fae285.up.railway.app** (Railway project `keyquest`,
+**https://typing.compresszone.com** (Railway project `keyquest`,
 service `web`). It uses the `Dockerfile` (PHP 8.3 + Apache, same `.htaccess` as
 Hostinger) and `railway.json` (health check on `/api/health`).
 

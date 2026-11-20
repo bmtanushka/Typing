@@ -306,7 +306,7 @@ celebrations arrive in Phase 3.
 7. Try 30 seconds, Large text and "My own text…". Finish to see results + problem keys.
 
 ## Test deployment (Railway)
-- Live test site: https://web-production-c9fae285.up.railway.app – deploys the branch
+- Live test site: https://typing.compresszone.com – deploys the branch
   `claude/determined-albattani-7m20sy` (deploy-on-push needs the Railway GitHub App on the repo;
   until then Claude triggers each deploy).
 - Railway project `keyquest` → service `web`, Dockerfile build, health check `/api/health`.
