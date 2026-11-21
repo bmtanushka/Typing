@@ -5,6 +5,7 @@ import { load } from './store.js';
 import { loadLayout, detectLayout } from '../engine/layouts.js';
 import { allowedKeys, nextLessonId, courseOrder } from './lesson-logic.js';
 import { formatTime } from '../engine/stats.js';
+import { showPageError } from './errors.js';
 
 const base = () => document.documentElement.dataset.base || '';
 const json = (path) => fetch(base() + path, { headers: { Accept: 'application/json' } }).then((r) => {
@@ -13,7 +14,16 @@ const json = (path) => fetch(base() + path, { headers: { Accept: 'application/js
 });
 
 /** Fetch what the pages need, in parallel. */
-export async function loadData({ texts = false, words = false } = {}) {
+export async function loadData(opts = {}) {
+  try {
+    return await loadDataInner(opts);
+  } catch (e) {
+    showPageError();
+    throw e;
+  }
+}
+
+async function loadDataInner({ texts = false, words = false } = {}) {
   const [index, badges, layout, textData, wordlist] = await Promise.all([
     json('/api/lessons'),
     json('/api/badges').then((d) => d.badges),

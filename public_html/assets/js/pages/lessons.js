@@ -7,9 +7,16 @@ import { lessonState, blockingLesson, skipUnit, nextLessonId, courseOrder } from
 import { isUnitComplete } from '../core/rewards.js';
 import { greeting } from '../core/mascot.js';
 import { trackSkipped } from '../core/sync.js';
+import { showPageError, fetchJsonOrThrow } from '../core/errors.js';
 
 const base = document.documentElement.dataset.base || '';
-const index = await fetch(`${base}/api/lessons`).then((r) => r.json());
+let index;
+try {
+  index = await fetchJsonOrThrow(`${base}/api/lessons`);
+} catch (e) {
+  showPageError('Your progress couldn’t be shown just now – the lessons below still work. Try again in a moment.');
+  throw e;
+}
 const order = courseOrder(index);
 const byId = Object.fromEntries(order.map((l) => [l.id, l]));
 const dialog = document.querySelector('[data-locked-dialog]');

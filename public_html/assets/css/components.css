@@ -577,3 +577,9 @@
 .touch-notice__text { margin: 0; flex: 1; }
 /* Links inside alerts use the alert's own (contrast-checked) colour */
 .alert a { color: inherit; font-weight: var(--fw-bold); text-decoration-thickness: 0.1em; }
+/* Narrow phones: long button labels may wrap rather than overflow */
+@media (max-width: 30rem) {
+  .btn { white-space: normal; text-align: center; }
+}
+.page-error { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-4); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--danger-soft); color: var(--danger); font-weight: var(--fw-bold); }
+.page-error p { margin: 0; }

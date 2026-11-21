@@ -8,6 +8,7 @@ import { recordGame } from '../core/rewards.js';
 import { track, makeEvent } from '../core/sync.js';
 import { play } from '../core/sound.js';
 import { confetti } from '../core/confetti.js';
+import { showPageError, fetchJsonOrThrow } from '../core/errors.js';
 
 const GAMES = ['key-drops', 'balloon-pop', 'space-defender', 'word-race', 'typing-bubbles'];
 const root = document.querySelector('[data-game]');
@@ -15,11 +16,18 @@ const id = root.dataset.game;
 if (!GAMES.includes(id)) throw new Error('Unknown game');
 const $ = (s) => root.querySelector(s);
 
-const [{ createGame }, data, wordlist] = await Promise.all([
-  import(`../games/${id}.js`), // lazy: only this game's code is downloaded
-  loadData(),
-  fetch(`${document.documentElement.dataset.base || ''}/api/wordlists/en-common`).then((r) => r.json()),
-]);
+let createGame, data, wordlist;
+try {
+  [{ createGame }, data, wordlist] = await Promise.all([
+    import(`../games/${id}.js`), // lazy: only this game's code is downloaded
+    loadData(),
+    fetchJsonOrThrow(`${document.documentElement.dataset.base || ''}/api/wordlists/en-common`),
+  ]);
+} catch (e) {
+  showPageError('Sorry – the game couldn’t load. Check your connection and try again.');
+  root.querySelector('[data-play]').disabled = true;
+  throw e;
+}
 const { index, badges } = data;
 const form = $('[data-options]');
 const startOverlay = $('[data-start]');

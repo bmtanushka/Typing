@@ -10,14 +10,21 @@ import { loadLayout, detectLayout } from '../engine/layouts.js';
 import { lineChart } from '../core/chart.js';
 import { icon } from '../core/icons.js';
 import { courseOrder } from '../core/lesson-logic.js';
+import { showPageError, fetchJsonOrThrow } from '../core/errors.js';
 
 const base = document.documentElement.dataset.base || '';
 const $ = (s) => document.querySelector(s);
-const [index, badges, layout] = await Promise.all([
-  fetch(`${base}/api/lessons`).then((r) => r.json()),
-  fetch(`${base}/api/badges`).then((r) => r.json()).then((d) => d.badges),
-  loadLayout(load().settings.layout || detectLayout()),
-]);
+let index, badges, layout;
+try {
+  [index, badges, layout] = await Promise.all([
+    fetchJsonOrThrow(`${base}/api/lessons`),
+    fetchJsonOrThrow(`${base}/api/badges`).then((d) => d.badges),
+    loadLayout(load().settings.layout || detectLayout()),
+  ]);
+} catch (e) {
+  showPageError();
+  throw e;
+}
 const titles = Object.fromEntries(courseOrder(index).map((l) => [l.id, l.title]));
 const keyboard = new Keyboard($('[data-dash-keyboard]'), layout);
 const dateFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' });
