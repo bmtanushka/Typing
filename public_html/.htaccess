@@ -8,7 +8,7 @@ ServerSignature Off
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # --- HTTPS redirect (enable in production, see docs in Phase 8) ---
+    # --- HTTPS redirect: uncomment the next two lines once SSL works (docs/DEPLOY-HOSTINGER.md step 8) ---
     # RewriteCond %{HTTPS} !=on
     # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 

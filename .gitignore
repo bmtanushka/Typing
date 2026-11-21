@@ -18,3 +18,4 @@ node_modules/
 /storage/installed.lock
 /tests/e2e/shots/
 /package-lock.json
+/dist/

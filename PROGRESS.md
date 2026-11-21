@@ -8,9 +8,9 @@
 | 3 – Guest progress + motivation | ✅ Done |
 | 4 – Accounts + sync | ✅ Done (user asked to continue straight to Phase 6) |
 | 5 – Remaining curriculum + practice modes | ✅ Done |
-| 6 – Games | ✅ Built – awaiting review (Phases 4–6 built back to back, as requested) |
-| 7 – Polish | ⏳ Next |
-| 8 – Deployment to Hostinger | – |
+| 6 – Games | ✅ Done |
+| 7 – Polish | ✅ Done |
+| 8 – Deployment to Hostinger | ✅ Done (guide + package script) |
 
 ## Phase 0 – Foundations
 
@@ -50,6 +50,39 @@
 4. Click the theme button in the header (System → Light → Dark), reload: it persists.
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
+
+## Phase 7 – Polish
+
+**Done**
+- **Help** (`/help`): posture, home row, finger map, technique, how KeyQuest works, FAQ.
+  **Privacy** (`/privacy`): plain-English account of what’s stored (guest = browser only;
+  account data; one strictly-necessary session cookie; security records kept 2 days; export
+  and delete). Optional contact email via `app.contact_email` / `CONTACT_EMAIL`.
+  The "coming soon" placeholder mechanism is gone – every page is real.
+- **Touch-only devices**: a friendly "needs a physical keyboard" notice on every page,
+  hidden as soon as a real key is pressed (e.g. a tablet with a Bluetooth keyboard).
+- **Accessibility audit** (`tests/e2e/a11y.e2e.cjs`, no dependencies): every page in light
+  and dark, with and without progress (dashboard charts, map with stars, badges, a lesson
+  mid-typing): one `h1`, heading order, labels, accessible names, unique ids, landmarks,
+  no positive tabindex, **WCAG AA contrast on all visible text**, visible keyboard focus.
+  It found and I fixed 3 contrast issues (games card gold text, link in a dark-theme alert,
+  streak number in the header chip). Now 0 issues.
+- **Responsive**: no horizontal overflow on any page at 360 px and 768 px (one fixed:
+  long button labels now wrap on small phones); dashboard stats two-per-row on phones.
+- **Performance**: `module_graph()` walks each page’s ES-module imports (cached per asset
+  version) and the layout emits `<link rel="modulepreload">` for all of them, removing the
+  request waterfall that unbundled modules cause; the UI font is preloaded. No console
+  warnings. Page weight (uncompressed): home 79 KB … lesson 177 KB – all under budget.
+- **Error states**: if page data can’t load, pages show "Sorry – this page couldn’t load…"
+  with a Try again button instead of going blank (`resilience.e2e.cjs`).
+- **Copy review**: British English checked across views, lesson content and scripts.
+- **Production hardening**: sessions stored in MySQL (`sessions` table, `DbSessionHandler`)
+  so logins survive redeploys; strict session-id validation (made-up ids are rejected –
+  checked); HSTS header when `security.force_https` is on. Railway now runs with
+  `APP_ENV=production` and `FORCE_HTTPS=true` behind Cloudflare (SSL mode Full (strict)).
+
+**Verified**: 72 JS + 20 PHP unit tests, 19 API tests, 8 browser suites (a11y,
+accounts, curriculum, games, lessons, motivation, playground, resilience) – all passing.
 
 ## Phase 6 – Games
 

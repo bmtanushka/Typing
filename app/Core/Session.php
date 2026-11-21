@@ -35,7 +35,7 @@ final class Session
         ini_set('session.cookie_httponly', '1');
         ini_set('session.gc_maxlifetime', (string) (60 * 60 * 24 * 30));
         $lifetime = 60 * 60 * 24 * 30;
-        if (Database::isConfigured() && Config::get('session.driver', 'database') === 'database') {
+        if (Config::get('session.driver', 'database') === 'database' && self::databaseReady()) {
             // Sessions in MySQL: logins survive redeploys (e.g. Railway containers).
             session_set_save_handler(new DbSessionHandler($lifetime), true);
             ini_set('session.gc_probability', '1');
@@ -55,6 +55,23 @@ final class Session
             'samesite' => 'Lax',
         ]);
         session_start();
+    }
+
+    /**
+     * Database sessions need the `sessions` table. Before the installer has run (e.g. /setup on
+     * a fresh database) it doesn't exist yet, so fall back to file sessions instead of failing.
+     */
+    private static function databaseReady(): bool
+    {
+        if (!Database::isConfigured()) {
+            return false;
+        }
+        try {
+            Database::one('SELECT 1 FROM sessions LIMIT 1');
+            return true;
+        } catch (\Throwable) {
+            return false;
+        }
     }
 
     /** Start only if the browser already has a session cookie (keeps guests cookie-free). */
