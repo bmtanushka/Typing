@@ -22,7 +22,7 @@
 .game-card--info { --tone: var(--info); --tone-soft: var(--info-soft); }
 .game-card--accent { --tone: #c2410c; --tone-soft: var(--accent-soft); }
 .game-card--success { --tone: var(--success); --tone-soft: var(--success-soft); }
-.game-card--star { --tone: #b97a00; --tone-soft: #fff1c7; }
+.game-card--star { --tone: #7a5100; --tone-soft: #fff1c7; } /* 6.5:1 on white for the "best score" text */
 :root[data-theme="dark"] .game-card--accent { --tone: var(--accent); }
 :root[data-theme="dark"] .game-card--star { --tone: var(--star); --tone-soft: #3d3312; }
 .game-card__art { position: relative; height: 9rem; background: var(--tone-soft); overflow: hidden; }

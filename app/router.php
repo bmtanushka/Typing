@@ -36,10 +36,8 @@ return static function (Router $r): void {
     $r->get('/setup', [InstallController::class, 'show']);
     $r->post('/setup', [InstallController::class, 'run']);
 
-    // Sections still to be built – friendly "coming soon" placeholder for now.
-    foreach (array_keys(PageController::PLACEHOLDERS) as $path) {
-        $r->get($path, [PageController::class, 'placeholder']);
-    }
+    $r->get('/help', [PageController::class, 'help']);
+    $r->get('/privacy', [PageController::class, 'privacy']);
 
     // JSON API
     $r->get('/api/health', [ApiController::class, 'health']);

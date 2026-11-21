@@ -467,7 +467,7 @@
 .header-stats[hidden] { display: none; }
 .header-stats:hover { background: var(--primary-soft); }
 .header-stats__item { display: inline-flex; align-items: center; gap: 3px; }
-.header-stats__item--streak { color: #d9480f; }
+.header-stats__item--streak { color: #a3330a; } /* ≥ 5:1 on the chip */
 .header-stats__item--streak.is-cold { color: var(--text-muted); }
 .header-stats__item--level .icon { color: var(--star); fill: var(--star); }
 :root[data-theme="dark"] .header-stats__item--streak { color: var(--accent); }
@@ -558,3 +558,22 @@
   font-weight: var(--fw-black);
 }
 .account-chip__avatar--lg { width: 4rem; height: 4rem; font-size: var(--fs-xl); }
+
+/* Touch-only notice */
+.touch-notice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-3) auto 0;
+  width: calc(100% - 2 * var(--space-4));
+  max-width: var(--container);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--warning-soft);
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--warning) 30%, transparent);
+}
+.touch-notice__icon { font-size: 1.4rem; }
+.touch-notice__text { margin: 0; flex: 1; }
+/* Links inside alerts use the alert's own (contrast-checked) colour */
+.alert a { color: inherit; font-weight: var(--fw-bold); text-decoration-thickness: 0.1em; }

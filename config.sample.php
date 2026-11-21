@@ -17,6 +17,8 @@ return [
         // Absolute URL used in e-mails (password reset links).
         'base_url'  => 'http://localhost:8000',
         'timezone'  => 'Europe/London',
+        // Shown on the privacy page for data questions (optional).
+        'contact_email' => '',
     ],
 
     'db' => [

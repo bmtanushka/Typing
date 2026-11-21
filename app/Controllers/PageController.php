@@ -12,11 +12,24 @@ use App\Services\LessonRepository;
 
 final class PageController
 {
-    /** Sections not built yet: path => [title, phase, blurb]. */
-    public const PLACEHOLDERS = [
-        '/help'     => ['Help and technique', 7, 'Posture, home position and tips for touch typing.'],
-        '/privacy'  => ['Privacy', 7, 'What we store, why, and how to delete it.'],
-    ];
+    public function help(Request $request): Response
+    {
+        return Response::html(View::page('pages/help', [
+            'title' => 'Help and technique',
+            'description' => 'Posture, the home row, which finger for which key and how KeyQuest works.',
+            'pageStyles' => ['css/prose.css'],
+        ]));
+    }
+
+    public function privacy(Request $request): Response
+    {
+        return Response::html(View::page('pages/privacy', [
+            'title' => 'Privacy',
+            'description' => 'What KeyQuest stores, why, and how to download or delete it.',
+            'pageStyles' => ['css/prose.css'],
+            'contact' => config('app.contact_email') ?: null,
+        ]));
+    }
 
     public function home(Request $request): Response
     {
@@ -249,16 +262,6 @@ final class PageController
             return Response::redirect(url('/login') . '?next=/account');
         }
         return $this->authPage('account', 'Your account', ['user' => $user]);
-    }
-
-    public function placeholder(Request $request): Response
-    {
-        [$title, $phase, $blurb] = self::PLACEHOLDERS[$request->path];
-        return Response::html(View::page('pages/placeholder', [
-            'title' => $title,
-            'phase' => $phase,
-            'blurb' => $blurb,
-        ]));
     }
 
     public function notFound(Request $request): Response

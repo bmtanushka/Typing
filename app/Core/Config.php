@@ -32,6 +32,7 @@ final class Config
         'app.debug'            => ['APP_DEBUG'],
         'app.base_path'        => ['APP_BASE_PATH'],
         'app.base_url'         => ['APP_BASE_URL'],
+        'app.contact_email'    => ['CONTACT_EMAIL'],
         'db.host'              => ['DB_HOST', 'MYSQLHOST'],
         'db.port'              => ['DB_PORT', 'MYSQLPORT'],
         'db.name'              => ['DB_NAME', 'MYSQLDATABASE'],

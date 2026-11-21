@@ -111,3 +111,25 @@ document.addEventListener('kq:progress', () => renderBanner());
 if (document.documentElement.dataset.user || load().account?.userId) {
   import('./core/sync.js').then((m) => m.initSync()).catch(() => {});
 }
+
+/* ---- Touch-only devices: friendly physical-keyboard notice ---- */
+(() => {
+  const touchOnly = matchMedia('(hover: none) and (pointer: coarse)').matches;
+  let dismissed = false;
+  try { dismissed = sessionStorage.getItem('kq-touch-notice') === 'off'; } catch { /* private mode */ }
+  if (!touchOnly || dismissed) return;
+  const note = document.createElement('aside');
+  note.className = 'touch-notice';
+  note.setAttribute('role', 'note');
+  note.innerHTML = '<span class="touch-notice__icon" aria-hidden="true">⌨</span>'
+    + '<p class="touch-notice__text"><strong>KeyQuest needs a physical keyboard.</strong> On a tablet, connect a Bluetooth keyboard and you’re ready to type.</p>'
+    + '<button class="btn btn--ghost btn--sm" type="button">Got it</button>';
+  const hide = () => {
+    note.remove();
+    try { sessionStorage.setItem('kq-touch-notice', 'off'); } catch { /* ignore */ }
+  };
+  note.querySelector('button').addEventListener('click', hide);
+  // A real key press means a keyboard is attached – no need for the notice.
+  window.addEventListener('keydown', (e) => { if (e.key && e.key.length === 1) hide(); }, { once: true });
+  document.querySelector('main')?.prepend(note);
+})();
