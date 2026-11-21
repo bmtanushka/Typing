@@ -99,3 +99,13 @@ brief is summarised there; work phase by phase and stop for review at the end of
 - Run locally with `php -S localhost:8000 -t public_html` (no `.htaccess` there – test
   rewrites, headers and caching under Apache before deploying).
 - Small, focused commits with clear messages. Update `PROGRESS.md` at the end of each phase.
+
+## Deployment
+- Hostinger: `docs/DEPLOY-HOSTINGER.md`; `tools/package.sh` zips **committed** files (HEAD)
+  into `dist/` – commit before packaging, and add any new top-level runtime folder there.
+- `.htaccess` blocks internal folders and `.md/.sql/.sh/.lock/.log/.ini` by extension (for the
+  everything-in-`public_html` layout). Keep both layouts working.
+- DB sessions fall back to files until the `sessions` table exists (so `/setup` works on an
+  empty database). New tables go in `install/schema.sql` as `CREATE TABLE IF NOT EXISTS`.
+- Railway: deploy-on-push isn't wired up; trigger a deploy with the Railway MCP
+  `connect-service-source`. The container runs migrations at start (`docker/start.sh`).
