@@ -59,6 +59,54 @@ function asset(string $path): string
     return base_path() . '/assets/_v' . asset_version() . '/' . $path;
 }
 
+/**
+ * All static ES-module dependencies of the given entry modules (paths under assets/), so the
+ * layout can emit <link rel="modulepreload"> and the browser fetches them in parallel instead
+ * of discovering them one import at a time. Dynamic import() calls are not followed (they are
+ * meant to stay lazy). Cached per asset version.
+ */
+function module_graph(array $entries): array
+{
+    $key = asset_version() . ':' . implode(',', $entries);
+    static $memo = [];
+    if (isset($memo[$key])) {
+        return $memo[$key];
+    }
+    $cacheFile = KQ_ROOT . '/storage/cache/modules-' . md5($key) . '.json';
+    if (is_file($cacheFile)) {
+        $cached = json_decode((string) file_get_contents($cacheFile), true);
+        if (is_array($cached)) {
+            return $memo[$key] = $cached;
+        }
+    }
+    $root = realpath(KQ_PUBLIC . '/assets');
+    $seen = [];
+    $walk = static function (string $rel) use (&$walk, &$seen, $root): void {
+        $file = realpath($root . '/' . $rel);
+        if ($file === false || !str_starts_with($file, $root) || isset($seen[$rel])) {
+            return;
+        }
+        $seen[$rel] = true;
+        $src = (string) file_get_contents($file);
+        preg_match_all('/(?:^|[\s;}])(?:import|export)\s[^\'"]*?\sfrom\s*[\'"](\.{1,2}\/[^\'"]+)[\'"]|^import\s*[\'"](\.{1,2}\/[^\'"]+)[\'"]/m', $src, $m, PREG_SET_ORDER);
+        foreach ($m as $match) {
+            $spec = $match[1] !== '' ? $match[1] : ($match[2] ?? '');
+            $target = realpath(dirname($file) . '/' . $spec);
+            if ($target !== false && str_starts_with($target, $root)) {
+                $walk(ltrim(substr($target, strlen($root)), '/'));
+            }
+        }
+    };
+    foreach ($entries as $entry) {
+        $walk(ltrim($entry, '/'));
+    }
+    $list = array_values(array_diff(array_keys($seen), $entries));
+    if (is_dir(dirname($cacheFile)) || @mkdir(dirname($cacheFile), 0750, true)) {
+        @file_put_contents($cacheFile, json_encode($list));
+    }
+    return $memo[$key] = $list;
+}
+
 /** Short hash that changes whenever any file under public_html/assets changes. */
 function asset_version(): string
 {
@@ -122,4 +170,7 @@ function send_security_headers(): void
         . "font-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; "
         . "form-action 'self'; frame-ancestors 'none'");
     header_remove('X-Powered-By');
+    if (Config::get('security.force_https')) {
+        header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+    }
 }

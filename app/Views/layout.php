@@ -34,6 +34,12 @@ $appName = (string) config('app.name', 'KeyQuest');
     <?php if (!empty($pageScript)): ?>
     <script type="module" src="<?= e(asset($pageScript)) ?>"></script>
     <?php endif; ?>
+    <?php if (PHP_SAPI !== 'cli-server'): /* preload URLs must match import URLs exactly (path-versioned) */ ?>
+    <link rel="preload" href="<?= e(asset('fonts/nunito-latin-wght-normal.woff2')) ?>" as="font" type="font/woff2" crossorigin>
+    <?php foreach (module_graph(array_filter(['js/app.js', $pageScript ?? null])) as $mod): ?>
+    <link rel="modulepreload" href="<?= e(asset($mod)) ?>">
+    <?php endforeach; ?>
+    <?php endif; ?>
 </head>
 <body class="<?= e($bodyClass ?? '') ?>">
     <a class="skip-link" href="#main">Skip to content</a>
