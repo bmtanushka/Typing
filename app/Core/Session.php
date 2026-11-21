@@ -34,9 +34,17 @@ final class Session
         ini_set('session.use_only_cookies', '1');
         ini_set('session.cookie_httponly', '1');
         ini_set('session.gc_maxlifetime', (string) (60 * 60 * 24 * 30));
-        $dir = KQ_ROOT . '/storage/sessions';
-        if (is_dir($dir) || @mkdir($dir, 0700, true)) {
-            session_save_path($dir);
+        $lifetime = 60 * 60 * 24 * 30;
+        if (Database::isConfigured() && Config::get('session.driver', 'database') === 'database') {
+            // Sessions in MySQL: logins survive redeploys (e.g. Railway containers).
+            session_set_save_handler(new DbSessionHandler($lifetime), true);
+            ini_set('session.gc_probability', '1');
+            ini_set('session.gc_divisor', '100');
+        } else {
+            $dir = KQ_ROOT . '/storage/sessions';
+            if (is_dir($dir) || @mkdir($dir, 0700, true)) {
+                session_save_path($dir);
+            }
         }
         session_name(self::NAME);
         session_set_cookie_params([

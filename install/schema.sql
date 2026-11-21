@@ -108,3 +108,11 @@ CREATE TABLE IF NOT EXISTS guest_merges (
     PRIMARY KEY (user_id, merge_id),
     CONSTRAINT fk_gm_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS sessions (
+    id          VARCHAR(128) NOT NULL,
+    data        MEDIUMBLOB   NOT NULL,
+    expires_at  INT UNSIGNED NOT NULL,
+    PRIMARY KEY (id),
+    KEY idx_sessions_expiry (expires_at)
+) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;

@@ -45,6 +45,12 @@ return [
         ],
     ],
 
+    'session' => [
+        // 'database' (default when a database is configured) keeps logins across redeploys;
+        // 'files' stores them in storage/sessions.
+        'driver' => 'database',
+    ],
+
     'security' => [
         // Set true in production once HTTPS works (secure cookies + redirect).
         'force_https' => false,

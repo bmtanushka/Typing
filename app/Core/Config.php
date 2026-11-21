@@ -48,6 +48,7 @@ final class Config
         'mail.smtp.encryption' => ['SMTP_ENCRYPTION'],
         'security.force_https' => ['FORCE_HTTPS'],
         'security.trust_proxy' => ['TRUST_PROXY'],
+        'session.driver'       => ['SESSION_DRIVER'],
         'app.asset_version'    => ['ASSET_VERSION'],
     ];
 
