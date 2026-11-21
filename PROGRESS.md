@@ -51,6 +51,33 @@
 5. Narrow the window below ~900px: the menu collapses behind the ☰ button.
 6. `php tests/run.php`
 
+## Phase 8 – Deployment to Hostinger
+
+**Built**
+- `docs/DEPLOY-HOSTINGER.md`: step-by-step guide – package, PHP version in hPanel, MySQL
+  database and user, upload layout (private folders beside `public_html`, or everything in a
+  subdomain folder), `config.php` for production (SMTP via Hostinger mail), three ways to
+  create tables, an HTTP checklist, switching on HTTPS (incl. Cloudflare *Full (strict)*),
+  a final testing checklist, updating, backups and restore (hPanel, phpMyAdmin, mysqldump)
+  and troubleshooting.
+- `tools/package.sh`: builds `dist/keyquest-<date>.zip` from committed files only – no
+  tests, Docker, Node, git or `config.php`; empty writable `storage/` folders.
+
+**Verified by following the guide on a fresh server** (Apache + MariaDB, new empty
+database, files from the zip, `config.php` from the sample):
+- Layout A (private folders beside `public_html`): `/setup` showed its checks, created all
+  11 tables and locked itself; `config.php`, `app/`, `storage/`, `install/`, `content/` are
+  403; `/styleguide` 404; all 19 API tests pass; sessions moved into the database.
+- Layout B (everything in `public_html/typing/`, served from a sub-path): base path
+  detected automatically, internal folders 403, full lesson browser suite passes.
+- Two real bugs found and fixed while doing this: the web installer crashed on a fresh
+  database (it needed the `sessions` table it was about to create – sessions now fall back
+  to files until the table exists), and `.md` files with a hyphen in the name were
+  downloadable in layout B (now `.md/.sql/.sh/.lock/.log/.ini` are blocked by extension).
+
+**Live now**: https://typing.compresszone.com on Railway (production mode, HTTPS-only
+cookies, HSTS, database sessions), behind Cloudflare with SSL mode *Full (strict)*.
+
 ## Phase 7 – Polish
 
 **Done**

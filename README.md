@@ -93,6 +93,18 @@ The base path is auto-detected, so the app works at `https://example.com/` or
 
 ## Deployment
 
-A full Hostinger guide arrives in Phase 8. In short: upload the folders above,
-point the domain at `public_html`, create `config.php` with `env => 'production'`
-and `debug => false`, and make `storage/logs` writable.
+**Hostinger (or any Apache/LiteSpeed + PHP 8.2 + MySQL host):** follow
+[`docs/DEPLOY-HOSTINGER.md`](docs/DEPLOY-HOSTINGER.md). Build the upload with:
+
+```bash
+tools/package.sh
+```
+
+It creates `dist/keyquest-<date>.zip` containing only production files, laid out for
+Hostinger (`public_html/` plus the private folders that go beside it). Then create the
+database, copy `config.sample.php` to `config.php`, and run the one-time installer at
+`/setup` (or `php install/migrate.php` over SSH).
+
+**Railway / Docker:** the `Dockerfile` runs the same Apache + `.htaccess` setup and creates
+the tables at start-up; configure it with environment variables (see `ENV_MAP` in
+`app/Core/Config.php`).
